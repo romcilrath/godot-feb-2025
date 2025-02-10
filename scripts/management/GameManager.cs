@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class GameManager : Node
 {
@@ -14,6 +15,9 @@ public partial class GameManager : Node
 
     // Define Turn
     public int Turn { get; private set; } = 1;  // Start Turn at 1
+
+    // Define ActiveDecks
+    public List<Deck> ActiveDecks { get; private set; } = new List<Deck>();
 
     public override void _Ready() 
     {

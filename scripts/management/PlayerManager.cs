@@ -2,6 +2,16 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+public enum Backstory
+{
+    Adventurer
+}
+
+public enum Race
+{
+    Human
+}
+
 public partial class PlayerManager : Node
 {
     // Used to store single game instance
@@ -10,7 +20,13 @@ public partial class PlayerManager : Node
     private static PlayerManager _instance;
     public static PlayerManager Instance => _instance;
 
-    // Global game states
+    // Player characteristics
+    public string PlayerName { get; private set; } = "Player Name";
+    public int Age { get; private set; } = 12;
+    public Race Race { get; private set; } = Race.Human;
+    public Backstory Backstory { get; private set; } = Backstory.Adventurer;
+
+    // Player stats
     public Stat Money { get; private set; } = new Stat("Money");                            // Money
     public Stat Health { get; private set; } = new Stat("Health", min:100, max:100);             // Health
     public Stat Armor { get; private set; } = new Stat("Armor");                            // Armor

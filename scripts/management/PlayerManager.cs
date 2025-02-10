@@ -34,7 +34,7 @@ public partial class PlayerManager : Node
         Effect test = new RepeatEffect(Money, 10f, ActionType.Multiply, 1, 5);
 
         List<Effect> effects = new List<Effect> { test2, test };
-        Choice choice = new Choice(effects);
+        Choice choice = new Choice(effects:effects);
         choice.Apply();
 
         GD.Print(GameManager.Instance.Turn);

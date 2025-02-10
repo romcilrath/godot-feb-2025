@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class PlayerManager : Node
 {
@@ -29,10 +30,12 @@ public partial class PlayerManager : Node
         GD.Print("PlayerManager Initialized.");
 
         Effect test2 = new OneTimeEffect(Money, 10f, ActionType.Set);
-        test2.Apply();
 
         Effect test = new RepeatEffect(Money, 10f, ActionType.Multiply, 1, 5);
-        test.Apply();
+
+        List<Effect> effects = new List<Effect> { test2, test };
+        Choice choice = new Choice(effects);
+        choice.Apply();
 
         GD.Print(GameManager.Instance.Turn);
         PrintStats();

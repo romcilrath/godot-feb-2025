@@ -61,7 +61,7 @@ public class RepeatEffect: Effect
             GameManager.Instance.OnTurnIncremented -= ApplyOnce;
             GameManager.Instance.OnTurnIncremented -= RepeatApply;
 
-            GD.Print("RepeatEffect expired");
+            GD.Print("RepeatEffect expired.");
         }
     }
 }

@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=3 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_kksdf"]
+[ext_resource type="Script" path="res://scripts/PlayerManager.cs" id="2_by3to"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Node" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_kksdf")
 
-[node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("1_kksdf")
+[node name="PlayerManager" type="Node" parent="."]
+script = ExtResource("2_by3to")

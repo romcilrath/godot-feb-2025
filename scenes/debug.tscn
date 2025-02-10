@@ -4,5 +4,8 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_kksdf")
+
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("1_kksdf")

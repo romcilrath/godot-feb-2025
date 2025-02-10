@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class GameManager : Node2D
+public partial class GameManager : Node
 {
     private static GameManager _instance;
     public static GameManager Instance => _instance;

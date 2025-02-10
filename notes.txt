@@ -23,7 +23,8 @@ Card:
 
 
 Choice:
-    Text
+    Name
+    Description
     Effects
 
 

@@ -1,4 +1,5 @@
 using System;
+using Godot;
 
 public class Stat
 {
@@ -15,8 +16,18 @@ public class Stat
         Current = Math.Clamp(initial, min, max);
     }
 
-    public void Modify(float amount)
+    public void Set(float amount)
+    {
+        Current = Math.Clamp(amount, Min, Max);
+    }
+
+    public void Add(float amount)
     {
         Current = Math.Clamp(Current + amount, Min, Max);
+    }
+
+    public void Multiply(float amount)
+    {
+        Current = Math.Clamp(Current * amount, Min, Max);
     }
 }

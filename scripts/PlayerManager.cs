@@ -10,10 +10,10 @@ public partial class PlayerManager : Node
     public static PlayerManager Instance => _instance;
 
     // Global game states
-    public Stat Money { get; private set; } = new Stat("Money");
-    public Stat Health { get; private set; } = new Stat("Health", 0, 100, 100);
-    public Stat Armor { get; private set; } = new Stat("Armor");
-    public Stat Attack { get; private set; } = new Stat("Attack", 0, float.MaxValue, 1f);
+    public Stat Money { get; private set; } = new Stat("Money");                            // Money
+    public Stat Health { get; private set; } = new Stat("Health", min:100, max:100);             // Health
+    public Stat Armor { get; private set; } = new Stat("Armor");                            // Armor
+    public Stat Attack { get; private set; } = new Stat("Attack", initial:1f);   // Attack
 
     public override void _Ready() 
     {
@@ -28,7 +28,21 @@ public partial class PlayerManager : Node
         _instance = this;
         GD.Print("PlayerManager Initialized.");
 
+        Effect test2 = new OneTimeEffect(Money, 10f, ActionType.Set);
+        test2.Apply();
+
+        Effect test = new RepeatEffect(Money, 10f, ActionType.Multiply, 1, 5);
+        test.Apply();
+
+        GD.Print(GameManager.Instance.Turn);
         PrintStats();
+
+        for (int i = 0; i < 7; i++)
+        {
+            GameManager.Instance.IncrementTurn();
+            GD.Print(GameManager.Instance.Turn);
+            PrintStats();
+        }
     }
 
     public void PrintStats()

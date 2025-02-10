@@ -9,8 +9,11 @@ public partial class GameManager : Node
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
-    // Global game states
-    public int Turn { get; private set; } = 0;
+    // Define an event that gets triggered when Turn increments
+    public event Action OnTurnIncremented;
+
+    // Define Turn
+    public int Turn { get; private set; } = 1;  // Start Turn at 1
 
     public override void _Ready() 
     {
@@ -28,7 +31,12 @@ public partial class GameManager : Node
 
     public void IncrementTurn(int incrementBy = 1)
     {
-        GD.Print($"Incremented Turn from {Turn} to {Turn + 1}");
+        // Increment the Turn
+        float oldTurn = Turn;
         Turn += incrementBy;
+        GD.Print($"Incremented Turn from {oldTurn} to {Turn}");
+
+        // Notify the OnTurnIncremented listeners
+        OnTurnIncremented?.Invoke();
     }
 }

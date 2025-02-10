@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -18,5 +19,17 @@ public class Card
             Art = art;
         if (Choices is not null)
             Choices = choices;
+    }
+
+    public Choice SelectChoice(int choiceIndex = 0)
+    {
+        if (Choices == null || Choices.Count == 0)
+            return null;
+        if (choiceIndex < 0 || choiceIndex >= Choices.Count)
+            throw new ArgumentOutOfRangeException(nameof(choiceIndex), "Choice index is out of range.");
+        
+        Choices[choiceIndex].Apply();
+        
+        return Choices[choiceIndex];
     }
 }

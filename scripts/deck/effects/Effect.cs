@@ -52,7 +52,7 @@ public abstract class Effect
 
     public abstract void Apply();
 
-    public void PrintEffect()
+    public virtual void PrintEffect()
     {
         GD.Print($"Target: {Target.Name}");
         GD.Print($"Value: {Value}");

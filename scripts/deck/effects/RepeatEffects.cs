@@ -70,4 +70,12 @@ public class RepeatEffect : Effect
             GD.Print("RepeatEffect expired.");
         }
     }
+
+    public override void PrintEffect()
+    {
+        base.PrintEffect();
+        GD.Print($"Every Turn: {EveryTurn}");
+        GD.Print($"For Turns: {ForTurns}");
+        GD.Print($"Current Turn: {CurrentTurn}");
+    }
 }

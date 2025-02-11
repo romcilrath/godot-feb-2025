@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TestResource" load_steps=2 format=3 uid="uid://5ipse5hh5ikt"]
+
+[ext_resource type="Script" path="res://TestResource.cs" id="1_u3g18"]
+
+[resource]
+resource_name = "blah"
+script = ExtResource("1_u3g18")
+name = ""
+actionType = 0

@@ -5,7 +5,15 @@ public class OneTimeEffect: Effect
 {
     public OneTimeEffect(Stat target, float value, ActionType actionType = ActionType.Add)
         :base(target, value, actionType)
-    { }
+    {
+
+    }
+
+    public OneTimeEffect(OneTimeEffectResource oneTimeEffectResource)
+        :base(oneTimeEffectResource)
+    { 
+
+    }
 
     public override void Apply()
     {

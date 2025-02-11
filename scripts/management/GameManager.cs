@@ -43,4 +43,13 @@ public partial class GameManager : Node
         // Notify the OnTurnIncremented listeners
         OnTurnIncremented?.Invoke();
     }
+
+    public void Debug()
+    {
+        GD.Print("GameManager debug");        
+        CardResource cardResource = ResourceLoader.Load<CardResource>("res://resources/test_card.tres");
+        Card card = new Card(cardResource);
+        GD.Print(card.Body);
+        card.PrintCard();
+    }
 }

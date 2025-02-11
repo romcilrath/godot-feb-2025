@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpvwqtr55sa5y"]
 
-[ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_kksdf"]
-[ext_resource type="Script" path="res://scripts/PlayerManager.cs" id="2_by3to"]
+[ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_kksdf"]
+[ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="2_by3to"]
 
 [node name="Node2D" type="Node2D"]
 

@@ -85,4 +85,28 @@ public class Deck
         DiscardedCards.Clear();
         Shuffle();
     }
+
+    public void PrintDeck()
+    {
+        GD.Print($"Deck Name: {Name}");
+        GD.Print($"Deck Art: {Art}");
+        GD.Print($"Cards: {Cards.Count}");
+        for (int i = 0; i < Cards.Count; i++)
+        {
+            GD.Print($"Choice #{i+1}:");
+            Cards[i].PrintCard();
+        }
+        GD.Print($"Locked Cards: {LockedCards.Count}");
+        for (int i = 0; i < LockedCards.Count; i++)
+        {
+            GD.Print($"Choice #{i+1}:");
+            Cards[i].PrintCard();
+        }
+        GD.Print($"Discarded Cards: {DiscardedCards.Count}");
+        for (int i = 0; i < DiscardedCards.Count; i++)
+        {
+            GD.Print($"Choice #{i+1}:");
+            Cards[i].PrintCard();
+        }
+    }
 }

@@ -45,11 +45,33 @@ public partial class PlayerManager : Node
         _instance = this;
         GD.Print("PlayerManager Initialized.");
 
-        Effect test2 = new OneTimeEffect(Money, 10f, ActionType.Set);
+        Debug_Apply_Choice();
+        Debug_Load_Card();
+    }
 
-        Effect test = new RepeatEffect(Money, 10f, ActionType.Multiply, 1, 5);
+    public void PrintStats()
+    {
+        GD.Print($"Money: {Money.Current}");
+        GD.Print($"Health: {Health.Current}");
+        GD.Print($"Armor: {Armor.Current}");
+        GD.Print($"Attack: {Attack.Current}");
+    }
 
-        Effect[] effects = { test2, test };
+    public void Debug_Load_Card()
+    {
+        GD.Print("GameManager debug");        
+        CardResource cardResource = ResourceLoader.Load<CardResource>("res://resources/test_card.tres");
+        Card card = new Card(cardResource);
+        card.PrintCard();
+    }
+
+    public void Debug_Apply_Choice()
+    {
+        Effect test1 = new OneTimeEffect(Money, 10f, ActionType.Set);
+
+        Effect test2 = new RepeatEffect(Money, 10f, ActionType.Multiply, 1, 5);
+
+        Effect[] effects = { test1, test2 };
         Choice choice = new Choice(effects:effects);
         choice.Apply();
 
@@ -62,15 +84,5 @@ public partial class PlayerManager : Node
             GD.Print(GameManager.Instance.Turn);
             PrintStats();
         }
-
-        GameManager.Instance.Debug();
-    }
-
-    public void PrintStats()
-    {
-        GD.Print($"Money: {Money.Current}");
-        GD.Print($"Health: {Health.Current}");
-        GD.Print($"Armor: {Armor.Current}");
-        GD.Print($"Attack: {Attack.Current}");
     }
 }

@@ -1,9 +1,38 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=2 format=3 uid="uid://db8kmkf1e8ilh"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://db8kmkf1e8ilh"]
 
+[ext_resource type="Script" path="res://scripts/deck/effects/OneTimeEffectResource.cs" id="1_qyauy"]
 [ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_wi1o2"]
+[ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="2_t5tw7"]
+[ext_resource type="Script" path="res://scripts/deck/effects/RepeatEffectResource.cs" id="3_dayx3"]
+
+[sub_resource type="Resource" id="Resource_ahvi8"]
+script = ExtResource("1_qyauy")
+Target = 0
+Value = 10.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_t61wy"]
+script = ExtResource("2_t5tw7")
+Text = "Go right"
+HoverText = "Yeah, probably wise."
+Effects = Array[Object]([SubResource("Resource_ahvi8")])
+
+[sub_resource type="Resource" id="Resource_drth7"]
+script = ExtResource("3_dayx3")
+EveryTurn = 1
+ForTurns = 3
+Target = 1
+Value = -1.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_apjao"]
+script = ExtResource("2_t5tw7")
+Text = "Go left"
+HoverText = "Uh, you sure boss?"
+Effects = Array[Object]([SubResource("Resource_drth7")])
 
 [resource]
 script = ExtResource("1_wi1o2")
 Name = "A Simple Choice"
-Body = "A path divergres before you. You can either go right and safely progress. You could also go left and try your luck walking over hot coals. The right path also has a 10 dollar bill on the ground."
-Choices = Array[Object]([])
+Body = "A path divergres before you. Right awaits safety, and a $10 bill. You could also go left and try your luck walking over hot coals. "
+Choices = Array[Object]([SubResource("Resource_t61wy"), SubResource("Resource_apjao")])

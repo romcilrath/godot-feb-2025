@@ -12,9 +12,22 @@ config_version=5
 
 config/name="February 2025"
 run/main_scene="res://scenes/debug.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [dotnet]
 
 project/assembly_name="February 2025"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

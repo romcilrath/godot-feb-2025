@@ -60,7 +60,7 @@ public partial class PlayerManager : Node
     public void Debug_Load_Card()
     {
         GD.Print("GameManager debug");        
-        CardResource cardResource = ResourceLoader.Load<CardResource>("res://resources/test_card.tres");
+        CardResource cardResource = ResourceLoader.Load<CardResource>("res://resources/cards/test_card.tres");
         Card card = new Card(cardResource);
         card.PrintCard();
     }

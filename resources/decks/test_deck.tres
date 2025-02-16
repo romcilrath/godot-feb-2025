@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DeckResource" load_steps=2 format=3 uid="uid://ds427qa82mnnm"]
+
+[ext_resource type="Script" path="res://scripts/deck/DeckResource.cs" id="1_d8cn6"]
+
+[resource]
+script = ExtResource("1_d8cn6")
+Name = ""
+Cards = null
+LockedCards = null

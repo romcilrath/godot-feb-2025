@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=4 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_kksdf"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="2_by3to"]
+[ext_resource type="Texture2D" uid="uid://baapvkxd0bkwx" path="res://resources/sprites/9_Slice_Test.png" id="3_vwb1a"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,3 +11,17 @@ script = ExtResource("1_kksdf")
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("2_by3to")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = 472.0
+offset_top = 109.0
+offset_right = 504.0
+offset_bottom = 153.0
+scale = Vector2(10, 10)
+texture = ExtResource("3_vwb1a")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

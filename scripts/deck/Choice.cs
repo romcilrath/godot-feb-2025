@@ -7,6 +7,8 @@ public class Choice
     public string Text { get; private set; } = "The text of the choice, describing it in brief.";
     public string HoverText { get; private set; } = "The hover text of the choice, describing it in more detail.";
     public Effect[] Effects { get; private set; }
+    // TODO : Linked choice (A Card to force follow up after this Choice selected)
+    // Should get enqued into follow-up queue on Apply
 
     public Choice(string text = null, string hoverText = null, Effect[] effects = null)
     {
@@ -44,7 +46,6 @@ public class Choice
         HoverText = hoverText;
         Effects = effects;
     }
-
 
     public void Apply()
     {

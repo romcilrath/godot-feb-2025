@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=2 format=3 uid="uid://db8kmkf1e8ilh"]
+
+[ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_wi1o2"]
+
+[resource]
+script = ExtResource("1_wi1o2")
+Name = "A Simple Choice"
+Body = "A path divergres before you. You can either go right and safely progress. You could also go left and try your luck walking over hot coals. The right path also has a 10 dollar bill on the ground."
+Choices = Array[Object]([])

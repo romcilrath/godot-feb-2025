@@ -21,6 +21,8 @@ script = ExtResource("1_kksdf")
 script = ExtResource("2_by3to")
 
 [node name="CardInstance" type="Node2D" parent="."]
+position = Vector2(1068, 182)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("4_jwok1")
 cardResource = ExtResource("5_oocrf")
 

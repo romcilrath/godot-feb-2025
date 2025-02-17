@@ -46,7 +46,6 @@ public partial class PlayerManager : Node
         GD.Print("PlayerManager Initialized.");
 
         Debug_Apply_Choice();
-        Debug_Load_Card();
     }
 
     public void PrintStats()

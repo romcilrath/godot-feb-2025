@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=3840
+window/size/viewport_height=2160
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 
@@ -30,4 +32,4 @@ enabled=PackedStringArray()
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+anti_aliasing/screen_space_roughness_limiter/amount=1.0

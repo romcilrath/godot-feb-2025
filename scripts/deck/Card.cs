@@ -8,7 +8,7 @@ public class Card
     public string Body { get; private set; } = "Card Body";
     public Texture2D Art { get; private set; }
     public Choice[] Choices { get; private set; }
-
+    
     public Card(string name = null, string body = null, Texture2D art = null, Choice[] choices = null)
     {
         if (Name is not null)

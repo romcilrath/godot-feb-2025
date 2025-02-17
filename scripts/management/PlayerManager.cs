@@ -57,14 +57,6 @@ public partial class PlayerManager : Node
         GD.Print($"Attack: {Attack.Current}");
     }
 
-    public void Debug_Load_Card()
-    {
-        GD.Print("GameManager debug");        
-        CardResource cardResource = ResourceLoader.Load<CardResource>("res://resources/cards/test_card.tres");
-        Card card = new Card(cardResource);
-        card.PrintCard();
-    }
-
     public void Debug_Apply_Choice()
     {
         Effect test1 = new OneTimeEffect(Money, 10f, ActionType.Set);

@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=11 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_kksdf"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="2_by3to"]
-[ext_resource type="Texture2D" uid="uid://baapvkxd0bkwx" path="res://resources/sprites/9_Slice_Test.png" id="3_vwb1a"]
+[ext_resource type="Script" path="res://scripts/CardInstance.cs" id="4_jwok1"]
+[ext_resource type="Texture2D" uid="uid://bukcobsc4gj3e" path="res://resources/sprites/Card.png" id="5_h8qo4"]
+[ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://resources/cards/test_card.tres" id="5_oocrf"]
+[ext_resource type="Texture2D" uid="uid://dlch8a4m53654" path="res://resources/sprites/ArtWindow.png" id="6_vn3dh"]
+[ext_resource type="Texture2D" uid="uid://bmpk74evjvbbn" path="res://resources/sprites/Tab.png" id="7_q0iq1"]
+[ext_resource type="Texture2D" uid="uid://c6ahkt08on06y" path="res://resources/sprites/Choice.png" id="8_6yf3x"]
+[ext_resource type="FontFile" uid="uid://bdnyn2wpcxjib" path="res://resources/fonts/Comics Tricks.ttf" id="9_5ve0l"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x84tw"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -12,18 +20,217 @@ script = ExtResource("1_kksdf")
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("2_by3to")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_left = 472.0
-offset_top = 109.0
-offset_right = 504.0
-offset_bottom = 153.0
-scale = Vector2(10, 10)
-texture = ExtResource("3_vwb1a")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
+[node name="CardInstance" type="Node2D" parent="."]
+script = ExtResource("4_jwok1")
+cardResource = ExtResource("5_oocrf")
+
+[node name="CardBackdrop" type="NinePatchRect" parent="CardInstance"]
+modulate = Color(0.973031, 0.670336, 0.620027, 1)
+z_index = -2
+offset_left = 117.0
+offset_top = 29.0
+offset_right = 851.0
+offset_bottom = 1223.0
+texture = ExtResource("5_h8qo4")
+patch_margin_left = 75
+patch_margin_top = 75
+patch_margin_right = 75
+patch_margin_bottom = 75
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Art" type="TextureRect" parent="CardInstance"]
+offset_left = 161.0
+offset_top = 97.0
+offset_right = 801.0
+offset_bottom = 500.0
+texture = SubResource("PlaceholderTexture2D_x84tw")
+
+[node name="ArtPane" type="NinePatchRect" parent="CardInstance"]
+modulate = Color(0.973031, 0.670336, 0.620027, 1)
+offset_left = 155.0
+offset_top = 89.0
+offset_right = 807.0
+offset_bottom = 502.0
+texture = ExtResource("6_vn3dh")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 40
+axis_stretch_vertical = 1
+
+[node name="Tab" type="NinePatchRect" parent="CardInstance"]
+modulate = Color(0.973031, 0.670336, 0.620027, 1)
+offset_left = 127.0
+offset_top = 70.0
+offset_right = 539.0
+offset_bottom = 170.0
+texture = ExtResource("7_q0iq1")
+patch_margin_left = 40
+patch_margin_right = 100
+patch_margin_bottom = 100
+axis_stretch_horizontal = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Tab"]
+offset_left = 46.0
+offset_top = -18.0
+offset_right = 442.0
+offset_bottom = 56.0
+scale = Vector2(0.8, 1.8)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_5ve0l")
+theme_override_font_sizes/normal_font_size = 62
+bbcode_enabled = true
+text = "CARD NAME"
+fit_content = true
+
+[node name="Choice1" type="NinePatchRect" parent="CardInstance"]
+modulate = Color(0.933333, 1, 0, 1)
+offset_left = 177.0
+offset_top = 747.0
+offset_right = 800.0
+offset_bottom = 872.0
+texture = ExtResource("8_6yf3x")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Choice1"]
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 411.0
+offset_bottom = 112.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_5ve0l")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "CHOICE #1: THIS IS THE FIRST CHOICE
+ASDF"
+fit_content = true
+
+[node name="Shadow" type="NinePatchRect" parent="CardInstance/Choice1"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+offset_left = -17.0
+offset_top = 17.0
+offset_right = 606.0
+offset_bottom = 142.0
+texture = ExtResource("8_6yf3x")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Choice2" type="NinePatchRect" parent="CardInstance"]
+modulate = Color(0.933333, 1, 0, 1)
+offset_left = 177.0
+offset_top = 900.0
+offset_right = 800.0
+offset_bottom = 1025.0
+texture = ExtResource("8_6yf3x")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Choice2"]
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 412.0
+offset_bottom = 112.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_5ve0l")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "CHOICE #1: THIS IS THE SECOND CHOICE
+ASDF
+"
+fit_content = true
+
+[node name="Shadow" type="NinePatchRect" parent="CardInstance/Choice2"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+offset_left = -18.0
+offset_top = 16.0
+offset_right = 605.0
+offset_bottom = 141.0
+texture = ExtResource("8_6yf3x")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Choice3" type="NinePatchRect" parent="CardInstance"]
+modulate = Color(0.933333, 1, 0, 1)
+offset_left = 177.0
+offset_top = 1051.0
+offset_right = 800.0
+offset_bottom = 1176.0
+texture = ExtResource("8_6yf3x")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Choice3"]
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 412.0
+offset_bottom = 88.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_5ve0l")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "CHOICE #3: THIS IS THE THIRD CHOICE
+ASDF"
+fit_content = true
+
+[node name="Shadow" type="NinePatchRect" parent="CardInstance/Choice3"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+offset_left = -17.0
+offset_top = 17.0
+offset_right = 606.0
+offset_bottom = 142.0
+texture = ExtResource("8_6yf3x")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CardInstance"]
+offset_left = 756.0
+offset_top = 52.0
+offset_right = 802.0
+offset_bottom = 86.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_5ve0l")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "12"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardInstance"]
+offset_left = 178.0
+offset_top = 520.0
+offset_right = 788.0
+offset_bottom = 748.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_5ve0l")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "THIS IS THE BODY OF THE CARD. THE MAIN TEXT OF THE CARD WILL GO HERE. FOR EXAMPLE MAYBE ITS, LIKE, A GOOD THING... OR MAYBE IT COULD BE BAD. DEPENDS WHAT CARDS FATE HAS IN STORE"
+fit_content = true

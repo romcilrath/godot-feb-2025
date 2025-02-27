@@ -32,4 +32,6 @@ enabled=PackedStringArray()
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=2
 anti_aliasing/screen_space_roughness_limiter/amount=1.0
+textures/default_filters/texture_mipmap_bias=-1.0

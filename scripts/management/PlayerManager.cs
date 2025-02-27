@@ -7,7 +7,7 @@ public enum Backstory
     Adventurer
 }
 
-public enum Race
+public enum Species
 {
     Human
 }
@@ -23,7 +23,7 @@ public partial class PlayerManager : Node
     // Player characteristics
     public string PlayerName { get; private set; } = "Player Name";
     public int Age { get; private set; } = 12;
-    public Race Race { get; private set; } = Race.Human;
+    public Species Species { get; private set; } = Species.Human;
     public Backstory Backstory { get; private set; } = Backstory.Adventurer;
 
     // Player stats

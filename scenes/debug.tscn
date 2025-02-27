@@ -21,7 +21,7 @@ script = ExtResource("1_kksdf")
 script = ExtResource("2_by3to")
 
 [node name="CardInstance" type="Node2D" parent="."]
-position = Vector2(1068, 182)
+position = Vector2(1358, 240)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("4_jwok1")
 cardResource = ExtResource("5_oocrf")
@@ -29,10 +29,8 @@ cardResource = ExtResource("5_oocrf")
 [node name="CardBackdrop" type="NinePatchRect" parent="CardInstance"]
 modulate = Color(0.973031, 0.670336, 0.620027, 1)
 z_index = -2
-offset_left = 117.0
-offset_top = 29.0
-offset_right = 851.0
-offset_bottom = 1223.0
+offset_right = 734.0
+offset_bottom = 1194.0
 texture = ExtResource("5_h8qo4")
 patch_margin_left = 75
 patch_margin_top = 75
@@ -42,18 +40,18 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="CardInstance"]
-offset_left = 161.0
-offset_top = 97.0
-offset_right = 801.0
-offset_bottom = 500.0
+offset_left = 46.0
+offset_top = 71.0
+offset_right = 686.0
+offset_bottom = 474.0
 texture = SubResource("PlaceholderTexture2D_x84tw")
 
 [node name="ArtPane" type="NinePatchRect" parent="CardInstance"]
 modulate = Color(0.973031, 0.670336, 0.620027, 1)
-offset_left = 155.0
-offset_top = 89.0
-offset_right = 807.0
-offset_bottom = 502.0
+offset_left = 40.0
+offset_top = 63.0
+offset_right = 692.0
+offset_bottom = 476.0
 texture = ExtResource("6_vn3dh")
 patch_margin_left = 25
 patch_margin_top = 25
@@ -63,10 +61,10 @@ axis_stretch_vertical = 1
 
 [node name="Tab" type="NinePatchRect" parent="CardInstance"]
 modulate = Color(0.973031, 0.670336, 0.620027, 1)
-offset_left = 127.0
-offset_top = 70.0
-offset_right = 539.0
-offset_bottom = 170.0
+offset_left = 12.0
+offset_top = 44.0
+offset_right = 534.0
+offset_bottom = 144.0
 texture = ExtResource("7_q0iq1")
 patch_margin_left = 40
 patch_margin_right = 100
@@ -74,6 +72,7 @@ patch_margin_bottom = 100
 axis_stretch_horizontal = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Tab"]
+layout_mode = 0
 offset_left = 46.0
 offset_top = -18.0
 offset_right = 442.0
@@ -88,10 +87,10 @@ fit_content = true
 
 [node name="Choice1" type="NinePatchRect" parent="CardInstance"]
 modulate = Color(0.933333, 1, 0, 1)
-offset_left = 177.0
-offset_top = 747.0
-offset_right = 800.0
-offset_bottom = 872.0
+offset_left = 62.0
+offset_top = 721.0
+offset_right = 685.0
+offset_bottom = 846.0
 texture = ExtResource("8_6yf3x")
 patch_margin_left = 30
 patch_margin_top = 30
@@ -101,6 +100,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Choice1"]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 13.0
 offset_right = 411.0
@@ -116,6 +116,7 @@ fit_content = true
 [node name="Shadow" type="NinePatchRect" parent="CardInstance/Choice1"]
 modulate = Color(0, 0, 0, 1)
 z_index = -1
+layout_mode = 0
 offset_left = -17.0
 offset_top = 17.0
 offset_right = 606.0
@@ -130,10 +131,10 @@ axis_stretch_vertical = 1
 
 [node name="Choice2" type="NinePatchRect" parent="CardInstance"]
 modulate = Color(0.933333, 1, 0, 1)
-offset_left = 177.0
-offset_top = 900.0
-offset_right = 800.0
-offset_bottom = 1025.0
+offset_left = 62.0
+offset_top = 874.0
+offset_right = 685.0
+offset_bottom = 999.0
 texture = ExtResource("8_6yf3x")
 patch_margin_left = 30
 patch_margin_top = 30
@@ -143,6 +144,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Choice2"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 13.0
 offset_right = 412.0
@@ -151,7 +153,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("9_5ve0l")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "CHOICE #1: THIS IS THE SECOND CHOICE
+text = "CHOICE #2: THIS IS THE SECOND CHOICE
 ASDF
 "
 fit_content = true
@@ -159,6 +161,7 @@ fit_content = true
 [node name="Shadow" type="NinePatchRect" parent="CardInstance/Choice2"]
 modulate = Color(0, 0, 0, 1)
 z_index = -1
+layout_mode = 0
 offset_left = -18.0
 offset_top = 16.0
 offset_right = 605.0
@@ -173,10 +176,10 @@ axis_stretch_vertical = 1
 
 [node name="Choice3" type="NinePatchRect" parent="CardInstance"]
 modulate = Color(0.933333, 1, 0, 1)
-offset_left = 177.0
-offset_top = 1051.0
-offset_right = 800.0
-offset_bottom = 1176.0
+offset_left = 62.0
+offset_top = 1025.0
+offset_right = 685.0
+offset_bottom = 1150.0
 texture = ExtResource("8_6yf3x")
 patch_margin_left = 30
 patch_margin_top = 30
@@ -186,6 +189,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CardInstance/Choice3"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 14.0
 offset_right = 412.0
@@ -201,6 +205,7 @@ fit_content = true
 [node name="Shadow" type="NinePatchRect" parent="CardInstance/Choice3"]
 modulate = Color(0, 0, 0, 1)
 z_index = -1
+layout_mode = 0
 offset_left = -17.0
 offset_top = 17.0
 offset_right = 606.0
@@ -213,11 +218,11 @@ patch_margin_bottom = 30
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CardInstance"]
-offset_left = 756.0
-offset_top = 52.0
-offset_right = 802.0
-offset_bottom = 86.0
+[node name="Number" type="RichTextLabel" parent="CardInstance"]
+offset_left = 641.0
+offset_top = 26.0
+offset_right = 687.0
+offset_bottom = 60.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("9_5ve0l")
 theme_override_font_sizes/normal_font_size = 32
@@ -225,14 +230,14 @@ bbcode_enabled = true
 text = "12"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CardInstance"]
-offset_left = 178.0
-offset_top = 520.0
-offset_right = 788.0
-offset_bottom = 748.0
+[node name="Body" type="RichTextLabel" parent="CardInstance"]
+offset_left = 47.0
+offset_top = 490.333
+offset_right = 686.0
+offset_bottom = 724.333
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("9_5ve0l")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "THIS IS THE BODY OF THE CARD. THE MAIN TEXT OF THE CARD WILL GO HERE. FOR EXAMPLE MAYBE ITS, LIKE, A GOOD THING... OR MAYBE IT COULD BE BAD. DEPENDS WHAT CARDS FATE HAS IN STORE"
+text = "[center]THIS IS THE BODY OF THE CARD. THE MAIN TEXT OF THE CARD WILL GO HERE. FOR EXAMPLE MAYBE ITS, LIKE, A GOOD THING... OR MAYBE IT COULD BE BAD. DEPENDS WHAT CARDS FATE HAS IN STORE[/center]"
 fit_content = true

@@ -24,7 +24,7 @@ Body = NodePath("Body")
 [node name="Backdrop" type="NinePatchRect" parent="."]
 modulate = Color(0.972549, 0.670588, 0.619608, 1)
 offset_right = 734.0
-offset_bottom = 1194.0
+offset_bottom = 1284.0
 texture = ExtResource("3_mmc0k")
 patch_margin_left = 75
 patch_margin_top = 75
@@ -35,16 +35,16 @@ axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
 offset_left = 46.0
-offset_top = 71.0
+offset_top = 70.3333
 offset_right = 686.0
-offset_bottom = 474.0
+offset_bottom = 710.333
 texture = ExtResource("4_7nvko")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
 offset_left = 41.0
-offset_top = 469.0
+offset_top = 544.0
 offset_right = 688.0
 offset_bottom = 714.0
 color = Color(0.972549, 0.670588, 0.619608, 1)
@@ -54,7 +54,7 @@ modulate = Color(0.973031, 0.670336, 0.620027, 1)
 offset_left = 40.0
 offset_top = 63.0
 offset_right = 692.0
-offset_bottom = 476.0
+offset_bottom = 545.0
 texture = ExtResource("4_3si1e")
 patch_margin_left = 25
 patch_margin_top = 25
@@ -101,10 +101,10 @@ text = "12"
 fit_content = true
 
 [node name="Body" type="RichTextLabel" parent="."]
-offset_left = 46.3333
-offset_top = 483.0
-offset_right = 685.333
-offset_bottom = 723.0
+offset_left = 46.0
+offset_top = 551.333
+offset_right = 685.0
+offset_bottom = 791.333
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_d6nmg")
 theme_override_font_sizes/normal_font_size = 32
@@ -115,10 +115,10 @@ For example, maybe it's, like, a good thing... Or  it could be a bad thing. Depe
 fit_content = true
 
 [node name="ChoiceInstance 1" parent="." instance=ExtResource("7_whuhx")]
-position = Vector2(64.6667, 724.667)
+position = Vector2(64.6667, 804)
 
 [node name="ChoiceInstance 2" parent="." instance=ExtResource("7_whuhx")]
-position = Vector2(64.6667, 875.333)
+position = Vector2(64.6667, 954.667)
 
 [node name="ChoiceInstance 3" parent="." instance=ExtResource("7_whuhx")]
-position = Vector2(65.3333, 1025.33)
+position = Vector2(65.3333, 1104.67)

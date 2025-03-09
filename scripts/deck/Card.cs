@@ -4,13 +4,15 @@ using Godot;
 
 public class Card 
 {
+    public int Number { get; private set; }
     public string Name { get; private set; } = "Card Name";
     public string Body { get; private set; } = "Card Body";
     public Texture2D Art { get; private set; }
     public Choice[] Choices { get; private set; }
     
-    public Card(string name = null, string body = null, Texture2D art = null, Choice[] choices = null)
+    public Card(int number = 0, string name = null, string body = null, Texture2D art = null, Choice[] choices = null)
     {
+        Number = number;
         if (Name is not null)
             Name = name;
         if (Body is not null)
@@ -23,6 +25,7 @@ public class Card
 
     public Card(CardResource cardResource)
     {
+        int number = cardResource.Number;
         string name = cardResource.Name;
         string body = cardResource.Body;
         Texture2D art = cardResource.Art;
@@ -35,6 +38,7 @@ public class Card
             choices[i] = new Choice(choiceResources[i]);
         }
         
+        Number = number;
         Name = name;
         Body = body;
         Art = art;
@@ -55,6 +59,7 @@ public class Card
 
     public void PrintCard()
     {
+        GD.Print($"Number: {Number}");
         GD.Print($"Name: {Name}");
         GD.Print($"Body: {Body}");
         GD.Print($"Art: {Art}");

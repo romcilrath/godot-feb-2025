@@ -27,10 +27,10 @@ public partial class PlayerManager : Node
     public Backstory Backstory { get; private set; } = Backstory.Adventurer;
 
     // Player stats
-    public Stat Money { get; private set; } = new Stat("Money");                        // Money
-    public Stat Health { get; private set; } = new Stat("Health", min:100, max:100);    // Health
-    public Stat Armor { get; private set; } = new Stat("Armor");                        // Armor
-    public Stat Attack { get; private set; } = new Stat("Attack", initial:1f);          // Attack
+    public Stat Money { get; private set; } = new Stat("Money", min:0, initial:0);                  // Money
+    public Stat Health { get; private set; } = new Stat("Health", min:0, max:100, initial:100);     // Health
+    public Stat Armor { get; private set; } = new Stat("Armor", min:0, initial:0);                  // Armor
+    public Stat Attack { get; private set; } = new Stat("Attack", initial:1f);                      // Attack
 
     public override void _Ready() 
     {

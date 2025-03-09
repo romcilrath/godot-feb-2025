@@ -1,0 +1,29 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
+public partial class GlobalReferences : Node
+{
+    // Used to store single game instance
+    // Accessed from other scripts like:
+    //      GameManager.Instance.ChoiceInstanceScene;
+    private static GlobalReferences _instance;
+    public static GlobalReferences Instance => _instance;
+
+    [Export] PackedScene CardInstanceScene;
+    [Export] PackedScene ChoiceInstanceScene;
+
+    public override void _Ready() 
+    {
+        // Enforce singleton design pattern
+        if (_instance != null)
+        {
+            GD.PrintErr("Multiple GlobalReferences instances detected! Deleting duplicate.");
+            QueueFree();
+            return;
+        }
+
+        _instance = this;
+        GD.Print("GlobalReferences Initialized.");
+    }
+}

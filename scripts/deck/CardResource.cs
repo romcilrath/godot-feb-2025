@@ -6,6 +6,7 @@ public partial class CardResource : Resource
 {
     #region VARIABLES
 
+    [Export] public int Number;
     [Export] public string Name;
     [Export(PropertyHint.MultilineText)] public string Body;
     [Export] public Texture2D Art;

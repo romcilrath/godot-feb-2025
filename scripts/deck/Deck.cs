@@ -10,10 +10,10 @@ public class Deck
     public List<Card> LockedCards { get; private set; }
     public List<Card> DiscardedCards { get; private set; }
 
-    public Deck(string name = null, Texture2D Art = null, List<Card> cards = null, List<Card> lockedCards = null)
+    public Deck(string name = null, Texture2D art = null, List<Card> cards = null, List<Card> lockedCards = null)
     {
-        if (name is not null)
-            Name = name;
+        Name = name ?? "Deck Name";
+        Art = art;                                          // TODO: Handle null art
         Cards = cards ?? new List<Card>();
         LockedCards = lockedCards ?? new List<Card>();
         DiscardedCards = new List<Card>();

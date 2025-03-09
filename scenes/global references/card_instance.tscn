@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://cn7ixi314jln5"]
+
+[ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
+[ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://resources/cards/test_card.tres" id="2_hyn6i"]
+[ext_resource type="Texture2D" uid="uid://bukcobsc4gj3e" path="res://resources/sprites/Card.png" id="3_mmc0k"]
+[ext_resource type="Texture2D" uid="uid://dlch8a4m53654" path="res://resources/sprites/ArtWindow.png" id="4_3si1e"]
+[ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://resources/sprites/ImageNotFound.png" id="4_7nvko"]
+[ext_resource type="Texture2D" uid="uid://bmpk74evjvbbn" path="res://resources/sprites/Tab.png" id="5_xfk33"]
+[ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://resources/fonts/Pangolin-Regular.ttf" id="6_d6nmg"]
+[ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://scenes/global references/choice_instance.tscn" id="7_whuhx"]
+
+[node name="CardInstance" type="Node2D" node_paths=PackedStringArray("Backdrop", "Art", "Window", "Tab", "NameLabel", "Number", "Body")]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_0mhr0")
+cardResource = ExtResource("2_hyn6i")
+Backdrop = NodePath("Backdrop")
+Art = NodePath("Art")
+Window = NodePath("Window")
+Tab = NodePath("Tab")
+NameLabel = NodePath("Tab/Name Label")
+Number = NodePath("Number")
+Body = NodePath("Body")
+
+[node name="Backdrop" type="NinePatchRect" parent="."]
+modulate = Color(0.972549, 0.670588, 0.619608, 1)
+offset_right = 734.0
+offset_bottom = 1194.0
+texture = ExtResource("3_mmc0k")
+patch_margin_left = 75
+patch_margin_top = 75
+patch_margin_right = 75
+patch_margin_bottom = 75
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Art" type="TextureRect" parent="."]
+offset_left = 46.0
+offset_top = 71.0
+offset_right = 686.0
+offset_bottom = 474.0
+texture = ExtResource("4_7nvko")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Cover" type="ColorRect" parent="."]
+offset_left = 41.0
+offset_top = 469.0
+offset_right = 688.0
+offset_bottom = 714.0
+color = Color(0.972549, 0.670588, 0.619608, 1)
+
+[node name="Window" type="NinePatchRect" parent="."]
+modulate = Color(0.973031, 0.670336, 0.620027, 1)
+offset_left = 40.0
+offset_top = 63.0
+offset_right = 692.0
+offset_bottom = 476.0
+texture = ExtResource("4_3si1e")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 40
+axis_stretch_vertical = 1
+
+[node name="Tab" type="NinePatchRect" parent="."]
+modulate = Color(0.973031, 0.670336, 0.620027, 1)
+offset_left = 12.0
+offset_top = 44.0
+offset_right = 534.0
+offset_bottom = 144.0
+texture = ExtResource("5_xfk33")
+patch_margin_left = 40
+patch_margin_right = 100
+patch_margin_bottom = 100
+axis_stretch_horizontal = 1
+
+[node name="Name Label" type="RichTextLabel" parent="Tab"]
+layout_mode = 0
+offset_left = 30.6667
+offset_top = -35.3333
+offset_right = 617.667
+offset_bottom = 43.6667
+scale = Vector2(0.8, 1.8)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_d6nmg")
+theme_override_font_sizes/normal_font_size = 62
+bbcode_enabled = true
+text = "Card Name"
+fit_content = true
+
+[node name="Number" type="RichTextLabel" parent="."]
+offset_left = 641.0
+offset_top = 26.0
+offset_right = 687.0
+offset_bottom = 60.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_d6nmg")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "12"
+fit_content = true
+
+[node name="Body" type="RichTextLabel" parent="."]
+offset_left = 46.3333
+offset_top = 483.0
+offset_right = 685.333
+offset_bottom = 723.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_d6nmg")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]This is the body of the card. The main text of the card will go here. 
+
+For example, maybe it's, like, a good thing... Or  it could be a bad thing. Depends what the cards have in store.[/center]"
+fit_content = true
+
+[node name="ChoiceInstance 1" parent="." instance=ExtResource("7_whuhx")]
+position = Vector2(64.6667, 724.667)
+
+[node name="ChoiceInstance 2" parent="." instance=ExtResource("7_whuhx")]
+position = Vector2(64.6667, 875.333)
+
+[node name="ChoiceInstance 3" parent="." instance=ExtResource("7_whuhx")]
+position = Vector2(65.3333, 1025.33)

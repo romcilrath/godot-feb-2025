@@ -87,6 +87,7 @@ public partial class CardInstance : Node2D
 		
 		_number.Text = this._card.Number.ToString();
         _nameLabel.Text = this._card.Name;
+		_art.Texture = this._card.Art;
 		_body.Text = "[center]" + this._card.Body + "[/center]";
 
 		foreach (ChoiceResource choiceResource in this.cardResource.Choices)

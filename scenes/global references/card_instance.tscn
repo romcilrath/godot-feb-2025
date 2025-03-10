@@ -47,7 +47,7 @@ stretch_mode = 4
 offset_left = 41.0
 offset_top = 581.0
 offset_right = 688.0
-offset_bottom = 714.0
+offset_bottom = 1213.0
 color = Color(0.972549, 0.670588, 0.619608, 1)
 
 [node name="Window" type="NinePatchRect" parent="."]

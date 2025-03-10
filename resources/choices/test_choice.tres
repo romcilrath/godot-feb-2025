@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ChoiceResource" load_steps=2 format=3 uid="uid://bod3libhrgw6b"]
+
+[ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="1_nno8i"]
+
+[resource]
+script = ExtResource("1_nno8i")
+Text = "This is a test choice"
+HoverText = "My hover text"
+Effects = Array[Object]([])

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bdnyn2wpcxjib"
-path="res://.godot/imported/Comics Tricks.ttf-21e9f716844efde8d4a73dab16ce7368.fontdata"
+uid="uid://cy08w2n8m5jv2"
+path="res://.godot/imported/ShantellSans-ExtraBoldItalic.ttf-df92d1e14e2de43868b90d9de2191dc0.fontdata"
 
 [deps]
 
-source_file="res://resources/fonts/Comics Tricks.ttf"
-dest_files=["res://.godot/imported/Comics Tricks.ttf-21e9f716844efde8d4a73dab16ce7368.fontdata"]
+source_file="res://resources/fonts/Shantell Sans/static/ShantellSans-ExtraBoldItalic.ttf"
+dest_files=["res://.godot/imported/ShantellSans-ExtraBoldItalic.ttf-df92d1e14e2de43868b90d9de2191dc0.fontdata"]
 
 [params]
 

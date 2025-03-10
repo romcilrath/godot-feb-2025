@@ -2,12 +2,39 @@
 
 [ext_resource type="Texture2D" uid="uid://c6ahkt08on06y" path="res://resources/sprites/Choice.png" id="1_bf7ne"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceInstance.cs" id="2_3ixah"]
-[ext_resource type="Resource" uid="uid://bod3libhrgw6b" path="res://resources/choices/test_resource.tres" id="2_v8578"]
-[ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://resources/fonts/Pangolin-Regular.ttf" id="4_d5ipd"]
+[ext_resource type="Resource" uid="uid://bod3libhrgw6b" path="res://resources/choices/test_choice.tres" id="2_6btmd"]
+[ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://resources/fonts/Pangolin/Pangolin-Regular.ttf" id="4_qxv8u"]
 
-[node name="Choice Instance" type="Node2D"]
+[node name="ChoiceInstance" type="NinePatchRect"]
+modulate = Color(0.933333, 1, 0, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 125)
+offset_right = 623.0
+offset_bottom = 125.0
+texture = ExtResource("1_bf7ne")
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 script = ExtResource("2_3ixah")
-choiceResource = ExtResource("2_v8578")
+choiceResource = ExtResource("2_6btmd")
+ShadowPath = NodePath("Shadow")
+TextPath = NodePath("Text")
+
+[node name="Text" type="RichTextLabel" parent="."]
+offset_left = 11.0
+offset_top = 8.0
+offset_right = 407.0
+offset_bottom = 116.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_qxv8u")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "This is a choice instance that has not yet loaded.
+Good luck loading it king."
+fit_content = true
 
 [node name="Shadow" type="NinePatchRect" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -23,29 +50,3 @@ patch_margin_right = 30
 patch_margin_bottom = 30
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-
-[node name="Box" type="NinePatchRect" parent="."]
-modulate = Color(0.933333, 1, 0, 1)
-show_behind_parent = true
-offset_right = 623.0
-offset_bottom = 125.0
-texture = ExtResource("1_bf7ne")
-patch_margin_left = 30
-patch_margin_top = 30
-patch_margin_right = 30
-patch_margin_bottom = 30
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="Text" type="RichTextLabel" parent="."]
-offset_left = 11.0
-offset_top = 8.0
-offset_right = 407.0
-offset_bottom = 116.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_d5ipd")
-theme_override_font_sizes/normal_font_size = 28
-bbcode_enabled = true
-text = "This is a choice instance that has not yet loaded.
-Good luck loading it king."
-fit_content = true

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://db8kmkf1e8ilh"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://db8kmkf1e8ilh"]
 
 [ext_resource type="Script" path="res://scripts/deck/effects/OneTimeEffectResource.cs" id="1_qyauy"]
 [ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_wi1o2"]
+[ext_resource type="Script" path="res://scripts/deck/effects/EffectResource.cs" id="2_rag7p"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="2_t5tw7"]
 [ext_resource type="Script" path="res://scripts/deck/effects/RepeatEffectResource.cs" id="3_dayx3"]
 
@@ -11,13 +12,27 @@ Target = 0
 Value = 10.0
 ActionType = 1
 
+[sub_resource type="Resource" id="Resource_cmaum"]
+script = ExtResource("2_rag7p")
+Target = 0
+Value = 10.0
+ActionType = 1
+
 [sub_resource type="Resource" id="Resource_t61wy"]
 script = ExtResource("2_t5tw7")
 Text = "Go right"
 HoverText = "Yeah, probably wise"
-Effects = Array[Object]([SubResource("Resource_ahvi8")])
+Effects = Array[Object]([SubResource("Resource_ahvi8"), SubResource("Resource_cmaum")])
 
 [sub_resource type="Resource" id="Resource_drth7"]
+script = ExtResource("3_dayx3")
+EveryTurn = 1
+ForTurns = 3
+Target = 1
+Value = -1.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_v1im2"]
 script = ExtResource("3_dayx3")
 EveryTurn = 1
 ForTurns = 3
@@ -29,7 +44,7 @@ ActionType = 1
 script = ExtResource("2_t5tw7")
 Text = "Go left"
 HoverText = "Uh, you sure boss?"
-Effects = Array[Object]([SubResource("Resource_drth7")])
+Effects = Array[Object]([SubResource("Resource_drth7"), SubResource("Resource_v1im2")])
 
 [resource]
 script = ExtResource("1_wi1o2")

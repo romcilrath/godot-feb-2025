@@ -10,8 +10,8 @@ public partial class GlobalReferences : Node
     private static GlobalReferences _instance;
     public static GlobalReferences Instance => _instance;
 
-    [Export] PackedScene CardInstanceScene;
-    [Export] PackedScene ChoiceInstanceScene;
+    [Export] public PackedScene CardInstanceScene;
+    [Export] public PackedScene ChoiceInstanceScene;
 
     public override void _Ready() 
     {

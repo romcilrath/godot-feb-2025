@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://mueukd37qxcs"
-path="res://.godot/imported/Pangolin-Regular.ttf-45aea1d1136aa7d5303fe1826a17a10d.fontdata"
+uid="uid://dha018t2il2f2"
+path="res://.godot/imported/ShantellSans-LightItalic.ttf-b006a6c13720725067ee223484158bbf.fontdata"
 
 [deps]
 
-source_file="res://resources/fonts/Pangolin-Regular.ttf"
-dest_files=["res://.godot/imported/Pangolin-Regular.ttf-45aea1d1136aa7d5303fe1826a17a10d.fontdata"]
+source_file="res://resources/fonts/Shantell Sans/static/ShantellSans-LightItalic.ttf"
+dest_files=["res://.godot/imported/ShantellSans-LightItalic.ttf-b006a6c13720725067ee223484158bbf.fontdata"]
 
 [params]
 

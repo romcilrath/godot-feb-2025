@@ -2,28 +2,43 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class ChoiceInstance : Node2D
+public partial class ChoiceInstance : NinePatchRect
 {
 	[Export] public ChoiceResource choiceResource;
-	public Choice choice;
+	private Choice _choice;
 
-	// Called when the node enters the scene tree for the first time.
+    [Export] public NodePath ShadowPath { get; set; }
+    [Export] public NodePath TextPath { get; set; }
+
+    private NinePatchRect _shadow;
+    private RichTextLabel _text;
+
 	public override void _Ready()
 	{
-		Debug_Load_Choice();
+		_shadow = GetNode<NinePatchRect>(ShadowPath);
+        if (_shadow == null)
+        {
+            GD.PrintErr($"Shadow node not found at path: {ShadowPath}");
+        }
+
+        _text = GetNode<RichTextLabel>(TextPath);
+        if (_text == null)
+        {
+            GD.PrintErr($"Text node not found at path: {TextPath}");
+        }
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void LoadChoice()
 	{
-		
-	}
-
-	public void Debug_Load_Choice()
-	{
-		GD.Print("ChoiceInstance.Debug_Load_Choice");        
 		Choice choice = new Choice(choiceResource);
-		this.choice = choice;
-		this.choice.PrintChoice();
+		this._choice = choice;
+
+		_text.Text = this._choice.Text;
 	}
+
+    public void SetChoiceResource(ChoiceResource newChoiceResource)
+    {
+        choiceResource = newChoiceResource;
+        LoadChoice();
+    }
 }

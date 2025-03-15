@@ -85,7 +85,7 @@ public partial class CardInstance : Node2D
         Card card = new Card(cardResource);
 		this._card = card;
 		
-		_number.Text = this._card.Number.ToString();
+		_number.Text = "No. " + this._card.Number.ToString();
         _nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
 		_body.Text = "[center]" + this._card.Body + "[/center]";
@@ -99,7 +99,7 @@ public partial class CardInstance : Node2D
 			choiceInstance.SetChoiceResource(choiceResource);
 
 			ReferenceRect space = new ReferenceRect();
-			space.CustomMinimumSize = new Vector2(0, 20);
+			space.CustomMinimumSize = new Vector2(0, 100);
 			_choicesContainer.AddChild(space);
 		}
     }

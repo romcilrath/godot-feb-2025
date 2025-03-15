@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=13 format=3 uid="uid://db8kmkf1e8ilh"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://db8kmkf1e8ilh"]
 
-[ext_resource type="Texture2D" uid="uid://bs2k00x31fin3" path="res://resources/sprites/SleepyKitty.jpg" id="1_eeard"]
+[ext_resource type="Texture2D" uid="uid://c20osm5q7yeuq" path="res://resources/sprites/StarryNight.jpg" id="1_eaq2i"]
 [ext_resource type="Script" path="res://scripts/deck/effects/OneTimeEffectResource.cs" id="1_qyauy"]
 [ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_wi1o2"]
 [ext_resource type="Script" path="res://scripts/deck/effects/EffectResource.cs" id="2_rag7p"]
@@ -47,14 +47,18 @@ Text = "Go left"
 HoverText = "Uh, you sure boss?"
 Effects = Array[Object]([SubResource("Resource_drth7"), SubResource("Resource_v1im2")])
 
+[sub_resource type="Resource" id="Resource_b3lby"]
+script = ExtResource("2_t5tw7")
+Text = "Eat shit and cry"
+HoverText = ""
+Effects = Array[Object]([])
+
 [resource]
 script = ExtResource("1_wi1o2")
 Number = 1
 Name = "A Simple Choice"
 Body = "A path divergres before you. 
-
 Right awaits safety, and a $10 bill. 
-
 You could also go left and try your luck walking over hot coals. "
-Art = ExtResource("1_eeard")
-Choices = Array[Object]([SubResource("Resource_t61wy"), SubResource("Resource_apjao")])
+Art = ExtResource("1_eaq2i")
+Choices = Array[Object]([SubResource("Resource_t61wy"), SubResource("Resource_apjao"), SubResource("Resource_b3lby")])

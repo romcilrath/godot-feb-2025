@@ -20,12 +20,12 @@ TabPath = NodePath("TabMarginContainer/TabNPR")
 NameLabelPath = NodePath("TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer/CardName")
 NumberPath = NodePath("Number")
 BodyPath = NodePath("BodyChoicesContainer/BodyContainer/Body")
-ChoicesContainerPath = NodePath("BodyChoicesContainer/ChoicesContainer")
+ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesContainer")
 
 [node name="Backdrop" type="NinePatchRect" parent="."]
-modulate = Color(0.972549, 0.670588, 0.619608, 1)
-offset_right = 734.0
-offset_bottom = 1284.0
+modulate = Color(0.443137, 0.690196, 0.560784, 1)
+offset_right = 2506.0
+offset_bottom = 4598.0
 texture = ExtResource("3_rwigl")
 region_rect = Rect2(0, 10, 2203, 3869)
 patch_margin_left = 149
@@ -36,28 +36,27 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
-offset_left = 46.0
-offset_top = 70.0
-offset_right = 686.0
-offset_bottom = 710.0
+offset_left = 92.0
+offset_top = 108.0
+offset_right = 2404.0
+offset_bottom = 5046.0
 texture = ExtResource("4_7nvko")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
-visible = false
-offset_left = 41.0
-offset_top = 581.0
-offset_right = 688.0
-offset_bottom = 1213.0
-color = Color(0.972549, 0.670588, 0.619608, 1)
+modulate = Color(0.443137, 0.690196, 0.560784, 1)
+offset_left = 57.0
+offset_top = 2071.0
+offset_right = 2433.0
+offset_bottom = 4190.0
 
 [node name="Window" type="NinePatchRect" parent="."]
-modulate = Color(0.973031, 0.670336, 0.620027, 1)
-offset_left = 40.0
-offset_top = 63.0
-offset_right = 692.0
-offset_bottom = 1019.0
+modulate = Color(0.443137, 0.690196, 0.560784, 1)
+offset_left = 37.0
+offset_top = 95.0
+offset_right = 2456.0
+offset_bottom = 2207.0
 texture = ExtResource("5_gub6f")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -65,14 +64,25 @@ patch_margin_right = 136
 patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
+[node name="Number" type="RichTextLabel" parent="."]
+offset_left = 1884.0
+offset_top = 33.0
+offset_right = 2325.0
+offset_bottom = 192.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_q1cyi")
+theme_override_font_sizes/normal_font_size = 90
+text = "No. 12"
+text_direction = 2
+
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
-offset_left = -1.0
-offset_top = 30.0
-offset_right = 431.0
-offset_bottom = 760.0
+offset_left = 46.0
+offset_top = 59.3333
+offset_right = 478.0
+offset_bottom = 477.333
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
-modulate = Color(0.972549, 0.670588, 0.619608, 1)
+modulate = Color(0.443137, 0.690196, 0.560784, 1)
 layout_mode = 2
 texture = ExtResource("6_wf8f5")
 region_rect = Rect2(9, 10, 609, 371)
@@ -92,42 +102,32 @@ layout_mode = 2
 tooltip_text = "this is a test"
 
 [node name="PaddingLeft" type="ReferenceRect" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="CardName" type="RichTextLabel" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_5gqjf")
-theme_override_font_sizes/normal_font_size = 60
-text = "Asdf"
+theme_override_font_sizes/normal_font_size = 200
+text = "Card Name "
 fit_content = true
 autowrap_mode = 0
 
 [node name="PaddingRight" type="ReferenceRect" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 
-[node name="Number" type="RichTextLabel" parent="."]
-offset_left = 641.0
-offset_top = 26.0
-offset_right = 687.0
-offset_bottom = 60.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("7_q1cyi")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "12"
-fit_content = true
-
 [node name="BodyChoicesContainer" type="VBoxContainer" parent="."]
-offset_left = 45.0
-offset_top = 584.0
-offset_right = 685.0
-offset_bottom = 1259.0
+offset_left = 97.0
+offset_top = 1820.0
+offset_right = 2398.0
+offset_bottom = 4515.0
 
 [node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
 
 [node name="SpaceTop" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -137,7 +137,8 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_q1cyi")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 130
+theme_override_font_sizes/bold_font_size = 130
 bbcode_enabled = true
 text = "[center]This is the body of the card. The main text of the card will go here. 
 
@@ -148,7 +149,15 @@ fit_content = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="ChoicesContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 80
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="BodyChoicesContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
 alignment = 1

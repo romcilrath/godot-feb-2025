@@ -20,4 +20,5 @@ ChoiceInstanceScene = ExtResource("10_nrsya")
 script = ExtResource("2_by3to")
 
 [node name="CardInstance" parent="." instance=ExtResource("5_vvn6d")]
-position = Vector2(1372, 182)
+position = Vector2(1451, 96)
+scale = Vector2(0.4, 0.4)

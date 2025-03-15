@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs2k00x31fin3"
-path="res://.godot/imported/SleepyKitty.jpg-84f95bb3f059186d54f343791d383687.ctex"
+uid="uid://bt5s37fc604r4"
+path="res://.godot/imported/Choice.PNG-c45d40a58dd0e9dd01df0ca3e5e9b05d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/SleepyKitty.jpg"
-dest_files=["res://.godot/imported/SleepyKitty.jpg-84f95bb3f059186d54f343791d383687.ctex"]
+source_file="res://resources/sprites/Card/Choice.PNG"
+dest_files=["res://.godot/imported/Choice.PNG-c45d40a58dd0e9dd01df0ca3e5e9b05d.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

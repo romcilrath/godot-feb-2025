@@ -44,6 +44,7 @@ fit_content = true
 [node name="Shadow" type="NinePatchRect" parent="."]
 modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
+layout_mode = 0
 offset_left = -17.0
 offset_top = 17.0
 offset_right = 606.0

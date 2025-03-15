@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
 [ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://resources/cards/test_card.tres" id="2_hyn6i"]
-[ext_resource type="Texture2D" uid="uid://bukcobsc4gj3e" path="res://resources/sprites/Card.png" id="3_mmc0k"]
-[ext_resource type="Texture2D" uid="uid://dlch8a4m53654" path="res://resources/sprites/ArtWindow.png" id="4_3si1e"]
+[ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://resources/sprites/Card/Card.PNG" id="3_rwigl"]
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://resources/sprites/ImageNotFound.png" id="4_7nvko"]
-[ext_resource type="Texture2D" uid="uid://bmpk74evjvbbn" path="res://resources/sprites/Tab.png" id="5_xfk33"]
+[ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://resources/sprites/Card/Window.PNG" id="5_gub6f"]
+[ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://resources/sprites/Card/Tab.PNG" id="6_wf8f5"]
 [ext_resource type="FontFile" uid="uid://1obcqasqw6i2" path="res://resources/fonts/Walter Turncoat/WalterTurncoat-Regular.ttf" id="7_5gqjf"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://resources/fonts/Pangolin/Pangolin-Regular.ttf" id="7_q1cyi"]
 
@@ -16,8 +16,8 @@ cardResource = ExtResource("2_hyn6i")
 BackdropPath = NodePath("Backdrop")
 ArtPath = NodePath("Art")
 WindowPath = NodePath("Window")
-TabPath = NodePath("Tab")
-NameLabelPath = NodePath("Tab/NameLabel")
+TabPath = NodePath("TabMarginContainer/TabNPR")
+NameLabelPath = NodePath("TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer/CardName")
 NumberPath = NodePath("Number")
 BodyPath = NodePath("BodyChoicesContainer/BodyContainer/Body")
 ChoicesContainerPath = NodePath("BodyChoicesContainer/ChoicesContainer")
@@ -26,24 +26,26 @@ ChoicesContainerPath = NodePath("BodyChoicesContainer/ChoicesContainer")
 modulate = Color(0.972549, 0.670588, 0.619608, 1)
 offset_right = 734.0
 offset_bottom = 1284.0
-texture = ExtResource("3_mmc0k")
-patch_margin_left = 75
-patch_margin_top = 75
-patch_margin_right = 75
-patch_margin_bottom = 75
+texture = ExtResource("3_rwigl")
+region_rect = Rect2(0, 10, 2203, 3869)
+patch_margin_left = 149
+patch_margin_top = 154
+patch_margin_right = 143
+patch_margin_bottom = 144
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
 offset_left = 46.0
-offset_top = 70.3333
+offset_top = 70.0
 offset_right = 686.0
-offset_bottom = 710.333
+offset_bottom = 710.0
 texture = ExtResource("4_7nvko")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
+visible = false
 offset_left = 41.0
 offset_top = 581.0
 offset_right = 688.0
@@ -55,39 +57,56 @@ modulate = Color(0.973031, 0.670336, 0.620027, 1)
 offset_left = 40.0
 offset_top = 63.0
 offset_right = 692.0
-offset_bottom = 582.0
-texture = ExtResource("4_3si1e")
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 40
+offset_bottom = 1019.0
+texture = ExtResource("5_gub6f")
+patch_margin_left = 128
+patch_margin_top = 134
+patch_margin_right = 136
+patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
-[node name="Tab" type="NinePatchRect" parent="."]
-modulate = Color(0.973031, 0.670336, 0.620027, 1)
-offset_left = 12.0
-offset_top = 44.0
-offset_right = 534.0
-offset_bottom = 144.0
-texture = ExtResource("5_xfk33")
-patch_margin_left = 40
-patch_margin_right = 100
-patch_margin_bottom = 100
+[node name="TabMarginContainer" type="MarginContainer" parent="."]
+offset_left = -1.0
+offset_top = 30.0
+offset_right = 431.0
+offset_bottom = 760.0
+
+[node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
+modulate = Color(0.972549, 0.670588, 0.619608, 1)
+layout_mode = 2
+texture = ExtResource("6_wf8f5")
+region_rect = Rect2(9, 10, 609, 371)
+patch_margin_left = 72
+patch_margin_top = 42
+patch_margin_right = 278
+patch_margin_bottom = 361
 axis_stretch_horizontal = 1
 
-[node name="NameLabel" type="RichTextLabel" parent="Tab"]
-layout_mode = 0
-offset_left = 33.3333
-offset_top = -44.0
-offset_right = 620.333
-offset_bottom = 42.0
-scale = Vector2(0.8, 1.8)
+[node name="CardNameCenterContainer" type="CenterContainer" parent="TabMarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="CardNameHBoxContainer" type="HBoxContainer" parent="TabMarginContainer/CardNameCenterContainer"]
+layout_mode = 2
+tooltip_text = "this is a test"
+
+[node name="PaddingLeft" type="ReferenceRect" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="CardName" type="RichTextLabel" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_5gqjf")
-theme_override_font_sizes/normal_font_size = 62
-bbcode_enabled = true
-text = "Card Name"
+theme_override_font_sizes/normal_font_size = 60
+text = "Asdf"
 fit_content = true
+autowrap_mode = 0
+
+[node name="PaddingRight" type="ReferenceRect" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
 
 [node name="Number" type="RichTextLabel" parent="."]
 offset_left = 641.0

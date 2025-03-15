@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class CardInstance : Node2D
+public partial class CardInstance : BaseNode
 {
 	[Export] public CardResource cardResource;
 	private Card _card;
@@ -29,55 +29,16 @@ public partial class CardInstance : Node2D
 
 	public override void _Ready()
 	{
-		_backdrop = GetNode<NinePatchRect>(BackdropPath);
-        if (_backdrop == null)
-        {
-            GD.PrintErr($"Backdrop node not found at path: {BackdropPath}");
-        }
+	    _backdrop = GetNodeWithError<NinePatchRect>(BackdropPath, "Backdrop");
+	    _art = GetNodeWithError<TextureRect>(ArtPath, "Art");
+	    _window = GetNodeWithError<NinePatchRect>(WindowPath, "Window");
+	    _tab = GetNodeWithError<NinePatchRect>(TabPath, "Tab");
+	    _nameLabel = GetNodeWithError<RichTextLabel>(NameLabelPath, "NameLabel");
+	    _number = GetNodeWithError<RichTextLabel>(NumberPath, "Number");
+	    _body = GetNodeWithError<RichTextLabel>(BodyPath, "Body");
+	    _choicesContainer = GetNodeWithError<VBoxContainer>(ChoicesContainerPath, "ChoicesContainer");
 
-        _art = GetNode<TextureRect>(ArtPath);
-        if (_art == null)
-        {
-            GD.PrintErr($"Art node not found at path: {ArtPath}");
-        }
-
-        _window = GetNode<NinePatchRect>(WindowPath);
-        if (_window == null)
-        {
-            GD.PrintErr($"Window node not found at path: {WindowPath}");
-        }
-
-        _tab = GetNode<NinePatchRect>(TabPath);
-        if (_tab == null)
-        {
-            GD.PrintErr($"Tab node not found at path: {TabPath}");
-        }
-
-        _nameLabel = GetNode<RichTextLabel>(NameLabelPath);
-        if (_nameLabel == null)
-        {
-            GD.PrintErr($"NameLabel node not found at path: {NameLabelPath}");
-        }
-
-        _number = GetNode<RichTextLabel>(NumberPath);
-        if (_number == null)
-        {
-            GD.PrintErr($"Number node not found at path: {NumberPath}");
-        }
-
-        _body = GetNode<RichTextLabel>(BodyPath);
-        if (_body == null)
-        {
-            GD.PrintErr($"Body node not found at path: {BodyPath}");
-        }
-
-        _choicesContainer = GetNode<VBoxContainer>(ChoicesContainerPath);
-        if (_choicesContainer == null)
-        {
-            GD.PrintErr($"ChoicesContainer node not found at path: {ChoicesContainerPath}");
-        }
-
-		LoadCard();
+	    LoadCard();
 	}
 
     public void LoadCard()

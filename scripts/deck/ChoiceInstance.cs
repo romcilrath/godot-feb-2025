@@ -2,30 +2,25 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class ChoiceInstance : NinePatchRect
+public partial class ChoiceInstance : BaseNode
 {
 	[Export] public ChoiceResource choiceResource;
 	private Choice _choice;
 
-    [Export] public NodePath ShadowPath { get; set; }
-    [Export] public NodePath TextPath { get; set; }
+	[Export] public NodePath ShadowPath { get; set; }
+	[Export] public NodePath TextPath { get; set; }
 
-    private NinePatchRect _shadow;
-    private RichTextLabel _text;
+	private NinePatchRect _shadow;
+	private RichTextLabel _text;
+
+    private bool _isHovered = false;
 
 	public override void _Ready()
 	{
-		_shadow = GetNode<NinePatchRect>(ShadowPath);
-        if (_shadow == null)
-        {
-            GD.PrintErr($"Shadow node not found at path: {ShadowPath}");
-        }
+		_shadow = GetNodeWithError<NinePatchRect>(ShadowPath, "Shadow");
+		_text = GetNodeWithError<RichTextLabel>(TextPath, "Text");
 
-        _text = GetNode<RichTextLabel>(TextPath);
-        if (_text == null)
-        {
-            GD.PrintErr($"Text node not found at path: {TextPath}");
-        }
+		_shadow.Visible = false;
 	}
 
 	public void LoadChoice()
@@ -36,9 +31,17 @@ public partial class ChoiceInstance : NinePatchRect
 		_text.Text = this._choice.Text;
 	}
 
-    public void SetChoiceResource(ChoiceResource newChoiceResource)
-    {
-        choiceResource = newChoiceResource;
-        LoadChoice();
-    }
+	public void SetChoiceResource(ChoiceResource newChoiceResource)
+	{
+		choiceResource = newChoiceResource;
+		LoadChoice();
+	}
+
+	private void OnMouseEnter() {
+        _isHovered = true;
+	}
+
+	private void OnMouseExit() {
+		_isHovered = false;
+	}
 }

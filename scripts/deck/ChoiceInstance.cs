@@ -23,9 +23,13 @@ public partial class ChoiceInstance : ColorRect
     private bool _isHovered = false;
     private bool _isInitialPositionSet = false;
 	private Vector2 _initialPosition;
-	private Vector2 _hoverOffset = new Vector2(45, -45); 
+	private Vector2 _hoverOffset = new Vector2(0, -45); 
+	private Vector2 _shadowInitialPosition;
     private Tween hoverPositionTween;
     private Tween rotationTween;
+	private Tween sizeTween; 
+	private Tween shadowSizeTween;
+    private Tween shadowHoverPositionTween;
 
 	public override void _Ready()
 	{
@@ -51,6 +55,7 @@ public partial class ChoiceInstance : ColorRect
     {
         // Save the initial position of the choice rect
         this._initialPosition = _choiceRect.Position;
+        this._shadowInitialPosition = _shadowRect.Position; // Save the initial position of the shadow rect
         this._isInitialPositionSet = true;
 
         // Set the pivot offset to the center of the choice rect
@@ -134,6 +139,9 @@ public partial class ChoiceInstance : ColorRect
         // Kill any existing tween before starting a new one
         hoverPositionTween?.Kill();
         rotationTween?.Kill();
+        sizeTween?.Kill();
+        shadowSizeTween?.Kill();
+        shadowHoverPositionTween?.Kill();
 
         // Tween the choice rect to the hover position
         hoverPositionTween = CreateTween();
@@ -157,6 +165,24 @@ public partial class ChoiceInstance : ColorRect
             .TweenProperty(_choiceRect, "rotation_degrees", 0, 0.05f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the choice rect to scale up slightly
+        sizeTween = CreateTween();
+        sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.05f, 1.05f), 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the shadow rect to the inverse hover position
+        shadowHoverPositionTween = CreateTween();
+        shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition - _hoverOffset, 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the shadow rect to scale down slightly
+        shadowSizeTween = CreateTween();
+        shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(0.95f, 0.95f), 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
 	}
 
 	private void OnMouseExit() {
@@ -166,6 +192,9 @@ public partial class ChoiceInstance : ColorRect
         // Kill any existing tween before starting a new one
         hoverPositionTween?.Kill();
         rotationTween?.Kill();
+        sizeTween?.Kill();
+        shadowSizeTween?.Kill();
+        shadowHoverPositionTween?.Kill();
 
         // Tween the choice rect back to the initial position
         hoverPositionTween = CreateTween();
@@ -176,6 +205,24 @@ public partial class ChoiceInstance : ColorRect
         // Tween the choice rect to rotate back to 0
         rotationTween = CreateTween();
         rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the choice rect back to its original size
+        sizeTween = CreateTween();
+        sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the shadow rect back to its original position
+        shadowHoverPositionTween = CreateTween();
+        shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition, 0.1f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the shadow rect back to its original size
+        shadowSizeTween = CreateTween();
+        shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 	}

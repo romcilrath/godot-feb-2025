@@ -86,6 +86,7 @@ offset_bottom = 192.667
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_q1cyi")
 theme_override_font_sizes/normal_font_size = 90
+bbcode_enabled = true
 text = "No. 12"
 text_direction = 2
 
@@ -123,9 +124,11 @@ border_color = Color(1, 0, 0, 0)
 [node name="CardName" type="RichTextLabel" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("7_5gqjf")
 theme_override_font_sizes/normal_font_size = 200
-text = "Card Name "
+bbcode_enabled = true
+text = "Card Name"
 fit_content = true
 autowrap_mode = 0
 

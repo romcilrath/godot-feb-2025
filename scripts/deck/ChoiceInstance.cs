@@ -49,6 +49,23 @@ public partial class ChoiceInstance : ColorRect
         {
             _shadowRect.Material = shadowShaderMaterial.Duplicate() as ShaderMaterial;
         }
+	}    
+
+	public void LoadChoice()
+	{
+        // Convert the choiceResource to a Choice object
+		Choice choice = new Choice(choiceResource);
+		this._choice = choice;
+
+        // Set the choice text
+		_text.Text = this._choice.Text;
+	}
+
+	public void SetChoiceResource(ChoiceResource newChoiceResource)
+	{
+        // Set the new choice resource and load the choice
+		choiceResource = newChoiceResource;
+		LoadChoice();
 	}
 
     public void SetInitialPosition ()
@@ -65,7 +82,7 @@ public partial class ChoiceInstance : ColorRect
     public override void _Process(double delta)
     {
         // If the initial position hasn't been set, hold off
-        if (!_isInitialPositionSet) return;
+        if (!_isInitialPositionSet) SetInitialPosition();
 
         void UpdateShaderRotation(ShaderMaterial material, Vector2 anchorCenter, float angleXMax, float angleYMax, float time)
         {
@@ -105,27 +122,17 @@ public partial class ChoiceInstance : ColorRect
         }
     }
 
-	public void LoadChoice()
-	{
-        // Convert the choiceResource to a Choice object
-		Choice choice = new Choice(choiceResource);
-		this._choice = choice;
-
-        // Set the choice text
-		_text.Text = this._choice.Text;
-	}
-
-	public void SetChoiceResource(ChoiceResource newChoiceResource)
-	{
-        // Set the new choice resource and load the choice
-		choiceResource = newChoiceResource;
-		LoadChoice();
-	}
+    private void KillTweens() 
+    {
+        // Kill our tweens
+        hoverPositionTween?.Kill();
+        sizeTween?.Kill();
+        shadowSizeTween?.Kill();
+        shadowHoverPositionTween?.Kill();
+        rotationTween?.Kill();
+    }
 
 	private void OnMouseEnter() {
-        // Set the initial position if it hasn't been set yet on first mouse hover
-        if (_isInitialPositionSet == false) SetInitialPosition();
-
         // Set the hover flag
         _isHovered = true;
 
@@ -135,19 +142,9 @@ public partial class ChoiceInstance : ColorRect
             shaderMaterial.Set("shader_parameter/x_rotation", 0.0f); 
             shaderMaterial.Set("shader_parameter/y_rotation", 0.0f); 
         }
-        
+            
         // Kill any existing tween before starting a new one
-        hoverPositionTween?.Kill();
-        rotationTween?.Kill();
-        sizeTween?.Kill();
-        shadowSizeTween?.Kill();
-        shadowHoverPositionTween?.Kill();
-
-        // Tween the choice rect to the hover position
-        hoverPositionTween = CreateTween();
-        hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition + _hoverOffset, 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
+        KillTweens();
         
         // Tween the choice rect to rotate slightly
         rotationTween = CreateTween();
@@ -166,13 +163,19 @@ public partial class ChoiceInstance : ColorRect
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
+        // Tween the choice rect to the hover offset position
+        hoverPositionTween = CreateTween();
+        hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition + _hoverOffset, 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
         // Tween the choice rect to scale up slightly
         sizeTween = CreateTween();
         sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.05f, 1.05f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
-        // Tween the shadow rect to the inverse hover position
+        // Tween the shadow rect to the inverse hover offset position
         shadowHoverPositionTween = CreateTween();
         shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition - _hoverOffset, 0.4f)
             .SetEase(Tween.EaseType.Out)
@@ -190,21 +193,17 @@ public partial class ChoiceInstance : ColorRect
 		_isHovered = false;
         
         // Kill any existing tween before starting a new one
-        hoverPositionTween?.Kill();
-        rotationTween?.Kill();
-        sizeTween?.Kill();
-        shadowSizeTween?.Kill();
-        shadowHoverPositionTween?.Kill();
-
-        // Tween the choice rect back to the initial position
-        hoverPositionTween = CreateTween();
-        hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.1f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
+        KillTweens();
 
         // Tween the choice rect to rotate back to 0
         rotationTween = CreateTween();
         rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+
+        // Tween the choice rect back to the initial position
+        hoverPositionTween = CreateTween();
+        hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.1f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 

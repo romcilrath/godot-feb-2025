@@ -59,6 +59,6 @@ Number = 1
 Name = "A Simple Choice"
 Body = "A path divergres before you. 
 Right awaits safety, and a $10 bill. 
-You could also go left and try your luck walking over hot coals. "
+Left is a stretch of burning hot coals. "
 Art = ExtResource("1_eaq2i")
 Choices = Array[Object]([SubResource("Resource_t61wy"), SubResource("Resource_apjao"), SubResource("Resource_b3lby")])

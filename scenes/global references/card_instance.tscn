@@ -104,6 +104,7 @@ tooltip_text = "this is a test"
 [node name="PaddingLeft" type="ReferenceRect" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+border_color = Color(1, 0, 0, 0)
 
 [node name="CardName" type="RichTextLabel" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
 layout_mode = 2
@@ -117,12 +118,13 @@ autowrap_mode = 0
 [node name="PaddingRight" type="ReferenceRect" parent="TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
+border_color = Color(1, 0, 0, 0)
 
 [node name="BodyChoicesContainer" type="VBoxContainer" parent="."]
 offset_left = 97.0
 offset_top = 1820.0
 offset_right = 2398.0
-offset_bottom = 4515.0
+offset_bottom = 4467.0
 
 [node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
@@ -130,8 +132,9 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="SpaceTop" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+border_color = Color(1, 0, 0, 0)
 
 [node name="Body" type="RichTextLabel" parent="BodyChoicesContainer/BodyContainer"]
 layout_mode = 2
@@ -146,8 +149,9 @@ For example, maybe it's, like, a good thing... Or  it could be a bad thing. Depe
 fit_content = true
 
 [node name="SpaceBottom" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+border_color = Color(1, 0, 0, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
@@ -159,5 +163,5 @@ theme_override_constants/margin_bottom = 80
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="BodyChoicesContainer/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 8
 alignment = 1

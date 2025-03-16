@@ -60,7 +60,7 @@ public partial class CardInstance : Node2D
 			choiceInstance.SetChoiceResource(choiceResource);
 
 			ReferenceRect space = new ReferenceRect();
-			space.CustomMinimumSize = new Vector2(0, 150);
+			space.CustomMinimumSize = new Vector2(0, 50);
 			_choicesContainer.AddChild(space);
 		}
 	}

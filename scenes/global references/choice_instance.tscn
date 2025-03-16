@@ -25,6 +25,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
@@ -51,8 +52,7 @@ theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
 [node name="Text" type="RichTextLabel" parent="Choice/MarginContainer"]
-material = ExtResource("2_wyg3w")
-use_parent_material = true
+show_behind_parent = true
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 4
@@ -61,9 +61,10 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_qxv8u")
 theme_override_font_sizes/normal_font_size = 120
 theme_override_font_sizes/bold_font_size = 120
-text = "Go Right
-a
-b"
+bbcode_enabled = true
+text = "[center] Line 1 Line 1 Line 1
+Line 2 Line 2 Line 2
+Line 3 Line 3 Line 3 [/center]"
 fit_content = true
 
 [node name="Shadow" type="NinePatchRect" parent="."]
@@ -78,7 +79,7 @@ anchor_bottom = 1.0
 offset_left = -15.0
 offset_top = 15.0
 offset_right = -15.0
-offset_bottom = 15.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6

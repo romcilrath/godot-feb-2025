@@ -66,9 +66,9 @@ axis_stretch_vertical = 1
 
 [node name="Number" type="RichTextLabel" parent="."]
 offset_left = 1884.0
-offset_top = 33.0
+offset_top = 33.6667
 offset_right = 2325.0
-offset_bottom = 192.0
+offset_bottom = 192.667
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_q1cyi")
 theme_override_font_sizes/normal_font_size = 90

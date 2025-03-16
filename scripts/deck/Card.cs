@@ -8,9 +8,10 @@ public class Card
     public string Name { get; private set; } = "Card Name";
     public string Body { get; private set; } = "Card Body";
     public Texture2D Art { get; private set; }
+    public Effect CardEffect { get; private set; }
     public Choice[] Choices { get; private set; }
     
-    public Card(int number = 0, string name = null, string body = null, Texture2D art = null, Choice[] choices = null)
+    public Card(int number = 0, string name = null, string body = null, Texture2D art = null, Choice[] choices = null, Effect cardEffect = null)
     {
         Number = number;
         if (Name is not null)
@@ -19,6 +20,8 @@ public class Card
             Body = body;
         if (Art is not null)
             Art = art;
+        if (CardEffect is not null)
+            CardEffect = cardEffect;
         if (Choices is not null)
             Choices = choices;
     }
@@ -30,19 +33,32 @@ public class Card
         string body = cardResource.Body;
         Texture2D art = cardResource.Art;
         ChoiceResource[] choiceResources = cardResource.Choices;
+        EffectResource cardEffectResource = cardResource.CardEffect;
 
-        // Convert  array of choiceResources to array of choices
+        // Convert array of choiceResources to array of choices
         Choice[] choices = new Choice[choiceResources.Length];
         for (int i = 0; i < choiceResources.Length; i++)
         {
             choices[i] = new Choice(choiceResources[i]);
         }
-        
+
+        // Determine the specific type of Effect based on the EffectResource
+        Effect cardEffect = null;
+        if (cardEffectResource is OneTimeEffectResource oneTimeResource)
+        {
+            cardEffect = new OneTimeEffect(oneTimeResource);
+        }
+        else if (cardEffectResource is RepeatEffectResource repeatResource)
+        {
+            cardEffect = new RepeatEffect(repeatResource);
+        }
+
         Number = number;
         Name = name;
         Body = body;
         Art = art;
         Choices = choices;
+        CardEffect = cardEffect;
     }
 
     public Choice SelectChoice(int choiceIndex = 0)
@@ -57,6 +73,11 @@ public class Card
         return Choices[choiceIndex];
     }
 
+    public void ApplyEffect()
+    {
+        CardEffect.Apply();
+    }   
+
     public void PrintCard()
     {
         GD.Print($"Number: {Number}");
@@ -69,5 +90,6 @@ public class Card
             GD.Print($"Choice #{i+1}:");
             Choices[i].PrintChoice();
         }
+        CardEffect.PrintEffect();
     }
 }

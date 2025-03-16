@@ -2,52 +2,52 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class CardInstance : BaseNode
+public partial class CardInstance : Node2D
 {
 	[Export] public CardResource cardResource;
 	private Card _card;
 
-    public ChoiceInstance[] choiceInstances { get; private set; }
+	public ChoiceInstance[] choiceInstances { get; private set; }
 
-    [Export] public NodePath BackdropPath { get; set; }
-    [Export] public NodePath ArtPath { get; set; }
-    [Export] public NodePath WindowPath { get; set; }
-    [Export] public NodePath TabPath { get; set; }
-    [Export] public NodePath NameLabelPath { get; set; }
-    [Export] public NodePath NumberPath { get; set; }
-    [Export] public NodePath BodyPath { get; set; }
-    [Export] public NodePath ChoicesContainerPath { get; set; }
+	[Export] public NodePath BackdropPath { get; set; }
+	[Export] public NodePath ArtPath { get; set; }
+	[Export] public NodePath WindowPath { get; set; }
+	[Export] public NodePath TabPath { get; set; }
+	[Export] public NodePath NameLabelPath { get; set; }
+	[Export] public NodePath NumberPath { get; set; }
+	[Export] public NodePath BodyPath { get; set; }
+	[Export] public NodePath ChoicesContainerPath { get; set; }
 
-    private NinePatchRect _backdrop;
-    private TextureRect _art;
-    private NinePatchRect _window;
-    private NinePatchRect _tab;
-    private RichTextLabel _nameLabel;
-    private RichTextLabel _number;
-    private RichTextLabel _body;
-    private VBoxContainer _choicesContainer;
+	private NinePatchRect _backdrop;
+	private TextureRect _art;
+	private NinePatchRect _window;
+	private NinePatchRect _tab;
+	private RichTextLabel _nameLabel;
+	private RichTextLabel _number;
+	private RichTextLabel _body;
+	private VBoxContainer _choicesContainer;
 
 	public override void _Ready()
 	{
-	    _backdrop = GetNodeWithError<NinePatchRect>(BackdropPath, "Backdrop");
-	    _art = GetNodeWithError<TextureRect>(ArtPath, "Art");
-	    _window = GetNodeWithError<NinePatchRect>(WindowPath, "Window");
-	    _tab = GetNodeWithError<NinePatchRect>(TabPath, "Tab");
-	    _nameLabel = GetNodeWithError<RichTextLabel>(NameLabelPath, "NameLabel");
-	    _number = GetNodeWithError<RichTextLabel>(NumberPath, "Number");
-	    _body = GetNodeWithError<RichTextLabel>(BodyPath, "Body");
-	    _choicesContainer = GetNodeWithError<VBoxContainer>(ChoicesContainerPath, "ChoicesContainer");
+		_backdrop = NodeUtils.FindNodeWithError<NinePatchRect>(this, BackdropPath, "Backdrop");
+		_art = NodeUtils.FindNodeWithError<TextureRect>(this, ArtPath, "Art");
+		_window = NodeUtils.FindNodeWithError<NinePatchRect>(this, WindowPath, "Window");
+		_tab = NodeUtils.FindNodeWithError<NinePatchRect>(this, TabPath, "Tab");
+		_nameLabel = NodeUtils.FindNodeWithError<RichTextLabel>(this, NameLabelPath, "NameLabel");
+		_number = NodeUtils.FindNodeWithError<RichTextLabel>(this, NumberPath, "Number");
+		_body = NodeUtils.FindNodeWithError<RichTextLabel>(this, BodyPath, "Body");
+		_choicesContainer = NodeUtils.FindNodeWithError<VBoxContainer>(this, ChoicesContainerPath, "ChoicesContainer");
 
-	    LoadCard();
+		LoadCard();
 	}
 
-    public void LoadCard()
-    {
-        Card card = new Card(cardResource);
+	public void LoadCard()
+	{
+		Card card = new Card(cardResource);
 		this._card = card;
 		
 		_number.Text = "No. " + this._card.Number.ToString();
-        _nameLabel.Text = this._card.Name;
+		_nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
 		_body.Text = "[center]" + this._card.Body + "[/center]";
 
@@ -63,7 +63,7 @@ public partial class CardInstance : BaseNode
 			space.CustomMinimumSize = new Vector2(0, 100);
 			_choicesContainer.AddChild(space);
 		}
-    }
+	}
 
 	public void SetCardResource(CardResource newCardResource)
 	{

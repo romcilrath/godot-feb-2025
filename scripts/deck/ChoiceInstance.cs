@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class ChoiceInstance : BaseNode
+public partial class ChoiceInstance : NinePatchRect
 {
 	[Export] public ChoiceResource choiceResource;
 	private Choice _choice;
@@ -17,9 +17,9 @@ public partial class ChoiceInstance : BaseNode
 
 	public override void _Ready()
 	{
-		_shadow = GetNodeWithError<NinePatchRect>(ShadowPath, "Shadow");
-		_text = GetNodeWithError<RichTextLabel>(TextPath, "Text");
-
+		_shadow = NodeUtils.FindNodeWithError<NinePatchRect>(this, ShadowPath, "Shadow");
+		_text = NodeUtils.FindNodeWithError<RichTextLabel>(this, TextPath, "Text");
+        
 		_shadow.Visible = false;
 	}
 

@@ -1,10 +1,10 @@
 using Godot;
 
-public partial class BaseNode : Node
+public static class NodeUtils
 {
-	protected T GetNodeWithError<T>(NodePath path, string nodeName) where T : Node
+	public static T FindNodeWithError<T>(Node parent, NodePath path, string nodeName) where T : Node
 	{
-		T node = GetNode<T>(path);
+		T node = parent.GetNode<T>(path);
 		if (node == null)
 		{
 			GD.PrintErr($"{nodeName} node not found at path: {path}");

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk0aajrt6bywu"]
 
-[ext_resource type="Texture2D" uid="uid://bt5s37fc604r4" path="res://resources/sprites/Card/Choice.PNG" id="1_hd27e"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceInstance.cs" id="1_uwgwp"]
 [ext_resource type="Material" uid="uid://cndrd8ug3j4u3" path="res://shaders/perspective.tres" id="2_wyg3w"]
+[ext_resource type="Texture2D" uid="uid://bt5s37fc604r4" path="res://resources/sprites/card/Choice.PNG" id="3_a7e6m"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://resources/fonts/Pangolin/Pangolin-Regular.ttf" id="4_qxv8u"]
 
 [node name="ChoiceInstance" type="ColorRect"]
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
 mouse_filter = 1
-texture = ExtResource("1_hd27e")
+texture = ExtResource("3_a7e6m")
 region_rect = Rect2(0, 0, 1970, 352)
 patch_margin_left = 115
 patch_margin_top = 260
@@ -76,14 +76,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -15.0
-offset_top = 15.0
-offset_right = -15.0
-offset_bottom = 23.0
+offset_left = -49.0
+offset_top = 36.0
+offset_right = -49.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
-texture = ExtResource("1_hd27e")
+texture = ExtResource("3_a7e6m")
 region_rect = Rect2(0, 0, 1970, 352)
 patch_margin_left = 115
 patch_margin_top = 260

@@ -21,7 +21,7 @@ public partial class ChoiceInstance : ColorRect
 
     // Hover variables
     private bool _isHovered = false;
-    private bool _isInitialPositionSet;
+    private bool _isInitialPositionSet = false;
 	private Vector2 _initialPosition;
 	private Vector2 _hoverOffset = new Vector2(45, -45); 
     private Tween hoverPositionTween;
@@ -40,9 +40,11 @@ public partial class ChoiceInstance : ColorRect
 			_choiceRect.Material = shaderMaterial.Duplicate() as ShaderMaterial;
 		}
 
-        // Ensure the material is unique
-		_isInitialPositionSet = false;
-		_shadowRect.Visible = false;
+        // Ensure the material of _shadowRect is unique
+        if (_shadowRect.Material is ShaderMaterial shadowShaderMaterial)
+        {
+            _shadowRect.Material = shadowShaderMaterial.Duplicate() as ShaderMaterial;
+        }
 	}
 
     public void SetInitialPosition ()
@@ -57,32 +59,30 @@ public partial class ChoiceInstance : ColorRect
 
     public override void _Process(double delta)
     {
-        // If the initial position hasn't been set hold off
+        // If the initial position hasn't been set, hold off
         if (!_isInitialPositionSet) return;
 
-        void UpdateShaderRotation(ShaderMaterial material, Vector2 anchorCenter, Vector2 mousePos, float angleXMax, float angleYMax)
+        void UpdateShaderRotation(ShaderMaterial material, Vector2 anchorCenter, float angleXMax, float angleYMax, float time)
         {
-            float lerpValX = Mathf.Clamp((mousePos.X - anchorCenter.X) / _choiceRect.Size.X, -0.5f, 0.5f) + 0.5f;
-            float lerpValY = Mathf.Clamp((mousePos.Y - anchorCenter.Y) / _choiceRect.Size.Y, -0.5f, 0.5f) + 0.5f;
+            // Calculate circular motion
+            float angle = Mathf.Pi * 2 * time; // Full circle over time
+            float rotX = Mathf.Sin(angle) * angleXMax;
+            float rotY = Mathf.Cos(angle) * angleYMax;
 
-            float rotX = Mathf.Lerp(-angleXMax, angleXMax, lerpValX);
-            float rotY = Mathf.Lerp(angleYMax, -angleYMax, lerpValY);
-
-            material.Set("shader_parameter/rotation_x", float.IsNaN(rotX) ? 0.0f : rotX);
-            material.Set("shader_parameter/rotation_y", float.IsNaN(rotY) ? 0.0f : rotY);
+            material.Set("shader_parameter/rotation_x", rotX);
+            material.Set("shader_parameter/rotation_y", rotY);
         }
 
         if (_isHovered)
         {
-            Vector2 mousePos = _choiceRect.GetLocalMousePosition();
-            Vector2 anchorCenter = _choiceRect.Position + (_choiceRect.Size / 2);
             float angleXMax = 2.0f, angleYMax = 2.0f;
+            float time = (float)Time.GetTicksMsec() / 3000.0f; // Time in seconds
 
             if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
-                UpdateShaderRotation(choiceShaderMaterial, anchorCenter, mousePos, angleXMax, angleYMax);
+                UpdateShaderRotation(choiceShaderMaterial, _choiceRect.Position + (_choiceRect.Size / 2), angleXMax, angleYMax, time);
 
             if (_shadowRect.Material is ShaderMaterial shadowShaderMaterial)
-                UpdateShaderRotation(shadowShaderMaterial, _shadowRect.Position + (_shadowRect.Size / 2), mousePos, angleXMax, angleYMax);
+                UpdateShaderRotation(shadowShaderMaterial, _shadowRect.Position + (_shadowRect.Size / 2), angleXMax, angleYMax, time);
         }
         else
         {
@@ -121,9 +121,8 @@ public partial class ChoiceInstance : ColorRect
         // Set the initial position if it hasn't been set yet on first mouse hover
         if (_isInitialPositionSet == false) SetInitialPosition();
 
-        // Set the hover offset and make the shadow visible
+        // Set the hover flag
         _isHovered = true;
-		_shadowRect.Visible = true;
 
         // Ensure shader perspective parameters are reset on hover
         if (_choiceRect.Material is ShaderMaterial shaderMaterial)
@@ -161,9 +160,8 @@ public partial class ChoiceInstance : ColorRect
 	}
 
 	private void OnMouseExit() {
-        // Reset the hover offset and hide the shadow
+        // Reset the hover flag
 		_isHovered = false;
-        _shadowRect.Visible = false;
         
         // Kill any existing tween before starting a new one
         hoverPositionTween?.Kill();

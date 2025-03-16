@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn7ixi314jln5"]
+[gd_scene load_steps=10 format=3 uid="uid://cn7ixi314jln5"]
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
 [ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://resources/cards/test_card.tres" id="2_hyn6i"]
-[ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://resources/sprites/Card/Card.PNG" id="3_rwigl"]
+[ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://resources/sprites/card/Card.PNG" id="3_g7umb"]
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://resources/sprites/ImageNotFound.png" id="4_7nvko"]
-[ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://resources/sprites/Card/Window.PNG" id="5_gub6f"]
-[ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://resources/sprites/Card/Tab.PNG" id="6_wf8f5"]
+[ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://resources/sprites/card/Window.PNG" id="5_vsr63"]
+[ext_resource type="Texture2D" uid="uid://dl056v53yg8kh" path="res://resources/sprites/card/Textbox.PNG" id="6_nmb1v"]
 [ext_resource type="FontFile" uid="uid://1obcqasqw6i2" path="res://resources/fonts/Walter Turncoat/WalterTurncoat-Regular.ttf" id="7_5gqjf"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://resources/fonts/Pangolin/Pangolin-Regular.ttf" id="7_q1cyi"]
+[ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://resources/sprites/card/Tab.PNG" id="8_l2ogx"]
 
 [node name="CardInstance" type="Node2D"]
 scale = Vector2(1.5, 1.5)
@@ -26,7 +27,7 @@ ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesCon
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
 offset_right = 2506.0
 offset_bottom = 4598.0
-texture = ExtResource("3_rwigl")
+texture = ExtResource("3_g7umb")
 region_rect = Rect2(0, 10, 2203, 3869)
 patch_margin_left = 149
 patch_margin_top = 154
@@ -57,7 +58,20 @@ offset_left = 37.0
 offset_top = 95.0
 offset_right = 2456.0
 offset_bottom = 2207.0
-texture = ExtResource("5_gub6f")
+texture = ExtResource("5_vsr63")
+patch_margin_left = 128
+patch_margin_top = 134
+patch_margin_right = 136
+patch_margin_bottom = 573
+axis_stretch_vertical = 1
+
+[node name="Textbox" type="NinePatchRect" parent="."]
+modulate = Color(0.552941, 0.796078, 0.666667, 1)
+offset_left = 88.0
+offset_top = 1774.0
+offset_right = 2408.0
+offset_bottom = 4478.0
+texture = ExtResource("6_nmb1v")
 patch_margin_left = 128
 patch_margin_top = 134
 patch_margin_right = 136
@@ -84,7 +98,7 @@ offset_bottom = 477.333
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
 layout_mode = 2
-texture = ExtResource("6_wf8f5")
+texture = ExtResource("8_l2ogx")
 region_rect = Rect2(9, 10, 609, 371)
 patch_margin_left = 72
 patch_margin_top = 42
@@ -148,8 +162,21 @@ text = "[center]This is the body of the card. The main text of the card will go 
 For example, maybe it's, like, a good thing... Or  it could be a bad thing. Depends what the cards have in store.[/center]"
 fit_content = true
 
+[node name="SpaceMiddle" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+border_color = Color(1, 0, 0, 0)
+
+[node name="DivBar" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
+custom_minimum_size = Vector2(1800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+border_color = Color(0.443137, 0.690196, 0.560784, 1)
+border_width = 10.0
+editor_only = false
+
 [node name="SpaceBottom" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 border_color = Color(1, 0, 0, 0)
 

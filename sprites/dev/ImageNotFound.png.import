@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl056v53yg8kh"
-path="res://.godot/imported/Textbox.PNG-a2143d2a17012b5b0390d4ca3cfd7662.ctex"
+uid="uid://b42d3lqmg3eig"
+path="res://.godot/imported/ImageNotFound.png-62ed7be799a5832014bbd35d47d06843.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/Textbox.PNG"
-dest_files=["res://.godot/imported/Textbox.PNG-a2143d2a17012b5b0390d4ca3cfd7662.ctex"]
+source_file="res://sprites/dev/ImageNotFound.png"
+dest_files=["res://.godot/imported/ImageNotFound.png-62ed7be799a5832014bbd35d47d06843.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

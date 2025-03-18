@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baapvkxd0bkwx"
-path="res://.godot/imported/9_Slice_Test.png-691911f9ac89d9a55e14f11be362eae7.ctex"
+uid="uid://bmpk74evjvbbn"
+path="res://.godot/imported/Tab.png-1637a4592e4eddddbe5302af5ff0e79a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/9_Slice_Test.png"
-dest_files=["res://.godot/imported/9_Slice_Test.png-691911f9ac89d9a55e14f11be362eae7.ctex"]
+source_file="res://sprites/dev/Tab.png"
+dest_files=["res://.godot/imported/Tab.png-1637a4592e4eddddbe5302af5ff0e79a.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

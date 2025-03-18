@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://cndrd8ug3j4u3" path="res://shaders/perspective.tres" id="2_wyg3w"]
 [ext_resource type="Texture2D" uid="uid://bt5s37fc604r4" path="res://sprites/card/Choice.PNG" id="3_jpfut"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="4_efxj2"]
-[ext_resource type="Texture2D" uid="uid://bath3o0frge45" path="res://sprites/Icon.PNG" id="5_eoxuu"]
+[ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_ab23b"]
 
 [node name="ChoiceInstance" type="ColorRect"]
 custom_minimum_size = Vector2(300, 450)
@@ -72,29 +72,22 @@ fit_content = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_right = 1.0
+anchor_right = 0.956
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Row 1" type="HBoxContainer" parent="Choice/VBoxContainer"]
+[node name="Row1" type="HBoxContainer" parent="Choice/VBoxContainer"]
 layout_mode = 2
-alignment = 1
+alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="Choice/VBoxContainer/Row 1"]
+[node name="Icon" parent="Choice/VBoxContainer/Row1" instance=ExtResource("5_ab23b")]
 layout_mode = 2
-texture = ExtResource("5_eoxuu")
-stretch_mode = 3
 
-[node name="Row 2" type="HBoxContainer" parent="Choice/VBoxContainer"]
+[node name="Row2" type="HBoxContainer" parent="Choice/VBoxContainer"]
 layout_mode = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Choice/VBoxContainer/Row 2"]
-layout_mode = 2
-texture = ExtResource("5_eoxuu")
-stretch_mode = 3
+alignment = 2
 
 [node name="Shadow" type="NinePatchRect" parent="."]
 modulate = Color(0, 0, 0, 0.552941)

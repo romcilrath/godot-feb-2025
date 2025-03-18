@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c20osm5q7yeuq"
-path="res://.godot/imported/StarryNight.jpg-31e99f10e96d628c91e3d60b012a7964.ctex"
+path="res://.godot/imported/StarryNight.jpg-58392a6cc79b1c4a45255c92666eb862.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/StarryNight.jpg"
-dest_files=["res://.godot/imported/StarryNight.jpg-31e99f10e96d628c91e3d60b012a7964.ctex"]
+source_file="res://sprites/dev/StarryNight.jpg"
+dest_files=["res://.godot/imported/StarryNight.jpg-58392a6cc79b1c4a45255c92666eb862.ctex"]
 
 [params]
 

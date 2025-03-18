@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6ahkt08on06y"
-path="res://.godot/imported/Choice.png-17e120ab2fffa3de99999b8926c2aeca.ctex"
+uid="uid://brbmhcyjityl"
+path="res://.godot/imported/CountBox.PNG-e755d352a6809a998232b78b661249e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Choice.png"
-dest_files=["res://.godot/imported/Choice.png-17e120ab2fffa3de99999b8926c2aeca.ctex"]
+source_file="res://sprites/card/CountBox.PNG"
+dest_files=["res://.godot/imported/CountBox.PNG-e755d352a6809a998232b78b661249e3.ctex"]
 
 [params]
 

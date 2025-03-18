@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b42d3lqmg3eig"
-path="res://.godot/imported/ImageNotFound.png-3c05bcdbf8c8710b19fa114ef0c977b3.ctex"
+uid="uid://c6ahkt08on06y"
+path="res://.godot/imported/Choice.png-9a105436de2f959479cd71ea9500bbb7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ImageNotFound.png"
-dest_files=["res://.godot/imported/ImageNotFound.png-3c05bcdbf8c8710b19fa114ef0c977b3.ctex"]
+source_file="res://sprites/dev/Choice.png"
+dest_files=["res://.godot/imported/Choice.png-9a105436de2f959479cd71ea9500bbb7.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

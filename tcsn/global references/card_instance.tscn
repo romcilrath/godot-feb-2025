@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
 [ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://tres/cards/test_card.tres" id="2_r4kyv"]
 [ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://sprites/card/Card.PNG" id="3_pootg"]
-[ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/ImageNotFound.png" id="4_k1258"]
+[ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/ImageNotFound.png" id="4_gxi1g"]
 [ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://sprites/card/Window.PNG" id="5_1gkqf"]
 [ext_resource type="Texture2D" uid="uid://dl056v53yg8kh" path="res://sprites/card/Textbox.PNG" id="6_ypig7"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="7_33gue"]
@@ -43,7 +43,7 @@ offset_left = 142.0
 offset_top = 106.667
 offset_right = 2454.0
 offset_bottom = 5044.67
-texture = ExtResource("4_k1258")
+texture = ExtResource("4_gxi1g")
 expand_mode = 5
 stretch_mode = 4
 

@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public class RepeatEffect : Effect
+public class RepeatEffect : StatEffect
 {
     public int EveryTurn { get; private set; } = 1;
     public int ForTurns { get; private set; }

@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class RepeatEffectResource : EffectResource
+public partial class RepeatEffectResource : StatEffectResource
 {
     #region VARIABLES
     

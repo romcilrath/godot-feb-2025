@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public class OneTimeEffect: Effect
+public class OneTimeEffect: StatEffect
 {
     public OneTimeEffect(Stat target, float value, ActionType actionType = ActionType.Add)
         :base(target, value, actionType)

@@ -43,15 +43,7 @@ public class Card
         }
 
         // Determine the specific type of Effect based on the EffectResource
-        Effect cardEffect = null;
-        if (cardEffectResource is OneTimeEffectResource oneTimeResource)
-        {
-            cardEffect = new OneTimeEffect(oneTimeResource);
-        }
-        else if (cardEffectResource is RepeatEffectResource repeatResource)
-        {
-            cardEffect = new RepeatEffect(repeatResource);
-        }
+        Effect cardEffect = EffectFactory.CreateEffect(cardEffectResource);
 
         Number = number;
         Name = name;

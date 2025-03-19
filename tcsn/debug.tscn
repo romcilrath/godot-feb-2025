@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=7 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
 [ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://tcsn/global references/card_instance.tscn" id="3_slpme"]
 [ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://tcsn/global references/choice_instance.tscn" id="4_e1s8x"]
+[ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_4pu66"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="5_vgp1m"]
 
 [node name="Node2D" type="Node2D"]
@@ -15,10 +16,11 @@ script = ExtResource("1_33a1n")
 script = ExtResource("2_77h7y")
 CardInstanceScene = ExtResource("3_slpme")
 ChoiceInstanceScene = ExtResource("4_e1s8x")
+IconInstanceScene = ExtResource("5_4pu66")
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("5_vgp1m")
 
 [node name="CardInstance" parent="." instance=ExtResource("3_slpme")]
-position = Vector2(490, 53)
-scale = Vector2(0.2, 0.2)
+position = Vector2(1563, 116)
+scale = Vector2(0.4, 0.4)

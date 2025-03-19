@@ -13,11 +13,13 @@ public partial class ChoiceInstance : ColorRect
 	[Export] public NodePath ChoiceRectPath { get; set; }
 	[Export] public NodePath ShadowRectPath { get; set; }
 	[Export] public NodePath TextPath { get; set; }
+	[Export] public NodePath EffectRowPath { get; set; }
 
     // These are the child nodes of the ChoiceInstance
 	private NinePatchRect _choiceRect;
 	private NinePatchRect _shadowRect;
 	private RichTextLabel _text;
+	private HBoxContainer _effectRow;
 
     // Hover variables
     private bool _isHovered = false;
@@ -37,6 +39,7 @@ public partial class ChoiceInstance : ColorRect
 		_choiceRect = NodeUtils.FindNodeWithError<NinePatchRect>(this, ChoiceRectPath, "ChoiceRect");
 		_shadowRect = NodeUtils.FindNodeWithError<NinePatchRect>(this, ShadowRectPath, "ShadowRect");
 		_text = NodeUtils.FindNodeWithError<RichTextLabel>(this, TextPath, "Text");
+		_effectRow = NodeUtils.FindNodeWithError<HBoxContainer>(this, EffectRowPath, "EffectRow");
 
 		// Ensure the material is unique, otherwise the shader will be shared between all instances
 		if (_choiceRect.Material is ShaderMaterial shaderMaterial)
@@ -59,6 +62,21 @@ public partial class ChoiceInstance : ColorRect
 
         // Set the choice text
 		_text.Text = this._choice.Text;
+
+        // Spawn icon instances
+        foreach (Effect effect in this._choice.Effects)
+        {
+            IconInstance iconInstance = GlobalReferences.Instance.IconInstanceScene.Instantiate() as IconInstance;
+            _effectRow.AddChild(iconInstance);
+            iconInstance.SetEffect(effect);
+
+			ReferenceRect space = new ReferenceRect();
+			space.CustomMinimumSize = new Vector2(50, 0);
+			_effectRow.AddChild(space);
+        }
+        ReferenceRect finalSpace = new ReferenceRect();
+        finalSpace.CustomMinimumSize = new Vector2(50, 0);
+        _effectRow.AddChild(finalSpace);
 	}
 
 	public void SetChoiceResource(ChoiceResource newChoiceResource)

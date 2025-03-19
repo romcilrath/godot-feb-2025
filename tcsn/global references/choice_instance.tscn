@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk0aajrt6bywu"]
+[gd_scene load_steps=5 format=3 uid="uid://bk0aajrt6bywu"]
 
 [ext_resource type="Script" path="res://scripts/deck/ChoiceInstance.cs" id="1_uwgwp"]
 [ext_resource type="Material" uid="uid://cndrd8ug3j4u3" path="res://shaders/perspective.tres" id="2_wyg3w"]
 [ext_resource type="Texture2D" uid="uid://bt5s37fc604r4" path="res://sprites/card/Choice.PNG" id="3_jpfut"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="4_efxj2"]
-[ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_ab23b"]
 
 [node name="ChoiceInstance" type="ColorRect"]
 custom_minimum_size = Vector2(300, 450)
@@ -17,7 +16,8 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("1_uwgwp")
 ChoiceRectPath = NodePath("Choice")
 ShadowRectPath = NodePath("Shadow")
-TextPath = NodePath("Choice/MarginContainer/Text")
+TextPath = NodePath("Choice/HBoxContainer/MarginContainer/Text")
+EffectRowPath = NodePath("Choice/HBoxContainer/VBoxContainer/EffectRow")
 
 [node name="Choice" type="NinePatchRect" parent="."]
 self_modulate = Color(0.933333, 1, 0.0156863, 1)
@@ -30,7 +30,6 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
-mouse_filter = 1
 texture = ExtResource("3_jpfut")
 region_rect = Rect2(0, 0, 1970, 352)
 patch_margin_left = 115
@@ -40,19 +39,25 @@ patch_margin_bottom = 260
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Choice"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Choice"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Choice/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="Text" type="RichTextLabel" parent="Choice/MarginContainer"]
+[node name="Text" type="RichTextLabel" parent="Choice/HBoxContainer/MarginContainer"]
 show_behind_parent = true
 clip_contents = false
 layout_mode = 2
@@ -60,37 +65,39 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_efxj2")
-theme_override_font_sizes/normal_font_size = 120
-theme_override_font_sizes/bold_font_size = 120
+theme_override_font_sizes/normal_font_size = 110
+theme_override_font_sizes/bold_font_size = 110
 bbcode_enabled = true
-text = "[center] Line 1 Line 1 Line 1
-Line 2 Line 2 Line 2
-Line 3 Line 3 Line 3 [/center]"
+text = "asdf asdf asdf asdf 
+asdf asd fasdf asdf asdf 
+asdf asdf asfd asdf"
 fit_content = true
+autowrap_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Choice"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.956
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ReferenceRect" type="ReferenceRect" parent="Choice/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+border_color = Color(1, 0, 0, 0)
+border_width = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Choice/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
-[node name="Row1" type="HBoxContainer" parent="Choice/VBoxContainer"]
+[node name="EffectRow" type="HBoxContainer" parent="Choice/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
-[node name="Icon" parent="Choice/VBoxContainer/Row1" instance=ExtResource("5_ab23b")]
+[node name="BottomSpace" type="ReferenceRect" parent="Choice/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-
-[node name="Row2" type="HBoxContainer" parent="Choice/VBoxContainer"]
-layout_mode = 2
-alignment = 2
+mouse_filter = 2
 
 [node name="Shadow" type="NinePatchRect" parent="."]
-modulate = Color(0, 0, 0, 0.552941)
+self_modulate = Color(0, 0, 0, 0.552941)
 show_behind_parent = true
 material = ExtResource("2_wyg3w")
 custom_minimum_size = Vector2(0, 250)

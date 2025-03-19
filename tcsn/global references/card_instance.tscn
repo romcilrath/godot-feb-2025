@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn7ixi314jln5"]
+[gd_scene load_steps=10 format=3 uid="uid://cn7ixi314jln5"]
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
 [ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://tres/cards/test_card.tres" id="2_r4kyv"]
@@ -9,7 +9,6 @@
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="7_33gue"]
 [ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://sprites/card/Tab.PNG" id="8_8dcjg"]
 [ext_resource type="FontFile" uid="uid://1obcqasqw6i2" path="res://fonts/Walter Turncoat/WalterTurncoat-Regular.ttf" id="9_o38rn"]
-[ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://tcsn/global references/choice_instance.tscn" id="10_ssl3d"]
 
 [node name="CardInstance" type="Node2D"]
 scale = Vector2(1.5, 1.5)
@@ -192,6 +191,3 @@ theme_override_constants/margin_bottom = 80
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
-
-[node name="ChoiceInstance" parent="BodyChoicesContainer/MarginContainer/ChoicesContainer" instance=ExtResource("10_ssl3d")]
-layout_mode = 2

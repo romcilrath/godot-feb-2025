@@ -12,6 +12,7 @@ public partial class GlobalReferences : Node
 
     [Export] public PackedScene CardInstanceScene;
     [Export] public PackedScene ChoiceInstanceScene;
+    [Export] public PackedScene IconInstanceScene;
 
     public override void _Ready() 
     {

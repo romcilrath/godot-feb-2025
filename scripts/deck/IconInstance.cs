@@ -30,26 +30,24 @@ public partial class IconInstance : TextureRect
 		// Check if the effect is of type StatEffect
 		if (this._effect is StatEffect statEffect)
 		{
+			// Set the count label text to the effect's count
 			switch(statEffect.ActionType)
 			{
 				case ActionType.Add:
-					// Set the count label text to the effect's count
 					if (statEffect.Value >= 0)
 						_countLabel.Text = "+" + statEffect.Value.ToString();
 					else
 						_countLabel.Text = statEffect.Value.ToString();
 					break;
 				case ActionType.Set:
-					// Set the count label text to the effect's count
 					_countLabel.Text = "=" + statEffect.Value.ToString();
 					break;
 				case ActionType.Multiply:
-					// Set the count label text to the effect's count
 					_countLabel.Text = "x" + statEffect.Value.ToString();
 					break;
 				default:
-					// Set the count label text to an empty string
-					_countLabel.Text = "";
+					// Set the count label text to an "???" string
+					_countLabel.Text = "???";
 					break;
 			}
 		}

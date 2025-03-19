@@ -30,14 +30,14 @@ public class Choice
         Effect[] effects = new Effect[effectResources.Length];
         for (int i = 0; i < effectResources.Length; i++)
         {
-            if (effectResources[i] is OneTimeEffectResource oneTimeResource)
+            if (effectResources[i] is OneTimeStatEffectResource oneTimeResource)
             {
-                effects[i] = new OneTimeEffect(oneTimeResource);
+                effects[i] = new OneStatTimeEffect(oneTimeResource);
                 continue;
             }
-            if (effectResources[i] is RepeatEffectResource repeatResource)
+            if (effectResources[i] is RepeatStatEffectResource repeatResource)
             {
-                effects[i] = new RepeatEffect(repeatResource);
+                effects[i] = new RepeatStatEffect(repeatResource);
                 continue;
             }
         }

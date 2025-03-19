@@ -1,14 +1,14 @@
 using System;
 using Godot;
 
-public class RepeatEffect : StatEffect
+public class RepeatStatEffect : StatEffect
 {
     public int EveryTurn { get; private set; } = 1;
     public int ForTurns { get; private set; }
     private int CurrentTurn { get; set; } = 0;
 
     // Constructor using explicit parameters
-    public RepeatEffect(Stat target, float value, ActionType actionType = ActionType.Add, int everyTurn = 1, int forTurns = 2)
+    public RepeatStatEffect(Stat target, float value, ActionType actionType = ActionType.Add, int everyTurn = 1, int forTurns = 2)
         : base(target, value, actionType)
     {
         EveryTurn = everyTurn;
@@ -16,7 +16,7 @@ public class RepeatEffect : StatEffect
     }
 
     // Constructor using RepeatEffectResource
-    public RepeatEffect(RepeatEffectResource repeatEffectResource) 
+    public RepeatStatEffect(RepeatStatEffectResource repeatEffectResource) 
         : base(repeatEffectResource)
     {
         EveryTurn = repeatEffectResource.EveryTurn;

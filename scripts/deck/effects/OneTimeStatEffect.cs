@@ -1,15 +1,15 @@
 using System;
 using Godot;
 
-public class OneTimeEffect: StatEffect
+public class OneStatTimeEffect: StatEffect
 {
-    public OneTimeEffect(Stat target, float value, ActionType actionType = ActionType.Add)
+    public OneStatTimeEffect(Stat target, float value, ActionType actionType = ActionType.Add)
         :base(target, value, actionType)
     {
 
     }
 
-    public OneTimeEffect(OneTimeEffectResource oneTimeEffectResource)
+    public OneStatTimeEffect(OneTimeStatEffectResource oneTimeEffectResource)
         :base(oneTimeEffectResource)
     { 
 

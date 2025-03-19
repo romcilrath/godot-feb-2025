@@ -2,16 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public enum Backstory
-{
-    Adventurer
-}
-
-public enum Species
-{
-    Human
-}
-
 public partial class PlayerManager : Node
 {
     // Used to store single game instance
@@ -20,17 +10,11 @@ public partial class PlayerManager : Node
     private static PlayerManager _instance;
     public static PlayerManager Instance => _instance;
 
-    // Player characteristics
-    public string PlayerName { get; private set; } = "Player Name";
-    public int Age { get; private set; } = 12;
-    public Species Species { get; private set; } = Species.Human;
-    public Backstory Backstory { get; private set; } = Backstory.Adventurer;
-
     // Player stats
     public Stat Money { get; private set; } = new Stat("Money", min:0, initial:0);                  // Money
-    public Stat Health { get; private set; } = new Stat("Health", min:0, max:100, initial:100);     // Health
-    public Stat Armor { get; private set; } = new Stat("Armor", min:0, initial:0);                  // Armor
-    public Stat Attack { get; private set; } = new Stat("Attack", initial:1f);                      // Attack
+    public Stat Vitality { get; private set; } = new Stat("Vitality", min:0, max:100, initial:100);     // Vitality
+    public Stat Grit { get; private set; } = new Stat("Grit", min:0, initial:0);                  // Grit
+    public Stat Rations { get; private set; } = new Stat("Rations", initial:1f);                      // Rations
 
     public override void _Ready() 
     {
@@ -51,16 +35,16 @@ public partial class PlayerManager : Node
     public void PrintStats()
     {
         GD.Print($"Money: {Money.Current}");
-        GD.Print($"Health: {Health.Current}");
-        GD.Print($"Armor: {Armor.Current}");
-        GD.Print($"Attack: {Attack.Current}");
+        GD.Print($"Vitality: {Vitality.Current}");
+        GD.Print($"Grit: {Grit.Current}");
+        GD.Print($"Rations: {Rations.Current}");
     }
 
     public void Debug_Apply_Choice()
     {
-        Effect test1 = new OneTimeEffect(Money, 10f, ActionType.Set);
+        Effect test1 = new OneStatTimeEffect(Money, 10f, ActionType.Set);
 
-        Effect test2 = new RepeatEffect(Money, 10f, ActionType.Multiply, 1, 5);
+        Effect test2 = new RepeatStatEffect(Money, 10f, ActionType.Multiply, 1, 5);
 
         Effect[] effects = { test1, test2 };
         Choice choice = new Choice(effects:effects);

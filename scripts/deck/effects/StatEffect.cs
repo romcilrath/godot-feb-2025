@@ -31,14 +31,14 @@ public abstract class StatEffect: Effect
             case TargetType.Money:
                 target = PlayerManager.Instance.Money;
                 break;
-            case TargetType.Health:
-                target = PlayerManager.Instance.Health;
+            case TargetType.Vitality:
+                target = PlayerManager.Instance.Vitality;
                 break;
-            case TargetType.Armor:
-                target = PlayerManager.Instance.Armor;
+            case TargetType.Grit:
+                target = PlayerManager.Instance.Grit;
                 break;
-            case TargetType.Attack:
-                target = PlayerManager.Instance.Attack;
+            case TargetType.Rations:
+                target = PlayerManager.Instance.Rations;
                 break;
             default:
                 GD.Print($"Cannot load EffectResource with TargetType: {targetType}");

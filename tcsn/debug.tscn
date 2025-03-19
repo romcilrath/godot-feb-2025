@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=9 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://tcsn/global references/choice_instance.tscn" id="4_e1s8x"]
 [ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_4pu66"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="5_vgp1m"]
+[ext_resource type="Texture2D" uid="uid://m4qkkvhabs7v" path="res://sprites/dev/HeartArt.png" id="6_7ocgx"]
+[ext_resource type="Texture2D" uid="uid://da0eao00mb24i" path="res://icon.svg" id="7_r4l1a"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -17,6 +19,10 @@ script = ExtResource("2_77h7y")
 CardInstanceScene = ExtResource("3_slpme")
 ChoiceInstanceScene = ExtResource("4_e1s8x")
 IconInstanceScene = ExtResource("5_4pu66")
+VitalityIcon = ExtResource("6_7ocgx")
+MoneyIcon = ExtResource("7_r4l1a")
+RationsIcon = ExtResource("7_r4l1a")
+GritIcon = ExtResource("7_r4l1a")
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("5_vgp1m")

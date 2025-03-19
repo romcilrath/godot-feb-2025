@@ -14,4 +14,7 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 
+# addons
+addons/
+
 # From https://github.com/github/gitignore/blob/main/Godot.gitignore

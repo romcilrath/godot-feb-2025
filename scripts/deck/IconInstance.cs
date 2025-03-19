@@ -30,6 +30,26 @@ public partial class IconInstance : TextureRect
 		// Check if the effect is of type StatEffect
 		if (this._effect is StatEffect statEffect)
 		{
+			// Assign apropriate icon to the art node
+			switch(statEffect.Target.Name)
+			{
+				case "Vitality":
+					_art.Texture = GlobalReferences.Instance.VitalityIcon;
+					break;
+				case "Money":
+					_art.Texture = GlobalReferences.Instance.MoneyIcon;
+					break;
+				case "Rations":
+					_art.Texture = GlobalReferences.Instance.RationsIcon;
+					break;
+				case "Grit":
+					_art.Texture = GlobalReferences.Instance.GritIcon;
+					break;
+				default:
+					// Set the art texture to null
+					_art.Texture = null;
+					break;
+			}
 			// Set the count label text to the effect's count
 			switch(statEffect.ActionType)
 			{

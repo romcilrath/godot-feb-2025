@@ -14,10 +14,10 @@ public partial class GlobalReferences : Node
     [Export] public PackedScene ChoiceInstanceScene;
     [Export] public PackedScene IconInstanceScene;
 
-    [Export] public Texture VitalityIcon;
-    [Export] public Texture MoneyIcon;
-    [Export] public Texture RationsIcon;
-    [Export] public Texture GritIcon;
+    [Export] public Texture2D VitalityIcon;
+    [Export] public Texture2D MoneyIcon;
+    [Export] public Texture2D RationsIcon;
+    [Export] public Texture2D GritIcon;
 
     public override void _Ready() 
     {

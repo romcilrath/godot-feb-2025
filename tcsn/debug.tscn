@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=11 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -8,8 +8,11 @@
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="5_vgp1m"]
 [ext_resource type="Texture2D" uid="uid://m4qkkvhabs7v" path="res://sprites/dev/HeartArt.png" id="6_7ocgx"]
 [ext_resource type="Texture2D" uid="uid://da0eao00mb24i" path="res://icon.svg" id="7_r4l1a"]
+[ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
+[ext_resource type="Script" path="res://tcsn/PlayerStatRenderer.cs" id="10_vadct"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(-5, -5)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_33a1n")
@@ -28,7 +31,7 @@ GritIcon = ExtResource("7_r4l1a")
 script = ExtResource("5_vgp1m")
 
 [node name="CardInstance" parent="." instance=ExtResource("3_slpme")]
-position = Vector2(1548, 959)
+position = Vector2(1057, 921)
 scale = Vector2(0.35, 0.35)
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -39,3 +42,67 @@ offset_right = 3314.0
 offset_bottom = 2120.0
 mouse_filter = 2
 color = Color(0.784314, 0.74902, 0.956863, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2517.0
+offset_top = 119.0
+offset_right = 2942.0
+offset_bottom = 245.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_r38au")
+theme_override_font_sizes/font_size = 100
+text = "Test: 300"
+horizontal_alignment = 2
+script = ExtResource("10_vadct")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 2517.0
+offset_top = 268.0
+offset_right = 2942.0
+offset_bottom = 394.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_r38au")
+theme_override_font_sizes/font_size = 100
+text = "Test: 300"
+horizontal_alignment = 2
+script = ExtResource("10_vadct")
+StatToTrack = 1
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 2517.0
+offset_top = 414.0
+offset_right = 2942.0
+offset_bottom = 540.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_r38au")
+theme_override_font_sizes/font_size = 100
+text = "Test: 300"
+horizontal_alignment = 2
+script = ExtResource("10_vadct")
+StatToTrack = 2
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 2517.0
+offset_top = 535.0
+offset_right = 2942.0
+offset_bottom = 661.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_r38au")
+theme_override_font_sizes/font_size = 100
+text = "Test: 300"
+horizontal_alignment = 2
+script = ExtResource("10_vadct")
+StatToTrack = 3
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 2517.0
+offset_top = 1694.0
+offset_right = 2942.0
+offset_bottom = 1820.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_r38au")
+theme_override_font_sizes/font_size = 100
+text = "Test: 300"
+horizontal_alignment = 2
+script = ExtResource("10_vadct")
+StatToTrack = 4

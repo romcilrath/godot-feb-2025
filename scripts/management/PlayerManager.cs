@@ -29,7 +29,12 @@ public partial class PlayerManager : Node
         _instance = this;
         GD.Print("PlayerManager Initialized.");
 
-        Debug_Apply_Choice();
+        //Debug_Apply_Choice();
+    }
+
+    public List<Stat> GetStats()
+    {
+        return new List<Stat> { Money, Vitality, Grit, Rations };
     }
 
     public void PrintStats()

@@ -15,7 +15,6 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("1_uwgwp")
 ChoiceRectPath = NodePath("Choice")
-ShadowRectPath = NodePath("Shadow")
 TextPath = NodePath("Choice/HBoxContainer/MarginContainer/Text")
 EffectRowPath = NodePath("Choice/HBoxContainer/VBoxContainer/EffectRow")
 
@@ -105,6 +104,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -57.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -118,5 +119,10 @@ patch_margin_bottom = 260
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[connection signal="ChoiceSelected" from="." to="." method="ChoiceSelected"]
+[connection signal="DismissCard" from="." to="." method="_on_dismiss_card"]
+[connection signal="DismissCard" from="." to="." method="DismissCard"]
+[connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExit"]

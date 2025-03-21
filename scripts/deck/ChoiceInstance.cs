@@ -11,37 +11,40 @@ public partial class ChoiceInstance : ColorRect
     // These are the paths to the child nodes of the ChoiceInstance
     // Allows us tomake ChoiceInstance a resource and set the paths in the editor
 	[Export] public NodePath ChoiceRectPath { get; set; }
-	[Export] public NodePath ShadowRectPath { get; set; }
 	[Export] public NodePath TextPath { get; set; }
 	[Export] public NodePath EffectRowPath { get; set; }
 
     // These are the child nodes of the ChoiceInstance
 	private NinePatchRect _choiceRect;
-	private NinePatchRect _shadowRect;
 	private RichTextLabel _text;
 	private HBoxContainer _effectRow;
 
-    // Define the signal
+    // Detect if this choice/ a sibling choice has been selected already
+    private bool _isDisabled = false;
+
+    // Define a signal to shake the parent card
     [Signal]
-    public delegate void ShakeParentEventHandler();
+    public delegate void ShakeParentEventHandler(float degrees=0.4f, float duration=0.5f);
+    
+    // Define signals to disable and then dismiss the parent card
+    [Signal]
+    public delegate void ChoiceSelectedEventHandler();
+    [Signal]
+    public delegate void DismissCardEventHandler();
 
     // Hover variables
     private bool _isHovered = false;
     private bool _isInitialPositionSet = false;
 	private Vector2 _initialPosition;
 	private Vector2 _hoverOffset = new Vector2(0, -45); 
-	private Vector2 _shadowInitialPosition;
     private Tween _hoverPositionTween;
     private Tween _rotationTween;
 	private Tween _sizeTween; 
-	private Tween _shadowSizeTween;
-    private Tween _shadowHoverPositionTween;
 
 	public override void _Ready()
 	{
         // Find the child nodes
 		_choiceRect = NodeUtils.FindNodeWithError<NinePatchRect>(this, ChoiceRectPath, "ChoiceRect");
-		_shadowRect = NodeUtils.FindNodeWithError<NinePatchRect>(this, ShadowRectPath, "ShadowRect");
 		_text = NodeUtils.FindNodeWithError<RichTextLabel>(this, TextPath, "Text");
 		_effectRow = NodeUtils.FindNodeWithError<HBoxContainer>(this, EffectRowPath, "EffectRow");
 
@@ -50,12 +53,6 @@ public partial class ChoiceInstance : ColorRect
 		{
 			_choiceRect.Material = shaderMaterial.Duplicate() as ShaderMaterial;
 		}
-
-        // Ensure the material of _shadowRect is unique
-        if (_shadowRect.Material is ShaderMaterial shadowShaderMaterial)
-        {
-            _shadowRect.Material = shadowShaderMaterial.Duplicate() as ShaderMaterial;
-        }
 	}    
 
 	public void LoadChoice()
@@ -89,12 +86,16 @@ public partial class ChoiceInstance : ColorRect
 		choiceResource = newChoiceResource;
 		LoadChoice();
 	}
+    
+    public void SetDisabled(bool isDisabled=true)
+    {
+        _isDisabled = isDisabled;
+    }
 
     public void SetInitialPosition ()
     {
         // Save the initial position of the choice rect
         this._initialPosition = _choiceRect.Position;
-        this._shadowInitialPosition = _shadowRect.Position; // Save the initial position of the shadow rect
         this._isInitialPositionSet = true;
 
         // Set the pivot offset to the center of the choice rect
@@ -124,9 +125,6 @@ public partial class ChoiceInstance : ColorRect
 
             if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
                 UpdateShaderRotation(choiceShaderMaterial, _choiceRect.Position + (_choiceRect.Size / 2), angleXMax, angleYMax, time);
-
-            if (_shadowRect.Material is ShaderMaterial shadowShaderMaterial)
-                UpdateShaderRotation(shadowShaderMaterial, _shadowRect.Position + (_shadowRect.Size / 2), angleXMax, angleYMax, time);
         }
         else
         {
@@ -138,9 +136,6 @@ public partial class ChoiceInstance : ColorRect
 
             if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
                 ResetShaderRotation(choiceShaderMaterial);
-
-            if (_shadowRect.Material is ShaderMaterial shadowShaderMaterial)
-                ResetShaderRotation(shadowShaderMaterial);
         }
     }
 
@@ -149,17 +144,17 @@ public partial class ChoiceInstance : ColorRect
         // Kill our tweens
         _hoverPositionTween?.Kill();
         _sizeTween?.Kill();
-        _shadowSizeTween?.Kill();
-        _shadowHoverPositionTween?.Kill();
         _rotationTween?.Kill();
     }
 
 	private void OnMouseEnter() {
+        if (_isDisabled) return;
+
         // Set the hover flag
         _isHovered = true;
 
         // Emit the signal
-        EmitSignal(SignalName.ShakeParent);
+        EmitSignal(SignalName.ShakeParent, 0.4f, 0.05f);
 
         // Ensure shader perspective parameters are reset on hover
         if (_choiceRect.Material is ShaderMaterial shaderMaterial)
@@ -199,18 +194,6 @@ public partial class ChoiceInstance : ColorRect
         _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.05f, 1.05f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the shadow rect to the inverse hover offset position
-        _shadowHoverPositionTween = CreateTween();
-        _shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition - _hoverOffset, 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the shadow rect to scale down slightly
-        _shadowSizeTween = CreateTween();
-        _shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(0.95f, 0.95f), 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
 	}
 
 	private void OnMouseExit() {
@@ -237,17 +220,50 @@ public partial class ChoiceInstance : ColorRect
         _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the shadow rect back to its original position
-        _shadowHoverPositionTween = CreateTween();
-        _shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition, 0.1f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the shadow rect back to its original size
-        _shadowSizeTween = CreateTween();
-        _shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
 	}
+
+    private void OnChoiceClicked(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+        {
+            if (_isDisabled) return;
+            _isDisabled = true;
+            EmitSignal(SignalName.ChoiceSelected);
+
+            GD.Print($"Choice clicked: {_choice?.Text}");
+            EmitSignal(SignalName.ShakeParent, 1.5f, 0.2f);
+
+            KillTweens();
+
+            // Tween the choice rect to rotate back to 0
+            _rotationTween = CreateTween();
+            _rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Elastic);
+
+            // Tween the choice rect back to the initial position
+            _hoverPositionTween = CreateTween();
+            _hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.05f)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Bounce);
+
+            // Expand then tween the choice rect back to its original size
+            _sizeTween = CreateTween();
+            _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(0.8f, 1.2f), 0.2f)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Elastic);
+            _sizeTween.Chain()
+                .TweenProperty(_choiceRect, "scale", new Vector2(1.2f, 1.0f), 0.2f)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Elastic);
+            _sizeTween.Chain()
+                .TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.2f)
+                .SetEase(Tween.EaseType.In)
+                .SetTrans(Tween.TransitionType.Bounce);
+
+            EmitSignal(SignalName.DismissCard);
+            _choice.Apply();
+            GameManager.Instance.IncrementTurn();
+        }
+    }
 }

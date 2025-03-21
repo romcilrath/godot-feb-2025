@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class CardInstance : Node2D
 {
@@ -63,7 +64,11 @@ public partial class CardInstance : Node2D
 			choiceInstance.SetChoiceResource(choiceResource);
 
 			// Connect the ShakeParent signal dynamically using Connect()
-			choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From(OnShakeParentReceived));
+			choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From((float degrees, float duration) => OnShakeParentReceived(degrees, duration)));
+
+			// Connect the Choice signal dynamically using Connect()
+			choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnChoiceSelected));
+			choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnDismissCard));
 
 			// Optional: Add spacing between choices
 			ReferenceRect space = new ReferenceRect();
@@ -78,24 +83,47 @@ public partial class CardInstance : Node2D
 		LoadCard();
 	}
 
-	private void OnShakeParentReceived()
-	{
-		GD.Print("ShakeParent signal received.");
-		
+	private void OnShakeParentReceived(float degrees=0.4f, float duration=0.05f)
+	{		
 		_rotationTween = CreateTween();
         _rotationTween
-            .TweenProperty(this, "rotation_degrees", .4, 0.05f)
+            .TweenProperty(this, "rotation_degrees", degrees, duration)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
         _rotationTween
             .Chain()
-            .TweenProperty(this, "rotation_degrees", -.4, 0.05f)
+            .TweenProperty(this, "rotation_degrees", -degrees, duration)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
         _rotationTween
             .Chain()
-            .TweenProperty(this, "rotation_degrees", 0, 0.05f)
+            .TweenProperty(this, "rotation_degrees", 0, duration)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 	}
+	
+	private void OnChoiceSelected()
+	{
+		foreach (Node child in _choicesContainer.GetChildren())
+		{
+			if (child is ChoiceInstance choiceInstance)
+			{
+				choiceInstance.SetDisabled();
+			}
+		}
+	}
+	
+	private void OnDismissCard()
+	{
+		_rotationTween?.Kill();
+
+		Tween positionTween = CreateTween();
+		positionTween
+			.TweenInterval(0.8f);
+		positionTween
+			.Chain()
+			.TweenProperty(this, "position", new Vector2(0, 10000), 1.5f)
+			.SetEase(Tween.EaseType.In)
+			.AsRelative();
+	}	
 }

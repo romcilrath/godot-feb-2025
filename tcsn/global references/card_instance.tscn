@@ -10,8 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://sprites/card/Tab.PNG" id="8_8dcjg"]
 [ext_resource type="FontFile" uid="uid://1obcqasqw6i2" path="res://fonts/Walter Turncoat/WalterTurncoat-Regular.ttf" id="9_o38rn"]
 
-[node name="CardInstance" type="Node2D"]
-scale = Vector2(1.5, 1.5)
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_0mhr0")
 cardResource = ExtResource("2_r4kyv")
 BackdropPath = NodePath("Backdrop")
@@ -25,9 +24,17 @@ ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesCon
 
 [node name="Backdrop" type="NinePatchRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_top = -16.0
-offset_right = 2601.0
-offset_bottom = 4793.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1300.5
+offset_top = -2404.5
+offset_right = 1300.5
+offset_bottom = 2404.5
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_pootg")
 region_rect = Rect2(0, 10, 2203, 3869)
 patch_margin_left = 149
@@ -38,27 +45,27 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
-offset_left = 142.0
-offset_top = 106.667
-offset_right = 2454.0
-offset_bottom = 5044.67
+offset_left = -1151.0
+offset_top = -2282.67
+offset_right = 1161.0
+offset_bottom = 2655.34
 texture = ExtResource("4_gxi1g")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = 107.0
-offset_top = 2069.67
-offset_right = 2483.0
-offset_bottom = 4188.67
+offset_left = -1186.0
+offset_top = -319.663
+offset_right = 1190.0
+offset_bottom = 1799.34
 
 [node name="Window" type="NinePatchRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = 87.0
-offset_top = 94.0
-offset_right = 2506.0
-offset_bottom = 2335.0
+offset_left = -1206.0
+offset_top = -2295.33
+offset_right = 1213.0
+offset_bottom = -54.333
 texture = ExtResource("5_1gkqf")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -68,10 +75,10 @@ axis_stretch_vertical = 1
 
 [node name="Textbox" type="NinePatchRect" parent="."]
 modulate = Color(0.552941, 0.796078, 0.666667, 1)
-offset_left = 138.0
-offset_top = 1944.0
-offset_right = 2458.0
-offset_bottom = 4627.0
+offset_left = -1155.0
+offset_top = -445.333
+offset_right = 1165.0
+offset_bottom = 2237.67
 texture = ExtResource("6_ypig7")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -80,10 +87,10 @@ patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
 [node name="Number" type="RichTextLabel" parent="."]
-offset_left = 1936.67
-offset_top = 11.3333
-offset_right = 2395.67
-offset_bottom = 170.333
+offset_left = 643.67
+offset_top = -2378.0
+offset_right = 1102.67
+offset_bottom = -2219.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_33gue")
 theme_override_font_sizes/normal_font_size = 120
@@ -92,10 +99,11 @@ text = "No. 12"
 text_direction = 2
 
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
-offset_left = 96.0001
-offset_top = 58.0
-offset_right = 1439.0
-offset_bottom = 476.0
+offset_left = -1197.0
+offset_top = -2331.33
+offset_right = 146.0
+offset_bottom = -1913.33
+metadata/_edit_use_anchors_ = true
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
@@ -139,10 +147,10 @@ layout_mode = 2
 border_color = Color(1, 0, 0, 0)
 
 [node name="BodyChoicesContainer" type="VBoxContainer" parent="."]
-offset_left = 147.0
-offset_top = 1953.0
-offset_right = 2448.0
-offset_bottom = 4465.0
+offset_left = -1146.0
+offset_top = -436.333
+offset_right = 1155.0
+offset_bottom = 2075.67
 
 [node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
 layout_mode = 2

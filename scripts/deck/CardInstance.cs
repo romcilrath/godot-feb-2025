@@ -26,6 +26,8 @@ public partial class CardInstance : Node2D
 	private RichTextLabel _number;
 	private RichTextLabel _body;
 	private VBoxContainer _choicesContainer;
+	
+    private Tween _rotationTween;
 
 	public override void _Ready()
 	{
@@ -41,11 +43,11 @@ public partial class CardInstance : Node2D
 		LoadCard();
 	}
 
-	public void LoadCard()
+	public void LoadCard() 
 	{
 		Card card = new Card(cardResource);
 		this._card = card;
-		
+
 		_number.Text = "No. " + this._card.Number.ToString();
 		_nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
@@ -55,10 +57,15 @@ public partial class CardInstance : Node2D
 		{
 			GD.Print("Loading choice...");
 			GD.Print(choiceResource.Text);
+
 			ChoiceInstance choiceInstance = GlobalReferences.Instance.ChoiceInstanceScene.Instantiate() as ChoiceInstance;
 			_choicesContainer.AddChild(choiceInstance);
 			choiceInstance.SetChoiceResource(choiceResource);
 
+			// Connect the ShakeParent signal dynamically using Connect()
+			choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From(OnShakeParentReceived));
+
+			// Optional: Add spacing between choices
 			ReferenceRect space = new ReferenceRect();
 			space.CustomMinimumSize = new Vector2(0, 50);
 			_choicesContainer.AddChild(space);
@@ -69,5 +76,26 @@ public partial class CardInstance : Node2D
 	{
 		cardResource = newCardResource;
 		LoadCard();
+	}
+
+	private void OnShakeParentReceived()
+	{
+		GD.Print("ShakeParent signal received.");
+		
+		_rotationTween = CreateTween();
+        _rotationTween
+            .TweenProperty(this, "rotation_degrees", .4, 0.05f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+        _rotationTween
+            .Chain()
+            .TweenProperty(this, "rotation_degrees", -.4, 0.05f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
+        _rotationTween
+            .Chain()
+            .TweenProperty(this, "rotation_degrees", 0, 0.05f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Elastic);
 	}
 }

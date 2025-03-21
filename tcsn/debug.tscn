@@ -28,5 +28,14 @@ GritIcon = ExtResource("7_r4l1a")
 script = ExtResource("5_vgp1m")
 
 [node name="CardInstance" parent="." instance=ExtResource("3_slpme")]
-position = Vector2(1563, 116)
-scale = Vector2(0.4, 0.4)
+position = Vector2(1548, 959)
+scale = Vector2(0.35, 0.35)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+offset_left = -269.0
+offset_top = -198.0
+offset_right = 3314.0
+offset_bottom = 2120.0
+mouse_filter = 2
+color = Color(0.784314, 0.74902, 0.956863, 1)

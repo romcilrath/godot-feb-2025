@@ -21,17 +21,21 @@ public partial class ChoiceInstance : ColorRect
 	private RichTextLabel _text;
 	private HBoxContainer _effectRow;
 
+    // Define the signal
+    [Signal]
+    public delegate void ShakeParentEventHandler();
+
     // Hover variables
     private bool _isHovered = false;
     private bool _isInitialPositionSet = false;
 	private Vector2 _initialPosition;
 	private Vector2 _hoverOffset = new Vector2(0, -45); 
 	private Vector2 _shadowInitialPosition;
-    private Tween hoverPositionTween;
-    private Tween rotationTween;
-	private Tween sizeTween; 
-	private Tween shadowSizeTween;
-    private Tween shadowHoverPositionTween;
+    private Tween _hoverPositionTween;
+    private Tween _rotationTween;
+	private Tween _sizeTween; 
+	private Tween _shadowSizeTween;
+    private Tween _shadowHoverPositionTween;
 
 	public override void _Ready()
 	{
@@ -143,16 +147,19 @@ public partial class ChoiceInstance : ColorRect
     private void KillTweens() 
     {
         // Kill our tweens
-        hoverPositionTween?.Kill();
-        sizeTween?.Kill();
-        shadowSizeTween?.Kill();
-        shadowHoverPositionTween?.Kill();
-        rotationTween?.Kill();
+        _hoverPositionTween?.Kill();
+        _sizeTween?.Kill();
+        _shadowSizeTween?.Kill();
+        _shadowHoverPositionTween?.Kill();
+        _rotationTween?.Kill();
     }
 
 	private void OnMouseEnter() {
         // Set the hover flag
         _isHovered = true;
+
+        // Emit the signal
+        EmitSignal(SignalName.ShakeParent);
 
         // Ensure shader perspective parameters are reset on hover
         if (_choiceRect.Material is ShaderMaterial shaderMaterial)
@@ -165,43 +172,43 @@ public partial class ChoiceInstance : ColorRect
         KillTweens();
         
         // Tween the choice rect to rotate slightly
-        rotationTween = CreateTween();
-        rotationTween
+        _rotationTween = CreateTween();
+        _rotationTween
             .TweenProperty(_choiceRect, "rotation_degrees", 1, 0.05f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
-        rotationTween
+        _rotationTween
             .Chain()
             .TweenProperty(_choiceRect, "rotation_degrees", -1, 0.05f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
-        rotationTween
+        _rotationTween
             .Chain()
             .TweenProperty(_choiceRect, "rotation_degrees", 0, 0.05f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the choice rect to the hover offset position
-        hoverPositionTween = CreateTween();
-        hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition + _hoverOffset, 0.4f)
+        _hoverPositionTween = CreateTween();
+        _hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition + _hoverOffset, 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the choice rect to scale up slightly
-        sizeTween = CreateTween();
-        sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.05f, 1.05f), 0.4f)
+        _sizeTween = CreateTween();
+        _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.05f, 1.05f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the shadow rect to the inverse hover offset position
-        shadowHoverPositionTween = CreateTween();
-        shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition - _hoverOffset, 0.4f)
+        _shadowHoverPositionTween = CreateTween();
+        _shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition - _hoverOffset, 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the shadow rect to scale down slightly
-        shadowSizeTween = CreateTween();
-        shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(0.95f, 0.95f), 0.4f)
+        _shadowSizeTween = CreateTween();
+        _shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(0.95f, 0.95f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 	}
@@ -214,32 +221,32 @@ public partial class ChoiceInstance : ColorRect
         KillTweens();
 
         // Tween the choice rect to rotate back to 0
-        rotationTween = CreateTween();
-        rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
+        _rotationTween = CreateTween();
+        _rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the choice rect back to the initial position
-        hoverPositionTween = CreateTween();
-        hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.1f)
+        _hoverPositionTween = CreateTween();
+        _hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.1f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the choice rect back to its original size
-        sizeTween = CreateTween();
-        sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
+        _sizeTween = CreateTween();
+        _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the shadow rect back to its original position
-        shadowHoverPositionTween = CreateTween();
-        shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition, 0.1f)
+        _shadowHoverPositionTween = CreateTween();
+        _shadowHoverPositionTween.TweenProperty(_shadowRect, "position", _shadowInitialPosition, 0.1f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 
         // Tween the shadow rect back to its original size
-        shadowSizeTween = CreateTween();
-        shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
+        _shadowSizeTween = CreateTween();
+        _shadowSizeTween.TweenProperty(_shadowRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
 	}

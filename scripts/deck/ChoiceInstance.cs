@@ -20,7 +20,7 @@ public partial class ChoiceInstance : ColorRect
 	private HBoxContainer _effectRow;
 
     // Detect if this choice/ a sibling choice has been selected already
-    private bool _isDisabled = false;
+    private bool _isDisabled = false; 
 
     // Define a signal to shake the parent card
     [Signal]

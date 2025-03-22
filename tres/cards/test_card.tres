@@ -70,6 +70,7 @@ Body = "A path divergres before you.
 Right awaits safety, and a $10 bill. 
 Left is a stretch of burning hot coals. 
 
+
 Thoughts? Perponderances?"
 Art = ExtResource("1_qanyq")
 CardEffect = SubResource("Resource_b50ad")

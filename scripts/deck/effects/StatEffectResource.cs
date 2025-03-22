@@ -14,7 +14,7 @@ public partial class StatEffectResource : EffectResource
 
 public enum TargetType
 {
-    Money,
+    Coin,
     Vitality,
     Grit,
     Rations

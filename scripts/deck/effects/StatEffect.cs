@@ -28,8 +28,8 @@ public abstract class StatEffect: Effect
         Stat target = null;
         switch (targetType)
         {
-            case TargetType.Money:
-                target = PlayerManager.Instance.Money;
+            case TargetType.Coin:
+                target = PlayerManager.Instance.Coin;
                 break;
             case TargetType.Vitality:
                 target = PlayerManager.Instance.Vitality;

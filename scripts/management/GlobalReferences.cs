@@ -15,12 +15,12 @@ public partial class GlobalReferences : Node
     [Export] public PackedScene IconInstanceScene;
 
     [Export] public Texture2D VitalityIcon;
-    [Export] public Texture2D MoneyIcon;
+    [Export] public Texture2D CoinIcon;
     [Export] public Texture2D RationsIcon;
     [Export] public Texture2D GritIcon;
 
     [Export] public Color VitalityColor;
-    [Export] public Color MoneyColor;
+    [Export] public Color CoinColor;
     [Export] public Color RationsColor;
     [Export] public Color GritColor;
 

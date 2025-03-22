@@ -4,7 +4,7 @@ using System;
 // Enum to define available stats
 public enum StatType
 {
-	Money,
+	Coin,
 	Vitality,
 	Grit,
 	Rations,
@@ -27,8 +27,8 @@ public partial class PlayerStatRenderer : Label
         // Update the label text based on the selected stat
         switch (StatToTrack)
         {
-            case StatType.Money:
-                this.Text = "Money: " + PlayerManager.Instance.Money.Current;
+            case StatType.Coin:
+                this.Text = "Coin: " + PlayerManager.Instance.Coin.Current;
                 break;
             case StatType.Vitality:
                 this.Text = "Vitality: " + PlayerManager.Instance.Vitality.Current;

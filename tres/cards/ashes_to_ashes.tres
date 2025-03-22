@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=2 format=3 uid="uid://bu3df4rhtw7c6"]
+
+[ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_m5fbo"]
+
+[resource]
+script = ExtResource("1_m5fbo")
+Number = 0
+Name = ""
+Body = "You come across a house burnt down to its frame, two brothers fighting out front."
+Choices = null

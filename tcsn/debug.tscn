@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=12 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -7,11 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_4pu66"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="5_vgp1m"]
 [ext_resource type="Texture2D" uid="uid://cymsq0rik0j7t" path="res://sprites/card/Vitality.PNG" id="6_tksyb"]
-[ext_resource type="Texture2D" uid="uid://c1a6khdfwm0r5" path="res://sprites/card/Money.PNG" id="7_3vi07"]
 [ext_resource type="Texture2D" uid="uid://bp3ghpuvojhjv" path="res://sprites/card/Rations.PNG" id="8_67s3o"]
 [ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/card/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
-[ext_resource type="Script" path="res://tcsn/PlayerStatRenderer.cs" id="10_vadct"]
+[ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
@@ -25,13 +24,11 @@ CardInstanceScene = ExtResource("3_slpme")
 ChoiceInstanceScene = ExtResource("4_e1s8x")
 IconInstanceScene = ExtResource("5_4pu66")
 VitalityIcon = ExtResource("6_tksyb")
-MoneyIcon = ExtResource("7_3vi07")
 RationsIcon = ExtResource("8_67s3o")
 GritIcon = ExtResource("9_3djmi")
-VitalityColor = Color(0.72549, 0.372549, 0.376471, 1)
-MoneyColor = Color(0.729412, 0.803922, 0.933333, 1)
+VitalityColor = Color(0.87451, 0.568627, 0.564706, 1)
 RationsColor = Color(0.776471, 0.662745, 0.913725, 1)
-GritColor = Color(0.843137, 0.447059, 0.286275, 1)
+GritColor = Color(0.905882, 0.509804, 0.101961, 1)
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("5_vgp1m")
@@ -40,7 +37,7 @@ script = ExtResource("5_vgp1m")
 position = Vector2(1506, 977)
 scale = Vector2(0.35, 0.35)
 
-[node name="MoneyStat" type="Label" parent="."]
+[node name="CoinStat" type="Label" parent="."]
 offset_left = 2365.0
 offset_top = 122.0
 offset_right = 2790.0

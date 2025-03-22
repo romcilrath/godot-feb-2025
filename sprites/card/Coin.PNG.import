@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1a6khdfwm0r5"
-path="res://.godot/imported/Money.PNG-9d14b5b2ffcf01d4220fef88cc2a9d24.ctex"
+path="res://.godot/imported/Coin.PNG-0b41f51d5d9077117988436403f20df5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/Money.PNG"
-dest_files=["res://.godot/imported/Money.PNG-9d14b5b2ffcf01d4220fef88cc2a9d24.ctex"]
+source_file="res://sprites/card/Coin.PNG"
+dest_files=["res://.godot/imported/Coin.PNG-0b41f51d5d9077117988436403f20df5.ctex"]
 
 [params]
 

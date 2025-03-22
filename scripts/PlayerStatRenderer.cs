@@ -14,7 +14,8 @@ public enum StatType
 public partial class PlayerStatRenderer : Label
 {
 
-    [Export] public StatType StatToTrack; // Expose the stat type in the editor
+    [Export] public StatType StatToTrack;
+    [Export] public Texture2D Art;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()

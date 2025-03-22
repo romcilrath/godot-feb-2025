@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c20osm5q7yeuq"
-path="res://.godot/imported/StarryNight.jpg-58392a6cc79b1c4a45255c92666eb862.ctex"
+uid="uid://b42d3lqmg3eig"
+path="res://.godot/imported/ImageNotFound.png-a82d11ad170d5a6ee21277812b6ddfd8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dev/StarryNight.jpg"
-dest_files=["res://.godot/imported/StarryNight.jpg-58392a6cc79b1c4a45255c92666eb862.ctex"]
+source_file="res://sprites/dev/card/ImageNotFound.png"
+dest_files=["res://.godot/imported/ImageNotFound.png-a82d11ad170d5a6ee21277812b6ddfd8.ctex"]
 
 [params]
 

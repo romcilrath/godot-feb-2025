@@ -46,6 +46,7 @@ public partial class CardInstance : Node2D
 
 	public void LoadCard() 
 	{
+		GD.Print("Loading card " + cardResource.Name + "...");
 		Card card = new Card(cardResource);
 		this._card = card;
 
@@ -56,25 +57,29 @@ public partial class CardInstance : Node2D
 
 		foreach (ChoiceResource choiceResource in this.cardResource.Choices)
 		{
-			GD.Print("Loading choice...");
-			GD.Print(choiceResource.Text);
-
-			ChoiceInstance choiceInstance = GlobalReferences.Instance.ChoiceInstanceScene.Instantiate() as ChoiceInstance;
-			_choicesContainer.AddChild(choiceInstance);
-			choiceInstance.SetChoiceResource(choiceResource);
-
-			// Connect the ShakeParent signal dynamically using Connect()
-			choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From((float degrees, float duration) => OnShakeParentReceived(degrees, duration)));
-
-			// Connect the Choice signal dynamically using Connect()
-			choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnChoiceSelected));
-			choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnDismissCard));
-
-			// Optional: Add spacing between choices
-			ReferenceRect space = new ReferenceRect();
-			space.CustomMinimumSize = new Vector2(0, 50);
-			_choicesContainer.AddChild(space);
+			LoadChoice(choiceResource);
 		}
+	}
+
+	public void LoadChoice(ChoiceResource choiceResource)
+	{
+		GD.Print("Loading choice " + choiceResource.Text + "...");
+
+		ChoiceInstance choiceInstance = GlobalReferences.Instance.ChoiceInstanceScene.Instantiate() as ChoiceInstance;
+		_choicesContainer.AddChild(choiceInstance);
+		choiceInstance.SetChoiceResource(choiceResource);
+
+		// Connect the ShakeParent signal dynamically using Connect()
+		choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From((float degrees, float duration) => OnShakeParentReceived(degrees, duration)));
+
+		// Connect the Choice signal dynamically using Connect()
+		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnChoiceSelected));
+		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnDismissCard));
+
+		// Optional: Add spacing between choices
+		ReferenceRect space = new ReferenceRect();
+		space.CustomMinimumSize = new Vector2(0, 50);
+		_choicesContainer.AddChild(space);
 	}
 
 	public void SetCardResource(CardResource newCardResource)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp3ghpuvojhjv"
-path="res://.godot/imported/Rations.PNG-b5a5c815a747be102e2298a0d26d7145.ctex"
+uid="uid://bukcobsc4gj3e"
+path="res://.godot/imported/Card.png-8e1e9d731204fa0e9400764dd28b3fce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/Rations.PNG"
-dest_files=["res://.godot/imported/Rations.PNG-b5a5c815a747be102e2298a0d26d7145.ctex"]
+source_file="res://sprites/dev/card/Card.png"
+dest_files=["res://.godot/imported/Card.png-8e1e9d731204fa0e9400764dd28b3fce.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

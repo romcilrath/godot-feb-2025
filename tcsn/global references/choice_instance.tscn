@@ -120,9 +120,9 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [connection signal="ChoiceSelected" from="." to="." method="ChoiceSelected"]
-[connection signal="DismissCard" from="." to="." method="_on_dismiss_card"]
 [connection signal="DismissCard" from="." to="." method="DismissCard"]
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="DismissCard" from="." to="." method="_on_dismiss_card"]
 [connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExit"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bath3o0frge45"
-path="res://.godot/imported/Icon.PNG-b92f0e9f6f0d510f27c3c619a86edb1c.ctex"
+uid="uid://c1a6khdfwm0r5"
+path="res://.godot/imported/Coin.PNG-27b3dd3143f70a03d5769bff123699fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/Icon.PNG"
-dest_files=["res://.godot/imported/Icon.PNG-b92f0e9f6f0d510f27c3c619a86edb1c.ctex"]
+source_file="res://sprites/icons/Coin.PNG"
+dest_files=["res://.godot/imported/Coin.PNG-27b3dd3143f70a03d5769bff123699fa.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

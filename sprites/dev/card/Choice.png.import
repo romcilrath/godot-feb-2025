@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c62mt40flsped"
-path="res://.godot/imported/Grit.PNG-33a2d0603d622c87d2b65a8cdf12a5ab.ctex"
+uid="uid://c6ahkt08on06y"
+path="res://.godot/imported/Choice.png-287db626d81b92f3644ee56965979a06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/Grit.PNG"
-dest_files=["res://.godot/imported/Grit.PNG-33a2d0603d622c87d2b65a8cdf12a5ab.ctex"]
+source_file="res://sprites/dev/card/Choice.png"
+dest_files=["res://.godot/imported/Choice.png-287db626d81b92f3644ee56965979a06.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

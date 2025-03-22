@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmpk74evjvbbn"
-path="res://.godot/imported/Tab.png-1637a4592e4eddddbe5302af5ff0e79a.ctex"
+uid="uid://c20osm5q7yeuq"
+path="res://.godot/imported/StarryNight.jpg-a2d51d170d02186c6cee97ea0d903ce3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dev/Tab.png"
-dest_files=["res://.godot/imported/Tab.png-1637a4592e4eddddbe5302af5ff0e79a.ctex"]
+source_file="res://sprites/dev/card/StarryNight.jpg"
+dest_files=["res://.godot/imported/StarryNight.jpg-a2d51d170d02186c6cee97ea0d903ce3.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

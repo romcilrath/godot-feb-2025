@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmenk5023jsaa"
-path="res://.godot/imported/Vitality.PNG-27f2faf40163475f26d19fb5c17761b0.ctex"
+uid="uid://c62mt40flsped"
+path="res://.godot/imported/Grit.PNG-5886f6661f67264c8b07491e2c958936.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/Vitality.PNG"
-dest_files=["res://.godot/imported/Vitality.PNG-27f2faf40163475f26d19fb5c17761b0.ctex"]
+source_file="res://sprites/icons/Grit.PNG"
+dest_files=["res://.godot/imported/Grit.PNG-5886f6661f67264c8b07491e2c958936.ctex"]
 
 [params]
 

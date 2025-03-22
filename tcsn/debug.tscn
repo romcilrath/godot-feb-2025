@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=13 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://tcsn/global references/choice_instance.tscn" id="4_e1s8x"]
 [ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_4pu66"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="5_vgp1m"]
-[ext_resource type="Texture2D" uid="uid://cymsq0rik0j7t" path="res://sprites/card/Vitality.PNG" id="6_tksyb"]
-[ext_resource type="Texture2D" uid="uid://bp3ghpuvojhjv" path="res://sprites/card/Rations.PNG" id="8_67s3o"]
-[ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/card/Grit.PNG" id="9_3djmi"]
+[ext_resource type="Texture2D" uid="uid://cymsq0rik0j7t" path="res://sprites/icons/Vitality.PNG" id="6_tksyb"]
+[ext_resource type="Texture2D" uid="uid://c1a6khdfwm0r5" path="res://sprites/icons/Coin.PNG" id="7_3vi07"]
+[ext_resource type="Texture2D" uid="uid://bp3ghpuvojhjv" path="res://sprites/icons/Rations.PNG" id="8_67s3o"]
+[ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/icons/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
 [ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
 
@@ -24,9 +25,11 @@ CardInstanceScene = ExtResource("3_slpme")
 ChoiceInstanceScene = ExtResource("4_e1s8x")
 IconInstanceScene = ExtResource("5_4pu66")
 VitalityIcon = ExtResource("6_tksyb")
+CoinIcon = ExtResource("7_3vi07")
 RationsIcon = ExtResource("8_67s3o")
 GritIcon = ExtResource("9_3djmi")
 VitalityColor = Color(0.87451, 0.568627, 0.564706, 1)
+CoinColor = Color(0.537255, 0.819608, 0.301961, 1)
 RationsColor = Color(0.776471, 0.662745, 0.913725, 1)
 GritColor = Color(0.905882, 0.509804, 0.101961, 1)
 

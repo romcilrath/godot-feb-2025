@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d4ffhg4gai21m"]
 
-[ext_resource type="Texture2D" uid="uid://bath3o0frge45" path="res://sprites/card/Icon.PNG" id="1_ntmb1"]
+[ext_resource type="Texture2D" uid="uid://bath3o0frge45" path="res://sprites/icons/Icon.PNG" id="1_ntmb1"]
 [ext_resource type="Texture2D" uid="uid://m4qkkvhabs7v" path="res://sprites/dev/HeartArt.png" id="2_8jfqk"]
 [ext_resource type="Texture2D" uid="uid://brbmhcyjityl" path="res://sprites/card/CountBox.PNG" id="2_bmahb"]
 [ext_resource type="Script" path="res://scripts/deck/IconInstance.cs" id="2_r7he4"]

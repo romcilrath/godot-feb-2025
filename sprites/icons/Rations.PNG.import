@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlch8a4m53654"
-path="res://.godot/imported/ArtWindow.png-2b38b8d8869b25db19946f4727f4d4d1.ctex"
+uid="uid://bp3ghpuvojhjv"
+path="res://.godot/imported/Rations.PNG-c5ee64af71f3cb1522ba337351dda01f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dev/ArtWindow.png"
-dest_files=["res://.godot/imported/ArtWindow.png-2b38b8d8869b25db19946f4727f4d4d1.ctex"]
+source_file="res://sprites/icons/Rations.PNG"
+dest_files=["res://.godot/imported/Rations.PNG-c5ee64af71f3cb1522ba337351dda01f.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

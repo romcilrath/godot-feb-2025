@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6ahkt08on06y"
-path="res://.godot/imported/Choice.png-9a105436de2f959479cd71ea9500bbb7.ctex"
+uid="uid://cymsq0rik0j7t"
+path="res://.godot/imported/Vitality.PNG-5e8cb1e9088adeebb3105e8b513f8bab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dev/Choice.png"
-dest_files=["res://.godot/imported/Choice.png-9a105436de2f959479cd71ea9500bbb7.ctex"]
+source_file="res://sprites/icons/Vitality.PNG"
+dest_files=["res://.godot/imported/Vitality.PNG-5e8cb1e9088adeebb3105e8b513f8bab.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

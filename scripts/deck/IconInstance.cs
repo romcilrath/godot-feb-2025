@@ -36,8 +36,16 @@ public partial class IconInstance : TextureRect
 		_artContainer.AddThemeConstantOverride("margin_bottom", margin);
 	}
 
+	public void SetArtContainerMargins(int marginRight=40, int marginLeft=40, int marginTop=40, int marginBottom=40)
+	{
+		_artContainer.AddThemeConstantOverride("margin_right", marginRight);
+		_artContainer.AddThemeConstantOverride("margin_left", marginLeft);
+		_artContainer.AddThemeConstantOverride("margin_top", marginTop);
+		_artContainer.AddThemeConstantOverride("margin_bottom", marginBottom);
+	}
+
 	public void LoadEffect()
-	{		
+	{
 		// Check if the effect is of type StatEffect
 		if (this._effect is StatEffect statEffect)
 		{
@@ -52,7 +60,7 @@ public partial class IconInstance : TextureRect
 				case "Coin":
 					_art.Texture = GlobalReferences.Instance.CoinIcon;
 					this.SelfModulate = GlobalReferences.Instance.CoinColor;
-					SetArtContainerMargins(50);
+					SetArtContainerMargins(10, 10, 0, 30);
 					break;
 				case "Rations":
 					_art.Texture = GlobalReferences.Instance.RationsIcon;

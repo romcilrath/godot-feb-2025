@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Diagnostics;
-using System.Linq;
 
 public partial class CardInstance : Node2D
 {

@@ -9,11 +9,13 @@ public partial class IconInstance : TextureRect
     // Allows us to make IconInstance a resource and set the paths in the editor
 	[Export] public NodePath CountBoxContainerPath { get; set; }
 	[Export] public NodePath CountLabelPath { get; set; }
+	[Export] public NodePath ArtContainerPath { get; set; }
 	[Export] public NodePath ArtPath { get; set; }
 
     // These are the child nodes of the ChoiceInstance
 	private HBoxContainer _countBoxContainer;
 	private Label _countLabel;
+	private MarginContainer _artContainer;
 	private TextureRect _art;
 
 	// Called when the node enters the scene tree for the first time.
@@ -22,7 +24,16 @@ public partial class IconInstance : TextureRect
         // Find the child nodes
 		_countBoxContainer = NodeUtils.FindNodeWithError<HBoxContainer>(this, CountBoxContainerPath, "CountBoxContainer");
 		_countLabel = NodeUtils.FindNodeWithError<Label>(this, CountLabelPath, "CountLabel");
+		_artContainer = NodeUtils.FindNodeWithError<MarginContainer>(this, ArtContainerPath, "ArtContainer");
 		_art = NodeUtils.FindNodeWithError<TextureRect>(this, ArtPath, "Art");
+	}
+
+	public void SetArtContainerMargins(int margin=40)
+	{
+		_artContainer.AddThemeConstantOverride("margin_right", margin);
+		_artContainer.AddThemeConstantOverride("margin_left", margin);
+		_artContainer.AddThemeConstantOverride("margin_top", margin);
+		_artContainer.AddThemeConstantOverride("margin_bottom", margin);
 	}
 
 	public void LoadEffect()
@@ -35,15 +46,22 @@ public partial class IconInstance : TextureRect
 			{
 				case "Vitality":
 					_art.Texture = GlobalReferences.Instance.VitalityIcon;
+					this.SelfModulate = GlobalReferences.Instance.VitalityColor;
+					SetArtContainerMargins(10);
 					break;
 				case "Money":
 					_art.Texture = GlobalReferences.Instance.MoneyIcon;
+					this.SelfModulate = GlobalReferences.Instance.MoneyColor;
 					break;
 				case "Rations":
 					_art.Texture = GlobalReferences.Instance.RationsIcon;
+					this.SelfModulate = GlobalReferences.Instance.RationsColor;
+					SetArtContainerMargins(50);
 					break;
 				case "Grit":
 					_art.Texture = GlobalReferences.Instance.GritIcon;
+					this.SelfModulate = GlobalReferences.Instance.GritColor;
+					SetArtContainerMargins(0);
 					break;
 				default:
 					// Set the art texture to null

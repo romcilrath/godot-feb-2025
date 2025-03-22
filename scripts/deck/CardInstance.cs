@@ -119,7 +119,7 @@ public partial class CardInstance : Node2D
 
 		Tween positionTween = CreateTween();
 		positionTween
-			.TweenInterval(0.8f);
+			.TweenInterval(0.6f);
 		positionTween
 			.Chain()
 			.TweenProperty(this, "position", new Vector2(0, 25), 0.1f)
@@ -136,7 +136,7 @@ public partial class CardInstance : Node2D
 			.TweenInterval(0.05f);
 		positionTween
 			.Chain()
-			.TweenProperty(this, "position", new Vector2(0, 4000), 0.6f)
+			.TweenProperty(this, "position", new Vector2(0, 4000), 0.5f)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
 	}	

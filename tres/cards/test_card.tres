@@ -40,13 +40,13 @@ Effects = Array[Object]([SubResource("Resource_drth7")])
 
 [sub_resource type="Resource" id="Resource_vn1fi"]
 script = ExtResource("2_epl1y")
-Target = 0
+Target = 2
 Value = 55.0
 ActionType = 1
 
 [sub_resource type="Resource" id="Resource_bh6p3"]
 script = ExtResource("2_epl1y")
-Target = 0
+Target = 3
 Value = 3.0
 ActionType = 2
 

@@ -153,9 +153,6 @@ public partial class ChoiceInstance : ColorRect
         // Set the hover flag
         _isHovered = true;
 
-        // Emit the signal
-        EmitSignal(SignalName.ShakeParent, 0.4f, 0.05f);
-
         // Ensure shader perspective parameters are reset on hover
         if (_choiceRect.Material is ShaderMaterial shaderMaterial)
         {
@@ -231,7 +228,7 @@ public partial class ChoiceInstance : ColorRect
             EmitSignal(SignalName.ChoiceSelected);
 
             GD.Print($"Choice clicked: {_choice?.Text}");
-            EmitSignal(SignalName.ShakeParent, 1.5f, 0.2f);
+            EmitSignal(SignalName.ShakeParent, 1f, 0.05f);
 
             KillTweens();
 

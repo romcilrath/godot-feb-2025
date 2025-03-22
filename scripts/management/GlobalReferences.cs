@@ -19,6 +19,11 @@ public partial class GlobalReferences : Node
     [Export] public Texture2D RationsIcon;
     [Export] public Texture2D GritIcon;
 
+    [Export] public Color VitalityColor;
+    [Export] public Color MoneyColor;
+    [Export] public Color RationsColor;
+    [Export] public Color GritColor;
+
     public override void _Ready() 
     {
         // Enforce singleton design pattern

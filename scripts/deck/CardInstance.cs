@@ -8,6 +8,9 @@ public partial class CardInstance : Node2D
 	[Export] public CardResource cardResource;
 	private Card _card;
 	private bool _isFlipped = false;
+	
+    [Signal]
+    public delegate void OnFlipEventHandler();
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
@@ -60,9 +63,8 @@ public partial class CardInstance : Node2D
 		Card card = new Card(cardResource);
 		this._card = card;
 
-		_isFlipped = false;
-		_cardBack.Visible = false;
-		_backdrop.Visible = true;
+		_isFlipped = true;
+		FlipCard();
 		_number.Text = "No. " + this._card.Number.ToString();
 		_nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
@@ -162,7 +164,7 @@ public partial class CardInstance : Node2D
 	private void OnDismissCard()
 	{
 		_rotationTween?.Kill();
-		// TODO 
-		FlipCard();
+
+		EmitSignal(SignalName.OnFlip);
 	}	
 }

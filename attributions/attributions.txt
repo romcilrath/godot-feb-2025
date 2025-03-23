@@ -1,0 +1,6 @@
+shaders
+    offsetshadow.gdshader
+        https://github.com/godotengine/godot-demo-projects/blob/master/2d/sprite_shaders/shaders/offsetshadow.gdshader
+    perspective.gdshader
+        https://godotshaders.com/shader/2d-perspective/
+    

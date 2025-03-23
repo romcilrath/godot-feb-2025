@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Linq;
 
 public partial class ChoiceInstance : ColorRect
 {
@@ -63,10 +65,15 @@ public partial class ChoiceInstance : ColorRect
 
         // Set the choice text
 		_text.Text = this._choice.Text;
-
+        
+        // No need to spawn icon instances if we hav eno effects
+        if (this._choice.Effects is null) return;
+        if (this._choice.Effects.Length == 0) return;
+        
         // Spawn icon instances
         foreach (Effect effect in this._choice.Effects)
         {
+
             IconInstance iconInstance = GlobalReferences.Instance.IconInstanceScene.Instantiate() as IconInstance;
             _effectRow.AddChild(iconInstance);
             iconInstance.SetEffect(effect);
@@ -118,7 +125,7 @@ public partial class ChoiceInstance : ColorRect
             material.Set("shader_parameter/rotation_y", rotY);
         }
 
-        if (_isHovered)
+        if (_isHovered && !_isDisabled)
         {
             float angleXMax = 2.0f, angleYMax = 2.0f;
             float time = (float)Time.GetTicksMsec() / 3000.0f; // Time in seconds
@@ -219,16 +226,25 @@ public partial class ChoiceInstance : ColorRect
             .SetTrans(Tween.TransitionType.Elastic);
 	}
 
+    private async void DelayApplyCard(int delay = 500)
+    {
+        await Task.Delay(delay); // Delay for 1 second
+        _choice.Apply();
+        GameManager.Instance.IncrementTurn();
+        EmitSignal(SignalName.DismissCard);
+        EmitSignal(SignalName.ChoiceSelected);
+    }
+
+
     private void OnChoiceClicked(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
         {
             if (_isDisabled) return;
             _isDisabled = true;
-            EmitSignal(SignalName.ChoiceSelected);
 
             GD.Print($"Choice clicked: {_choice?.Text}");
-            EmitSignal(SignalName.ShakeParent, 1f, 0.05f);
+            EmitSignal(SignalName.ShakeParent, 2f, 0.05f);
 
             KillTweens();
 
@@ -258,9 +274,7 @@ public partial class ChoiceInstance : ColorRect
                 .SetEase(Tween.EaseType.In)
                 .SetTrans(Tween.TransitionType.Bounce);
 
-            EmitSignal(SignalName.DismissCard);
-            _choice.Apply();
-            GameManager.Instance.IncrementTurn();
+            DelayApplyCard();
         }
     }
 }

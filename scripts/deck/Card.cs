@@ -39,6 +39,7 @@ public class Card
         Choice[] choices = new Choice[choiceResources.Length];
         for (int i = 0; i < choiceResources.Length; i++)
         {
+            if (choiceResources[i] == null) continue;
             choices[i] = new Choice(choiceResources[i]);
         }
 

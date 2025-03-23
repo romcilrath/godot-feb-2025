@@ -6,6 +6,6 @@
 shader = ExtResource("1_4ysln")
 shader_parameter/fov = 90.0
 shader_parameter/cull_back = true
-shader_parameter/rotation_y = -1.10999
+shader_parameter/rotation_y = 8.55e-06
 shader_parameter/rotation_x = 0.0
 shader_parameter/inset = 0.0

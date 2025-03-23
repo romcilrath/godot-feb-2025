@@ -10,6 +10,7 @@ custom_minimum_size = Vector2(300, 450)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -30,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
 texture = ExtResource("3_jpfut")
-region_rect = Rect2(0, 0, 1970, 352)
+region_rect = Rect2(0, 5, 1965, 352)
 patch_margin_left = 115
 patch_margin_top = 260
 patch_margin_right = 115
@@ -96,7 +97,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Shadow" type="NinePatchRect" parent="."]
-self_modulate = Color(0, 0, 0, 0.552941)
+self_modulate = Color(0, 0, 0, 0.294118)
 show_behind_parent = true
 material = ExtResource("2_wyg3w")
 custom_minimum_size = Vector2(0, 250)
@@ -104,9 +105,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_right = -57.0
-offset_bottom = 8.0
+offset_left = -10.0
+offset_top = 25.0
+offset_right = -131.0
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
@@ -121,8 +123,6 @@ axis_stretch_vertical = 1
 
 [connection signal="ChoiceSelected" from="." to="." method="ChoiceSelected"]
 [connection signal="DismissCard" from="." to="." method="DismissCard"]
-[connection signal="DismissCard" from="." to="." method="_on_dismiss_card"]
 [connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExit"]

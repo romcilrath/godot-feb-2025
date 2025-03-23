@@ -7,10 +7,17 @@ public partial class CardInstance : Node2D
 {
 	[Export] public CardResource cardResource;
 	private Card _card;
+	private bool _isFlipped = false;
+	
+    [Signal]
+    public delegate void OnFlipEventHandler();
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
+	[Export] public NodePath CardBack { get; set; }
 	[Export] public NodePath BackdropPath { get; set; }
+	[Export] public NodePath OtherElementsPath { get; set; }
+	[Export] public NodePath BodyChoicesContainer { get; set; }
 	[Export] public NodePath ArtPath { get; set; }
 	[Export] public NodePath WindowPath { get; set; }
 	[Export] public NodePath TabPath { get; set; }
@@ -19,7 +26,10 @@ public partial class CardInstance : Node2D
 	[Export] public NodePath BodyPath { get; set; }
 	[Export] public NodePath ChoicesContainerPath { get; set; }
 
+	private NinePatchRect _cardBack;
 	private NinePatchRect _backdrop;
+	private Node2D _otherElements;
+	private BoxContainer _bodyChoicesContainer;
 	private TextureRect _art;
 	private NinePatchRect _window;
 	private NinePatchRect _tab;
@@ -32,7 +42,10 @@ public partial class CardInstance : Node2D
 
 	public override void _Ready()
 	{
+		_cardBack = NodeUtils.FindNodeWithError<NinePatchRect>(this, CardBack, "CardBack");
 		_backdrop = NodeUtils.FindNodeWithError<NinePatchRect>(this, BackdropPath, "Backdrop");
+		_otherElements = NodeUtils.FindNodeWithError<Node2D>(this, OtherElementsPath, "OtherElements");
+		_bodyChoicesContainer = NodeUtils.FindNodeWithError<BoxContainer>(this, BodyChoicesContainer, "BodyChoicesContainer");
 		_art = NodeUtils.FindNodeWithError<TextureRect>(this, ArtPath, "Art");
 		_window = NodeUtils.FindNodeWithError<NinePatchRect>(this, WindowPath, "Window");
 		_tab = NodeUtils.FindNodeWithError<NinePatchRect>(this, TabPath, "Tab");
@@ -50,6 +63,8 @@ public partial class CardInstance : Node2D
 		Card card = new Card(cardResource);
 		this._card = card;
 
+		_isFlipped = true;
+		FlipCard();
 		_number.Text = "No. " + this._card.Number.ToString();
 		_nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
@@ -88,23 +103,61 @@ public partial class CardInstance : Node2D
 		LoadCard();
 	}
 
+	public void FlipCard()
+	{
+		if (_isFlipped)
+		{
+			_isFlipped = false;
+
+			_cardBack.Visible = false;
+			_backdrop.Visible = true;
+
+			_otherElements.Visible = true;
+			_bodyChoicesContainer.Visible = true;
+			_tab.Visible = true;
+			_nameLabel.Visible = true;
+		}
+		else
+		{
+			_isFlipped = true;
+
+			_cardBack.Visible = true;
+			_backdrop.Visible = false;
+			
+			_otherElements.Visible = false;
+			_bodyChoicesContainer.Visible = false;
+			_tab.Visible = false;
+			_nameLabel.Visible = false;
+		}
+	}
+
 	private void OnShakeParentReceived(float degrees=0.4f, float duration=0.05f)
 	{		
 		_rotationTween = CreateTween();
-        _rotationTween
-            .TweenProperty(this, "rotation_degrees", degrees, duration)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-        _rotationTween
-            .Chain()
-            .TweenProperty(this, "rotation_degrees", -degrees, duration)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-        _rotationTween
-            .Chain()
-            .TweenProperty(this, "rotation_degrees", 0, duration)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
+		_rotationTween
+			.TweenProperty(this, "rotation_degrees", degrees, duration)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Elastic);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", -degrees, duration)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Elastic);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", degrees / 2, duration * 1.5f)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Back);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", -degrees / 2, duration * 1.5f)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Back);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", 0, duration * 2)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Sine);
 	}
 	
 	private void OnChoiceSelected()
@@ -122,27 +175,6 @@ public partial class CardInstance : Node2D
 	{
 		_rotationTween?.Kill();
 
-		Tween positionTween = CreateTween();
-		positionTween
-			.TweenInterval(0.6f);
-		positionTween
-			.Chain()
-			.TweenProperty(this, "position", new Vector2(0, 25), 0.1f)
-			.SetEase(Tween.EaseType.InOut)
-			.AsRelative();
-		positionTween
-			.TweenInterval(0.05f);
-		positionTween
-			.Chain()
-			.TweenProperty(this, "position", new Vector2(0, -75), 0.1f)
-			.SetEase(Tween.EaseType.InOut)
-			.AsRelative();
-		positionTween
-			.TweenInterval(0.05f);
-		positionTween
-			.Chain()
-			.TweenProperty(this, "position", new Vector2(0, 4000), 0.5f)
-			.SetEase(Tween.EaseType.In)
-			.AsRelative();
+		EmitSignal(SignalName.OnFlip);
 	}	
 }

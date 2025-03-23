@@ -1,21 +1,33 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://bu3df4rhtw7c6"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://bu3df4rhtw7c6"]
 
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_1y60g"]
 [ext_resource type="Script" path="res://scripts/deck/effects/OneTimeStatEffectResource.cs" id="2_tdloc"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="3_eblnx"]
 [ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="4_73g6q"]
 
+[sub_resource type="Resource" id="Resource_id3gn"]
+script = ExtResource("2_tdloc")
+Target = 3
+Value = -2.0
+ActionType = 1
+
 [sub_resource type="Resource" id="Resource_5aubm"]
 script = ExtResource("2_tdloc")
-Target = 2
-Value = 10.0
+Target = 3
+Value = 5.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_w0o12"]
+script = ExtResource("2_tdloc")
+Target = 1
+Value = -15.0
 ActionType = 1
 
 [sub_resource type="Resource" id="Resource_cwr62"]
 script = ExtResource("3_eblnx")
 Text = "Arrest the son"
 HoverText = ""
-Effects = Array[Object]([SubResource("Resource_5aubm")])
+Effects = Array[Object]([SubResource("Resource_5aubm"), SubResource("Resource_w0o12")])
 
 [sub_resource type="Resource" id="Resource_5c4fj"]
 script = ExtResource("2_tdloc")
@@ -35,23 +47,26 @@ Text = "Kill the father"
 HoverText = ""
 Effects = Array[Object]([SubResource("Resource_5c4fj"), SubResource("Resource_48356")])
 
-[sub_resource type="Resource" id="Resource_iyrpu"]
+[sub_resource type="Resource" id="Resource_qkout"]
 script = ExtResource("2_tdloc")
-Target = 3
-Value = -2.0
+Target = 2
+Value = 10.0
 ActionType = 1
 
 [sub_resource type="Resource" id="Resource_i0nb6"]
 script = ExtResource("3_eblnx")
 Text = "Mind your own business"
 HoverText = ""
-Effects = Array[Object]([SubResource("Resource_iyrpu")])
+Effects = Array[Object]([SubResource("Resource_qkout")])
 
 [resource]
 script = ExtResource("4_73g6q")
 Number = 2
 Name = "Prodigal Son"
-Body = "You come across a quarelling father and son. 
+Body = "You come across a quarelling 
+father and son. 
+
 The father pleads for help arresting his violent son. The son frantically offers a sum to kill his meddling father."
 Art = ExtResource("1_1y60g")
+CardEffect = SubResource("Resource_id3gn")
 Choices = Array[Object]([SubResource("Resource_cwr62"), SubResource("Resource_o27k4"), SubResource("Resource_i0nb6")])

@@ -10,11 +10,16 @@ public partial class PlayerManager : Node
     private static PlayerManager _instance;
     public static PlayerManager Instance => _instance;
 
+    [Export] public int StartingCoin = 25;
+    [Export] public int StartingVitality = 100;
+    [Export] public int StartingGrit = 10;
+    [Export] public int StartingRations = 20;
+
     // Player stats
-    public Stat Coin { get; private set; } = new Stat("Coin", min:0, initial:0);                  // Coin
-    public Stat Vitality { get; private set; } = new Stat("Vitality", min:0, max:100, initial:100);     // Vitality
-    public Stat Grit { get; private set; } = new Stat("Grit", min:0, initial:0);                  // Grit
-    public Stat Rations { get; private set; } = new Stat("Rations", initial:1f);                      // Rations
+    public Stat Coin { get; private set; }
+    public Stat Vitality { get; private set; } 
+    public Stat Grit { get; private set; }
+    public Stat Rations { get; private set; }
 
     public override void _Ready() 
     {
@@ -28,6 +33,12 @@ public partial class PlayerManager : Node
 
         _instance = this;
         GD.Print("PlayerManager Initialized.");
+
+        // Initialize Vitality with StartingVitality
+        Coin = new Stat("Coin", min:0, initial:StartingCoin);
+        Vitality = new Stat("Vitality", min:0, max:100, initial:StartingVitality);
+        Grit = new Stat("Grit", min:0, initial:StartingGrit);
+        Rations = new Stat("Rations", initial:StartingRations);
 
         //Debug_Apply_Choice();
     }

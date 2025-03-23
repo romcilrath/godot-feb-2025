@@ -10,7 +10,11 @@ public partial class CardInstance : Node2D
 	private bool _isFlipped = false;
 	
     [Signal]
-    public delegate void OnFlipEventHandler();
+    public delegate void OnFlipRightEventHandler();
+	[Signal]
+    public delegate void OnFlipLeftEventHandler();
+	[Signal]
+	public delegate void OnShakeEventHandler(float degrees = 0.4f, float duration = 0.5f);
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
@@ -40,6 +44,7 @@ public partial class CardInstance : Node2D
 	
     private Tween _rotationTween;
 
+	// Get the nodes from the scene and load the card on Ready
 	public override void _Ready()
 	{
 		_cardBack = NodeUtils.FindNodeWithError<NinePatchRect>(this, CardBack, "CardBack");
@@ -57,52 +62,67 @@ public partial class CardInstance : Node2D
 		LoadCard();
 	}
 
+	// Load the card visuals including choices
 	public void LoadCard() 
-	{
+	{	
 		GD.Print("Loading card " + cardResource.Name + "...");
+
+		// Instiate the card object from the cardResource
 		Card card = new Card(cardResource);
 		this._card = card;
 
+		// Set the card visuals by setting card flipped to true, (state when showing the back)
+		// and then calling FlipCard() to show the front and ensure its all visible
 		_isFlipped = true;
 		FlipCard();
+
+		// Set the card visuals (number, name, art, body)
 		_number.Text = "No. " + this._card.Number.ToString();
 		_nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
 		_body.Text = "[center]" + this._card.Body + "[/center]";
 
+		// Load each choice to the card, includes instantiating 
+		// Hooks up choice sigals, adds as children, instantiates, and adds spaces between choices 
 		foreach (ChoiceResource choiceResource in this.cardResource.Choices)
 		{
 			LoadChoice(choiceResource);
 		}
 	}
 
+	// Load all choices to the card
+	// Hooks up choice sigals, adds as children, instantiates, and adds spaces between choices 
 	public void LoadChoice(ChoiceResource choiceResource)
 	{
 		GD.Print("Loading choice " + choiceResource.Text + "...");
 
+		// Instantiate the choice instance object and set its choiceResource
 		ChoiceInstance choiceInstance = GlobalReferences.Instance.ChoiceInstanceScene.Instantiate() as ChoiceInstance;
 		_choicesContainer.AddChild(choiceInstance);
 		choiceInstance.SetChoiceResource(choiceResource);
 
-		// Connect the ShakeParent signal dynamically using Connect()
-		choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From((float degrees, float duration) => OnShakeParentReceived(degrees, duration)));
-
-		// Connect the Choice signal dynamically using Connect()
+		// Connect the signals
+		choiceInstance.Connect(ChoiceInstance.SignalName.OnShake, Callable.From((float degrees, float duration) => EmitSignal(nameof(OnShake), degrees, duration)));
 		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnChoiceSelected));
 		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnDismissCard));
 
-		// Optional: Add spacing between choices
+		// Add space between choices
 		ReferenceRect space = new ReferenceRect();
 		space.CustomMinimumSize = new Vector2(0, 50);
 		_choicesContainer.AddChild(space);
 	}
 
+	// Set the card resource and load the card
+	// Consider we may not wanna load the card at the same time?
 	public void SetCardResource(CardResource newCardResource)
 	{
 		cardResource = newCardResource;
 		LoadCard();
 	}
 
+	// "Flips" the cards visuals in the sense that it...
+	// shows the card back if the card front is visible and vice versa
+	// Does not run the flip animation
 	public void FlipCard()
 	{
 		if (_isFlipped)
@@ -130,36 +150,8 @@ public partial class CardInstance : Node2D
 			_nameLabel.Visible = false;
 		}
 	}
-
-	private void OnShakeParentReceived(float degrees=0.4f, float duration=0.05f)
-	{		
-		_rotationTween = CreateTween();
-		_rotationTween
-			.TweenProperty(this, "rotation_degrees", degrees, duration)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Elastic);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", -degrees, duration)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Elastic);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", degrees / 2, duration * 1.5f)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Back);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", -degrees / 2, duration * 1.5f)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Back);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", 0, duration * 2)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Sine);
-	}
 	
+	// Disables all choices when a choice is selected
 	private void OnChoiceSelected()
 	{
 		foreach (Node child in _choicesContainer.GetChildren())
@@ -171,10 +163,11 @@ public partial class CardInstance : Node2D
 		}
 	}
 	
+	// Dismisses the card when a choice is selected by emitting a signal
 	private void OnDismissCard()
 	{
 		_rotationTween?.Kill();
 
-		EmitSignal(SignalName.OnFlip);
+		EmitSignal(SignalName.OnFlipRight);
 	}	
 }

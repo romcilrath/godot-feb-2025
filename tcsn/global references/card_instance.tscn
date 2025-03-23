@@ -127,6 +127,8 @@ theme_override_fonts/normal_font = ExtResource("7_33gue")
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "No. 12"
+meta_underlined = false
+hint_underlined = false
 text_direction = 2
 
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
@@ -183,10 +185,13 @@ offset_top = -436.333
 offset_right = 1158.0
 offset_bottom = 2075.67
 
-[node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
+[node name="BodyContainer" type="MarginContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 50
 
 [node name="SpaceTop" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -210,10 +215,11 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 border_color = Color(1, 0, 0, 0)
 
-[node name="DivBar" type="ReferenceRect" parent="BodyChoicesContainer/BodyContainer"]
+[node name="DivBar" type="ReferenceRect" parent="BodyChoicesContainer"]
 custom_minimum_size = Vector2(1800, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 border_color = Color(0.443137, 0.690196, 0.560784, 1)
 border_width = 10.0
 editor_only = false
@@ -222,7 +228,7 @@ editor_only = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 80
 
@@ -231,4 +237,6 @@ layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
 
-[connection signal="OnFlip" from="." to="." method="OnFlip"]
+[connection signal="OnFlipLeft" from="." to="." method="OnFlipLeft"]
+[connection signal="OnFlipRight" from="." to="." method="OnFlipRight"]
+[connection signal="OnShake" from="." to="." method="OnShake"]

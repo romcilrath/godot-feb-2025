@@ -237,4 +237,6 @@ layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
 
-[connection signal="OnFlip" from="." to="." method="OnFlip"]
+[connection signal="OnFlipLeft" from="." to="." method="OnFlipLeft"]
+[connection signal="OnFlipRight" from="." to="." method="OnFlipRight"]
+[connection signal="OnShake" from="." to="." method="OnShake"]

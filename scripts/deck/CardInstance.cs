@@ -10,7 +10,11 @@ public partial class CardInstance : Node2D
 	private bool _isFlipped = false;
 	
     [Signal]
-    public delegate void OnFlipEventHandler();
+    public delegate void OnFlipRightEventHandler();
+	[Signal]
+    public delegate void OnFlipLeftEventHandler();
+	[Signal]
+	public delegate void OnShakeEventHandler(float degrees = 0.4f, float duration = 0.5f);
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
@@ -98,7 +102,7 @@ public partial class CardInstance : Node2D
 		choiceInstance.SetChoiceResource(choiceResource);
 
 		// Connect the signals
-		choiceInstance.Connect(ChoiceInstance.SignalName.ShakeParent, Callable.From((float degrees, float duration) => OnShakeParentReceived(degrees, duration)));
+		choiceInstance.Connect(ChoiceInstance.SignalName.OnShake, Callable.From((float degrees, float duration) => EmitSignal(nameof(OnShake), degrees, duration)));
 		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnChoiceSelected));
 		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnDismissCard));
 
@@ -146,36 +150,6 @@ public partial class CardInstance : Node2D
 			_nameLabel.Visible = false;
 		}
 	}
-
-	// Shake the card by tweening the rotation
-	private void OnShakeParentReceived(float degrees=0.4f, float duration=0.05f)
-	{		
-		_rotationTween = CreateTween();
-		_rotationTween
-			.TweenProperty(this, "rotation_degrees", degrees, duration)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Elastic);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", -degrees, duration)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Elastic);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", degrees / 2, duration * 1.5f)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Back);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", -degrees / 2, duration * 1.5f)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Back);
-		_rotationTween
-			.Chain()
-			.TweenProperty(this, "rotation_degrees", 0, duration * 2)
-			.SetEase(Tween.EaseType.Out)
-			.SetTrans(Tween.TransitionType.Sine);
-	}
 	
 	// Disables all choices when a choice is selected
 	private void OnChoiceSelected()
@@ -194,6 +168,6 @@ public partial class CardInstance : Node2D
 	{
 		_rotationTween?.Kill();
 
-		EmitSignal(SignalName.OnFlip);
+		EmitSignal(SignalName.OnFlipRight);
 	}	
 }

@@ -24,11 +24,9 @@ public partial class ChoiceInstance : ColorRect
     // Detect if this choice/ a sibling choice has been selected already
     private bool _isDisabled = false; 
 
-    // Define a signal to shake the parent card
+    // Define a signals
     [Signal]
-    public delegate void ShakeParentEventHandler(float degrees=0.4f, float duration=0.5f);
-    
-    // Define signals to disable and then dismiss the parent card
+    public delegate void OnShakeEventHandler(float degrees=0.4f, float duration=0.5f);
     [Signal]
     public delegate void ChoiceSelectedEventHandler();
     [Signal]
@@ -244,7 +242,7 @@ public partial class ChoiceInstance : ColorRect
             _isDisabled = true;
 
             GD.Print($"Choice clicked: {_choice?.Text}");
-            EmitSignal(SignalName.ShakeParent, 2f, 0.05f);
+            EmitSignal(SignalName.OnShake, 2f, 0.05f);
 
             KillTweens();
 

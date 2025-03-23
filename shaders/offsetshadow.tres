@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://infov3mx7xwo"]
+
+[ext_resource type="Shader" path="res://shaders/offsetshadow.gdshader" id="1_ylhoo"]
+
+[resource]
+shader = ExtResource("1_ylhoo")
+shader_parameter/offset = Vector2(8, 8)
+shader_parameter/modulate = null

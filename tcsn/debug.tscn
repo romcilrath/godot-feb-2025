@@ -47,7 +47,14 @@ GritColor = Color(0.905882, 0.509804, 0.101961, 1)
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("5_vgp1m")
 
-[node name="CoinStat" type="Label" parent="."]
+[node name="StatRenderers" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CoinStat" type="Label" parent="StatRenderers"]
+layout_mode = 0
 offset_left = 2365.0
 offset_top = 122.0
 offset_right = 2790.0
@@ -59,7 +66,8 @@ text = "Test: 300"
 horizontal_alignment = 2
 script = ExtResource("10_vadct")
 
-[node name="VitalityStat" type="Label" parent="."]
+[node name="VitalityStat" type="Label" parent="StatRenderers"]
+layout_mode = 0
 offset_left = 2365.0
 offset_top = 268.0
 offset_right = 2790.0
@@ -72,7 +80,8 @@ horizontal_alignment = 2
 script = ExtResource("10_vadct")
 StatToTrack = 1
 
-[node name="GritStat" type="Label" parent="."]
+[node name="GritStat" type="Label" parent="StatRenderers"]
+layout_mode = 0
 offset_left = 2365.0
 offset_top = 416.0
 offset_right = 2790.0
@@ -85,7 +94,8 @@ horizontal_alignment = 2
 script = ExtResource("10_vadct")
 StatToTrack = 2
 
-[node name="RationsStat" type="Label" parent="."]
+[node name="RationsStat" type="Label" parent="StatRenderers"]
+layout_mode = 0
 offset_left = 2362.0
 offset_top = 560.0
 offset_right = 2787.0
@@ -98,7 +108,8 @@ horizontal_alignment = 2
 script = ExtResource("10_vadct")
 StatToTrack = 3
 
-[node name="TurnTracker" type="Label" parent="."]
+[node name="TurnTracker" type="Label" parent="StatRenderers"]
+layout_mode = 0
 offset_left = 133.0
 offset_top = 154.0
 offset_right = 558.0
@@ -111,35 +122,41 @@ horizontal_alignment = 2
 script = ExtResource("10_vadct")
 StatToTrack = 4
 
-[node name="Backdrop" type="ColorRect" parent="."]
-show_behind_parent = true
-offset_left = -76.0
-offset_top = -56.0
-offset_right = 3163.0
-offset_bottom = 2004.0
-mouse_filter = 2
-color = Color(0.784314, 0.74902, 0.956863, 1)
-metadata/_edit_lock_ = true
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 994.0
+offset_top = 125.0
+offset_right = 1034.0
+offset_bottom = 165.0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="CardFront" type="SubViewportContainer" parent="Control"]
 material = SubResource("ShaderMaterial_qep06")
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 994.0
-offset_top = 125.0
-offset_right = 3644.0
-offset_bottom = 4975.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 2630.0
+offset_bottom = 4830.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Control/CardFront"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(2650, 4850)
 render_target_update_mode = 4
 
-[node name="CardInstance" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_slpme")]
+[node name="CardInstance" parent="Control/CardFront/SubViewport" instance=ExtResource("3_slpme")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+offset_right = 3110.0
+offset_bottom = 1959.0
+mouse_filter = 2
+color = Color(0.784314, 0.74902, 0.956863, 1)

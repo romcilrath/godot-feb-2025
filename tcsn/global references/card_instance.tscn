@@ -16,17 +16,20 @@
 position = Vector2(1350, 2400)
 script = ExtResource("1_0mhr0")
 cardResource = ExtResource("2_8bc6y")
+CardBack = NodePath("CardBack")
 BackdropPath = NodePath("Backdrop")
-ArtPath = NodePath("Art")
-WindowPath = NodePath("Window")
+OtherElementsPath = NodePath("OtherElements")
+BodyChoicesContainer = NodePath("BodyChoicesContainer")
+ArtPath = NodePath("OtherElements/Art")
+WindowPath = NodePath("OtherElements/Window")
 TabPath = NodePath("TabMarginContainer/TabNPR")
 NameLabelPath = NodePath("TabMarginContainer/CardNameCenterContainer/CardNameHBoxContainer/CardName")
-NumberPath = NodePath("Number")
+NumberPath = NodePath("OtherElements/Number")
 BodyPath = NodePath("BodyChoicesContainer/BodyContainer/Body")
 ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesContainer")
 
-[node name="Backdrop" type="NinePatchRect" parent="."]
-modulate = Color(0.443137, 0.690196, 0.560784, 1)
+[node name="CardBack" type="NinePatchRect" parent="."]
+self_modulate = Color(0.980392, 0.282353, 0.866667, 1)
 material = SubResource("ShaderMaterial_opy7t")
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,28 +51,52 @@ patch_margin_bottom = 144
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Art" type="TextureRect" parent="."]
-offset_left = -1148.0
-offset_top = -2283.0
-offset_right = 1164.0
-offset_bottom = 2318.0
+[node name="Backdrop" type="NinePatchRect" parent="."]
+self_modulate = Color(0.443137, 0.690196, 0.560784, 1)
+material = SubResource("ShaderMaterial_opy7t")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1300.0
+offset_top = -2400.0
+offset_right = 1300.0
+offset_bottom = 2400.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pootg")
+region_rect = Rect2(0, 10, 2203, 3869)
+patch_margin_left = 149
+patch_margin_top = 154
+patch_margin_right = 143
+patch_margin_bottom = 144
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="OtherElements" type="Node2D" parent="."]
+position = Vector2(-1183, -319.663)
+
+[node name="Cover" type="ColorRect" parent="OtherElements"]
+modulate = Color(0.443137, 0.690196, 0.560784, 1)
+offset_right = 2376.0
+offset_bottom = 2119.0
+
+[node name="Art" type="TextureRect" parent="OtherElements"]
+offset_left = 35.0
+offset_top = -1956.34
+offset_right = 2347.0
+offset_bottom = 2644.66
 texture = ExtResource("4_ih85q")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Cover" type="ColorRect" parent="."]
+[node name="Window" type="NinePatchRect" parent="OtherElements"]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = -1183.0
-offset_top = -319.663
-offset_right = 1193.0
-offset_bottom = 1799.34
-
-[node name="Window" type="NinePatchRect" parent="."]
-modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = -1203.0
-offset_top = -2295.33
-offset_right = 1216.0
-offset_bottom = -54.333
+offset_left = -20.0
+offset_top = -1972.67
+offset_right = 2399.0
+offset_bottom = 268.33
 texture = ExtResource("5_1gkqf")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -77,12 +104,12 @@ patch_margin_right = 136
 patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
-[node name="Textbox" type="NinePatchRect" parent="."]
+[node name="Textbox" type="NinePatchRect" parent="OtherElements"]
 modulate = Color(0.552941, 0.796078, 0.666667, 1)
-offset_left = -1152.0
-offset_top = -445.333
-offset_right = 1168.0
-offset_bottom = 2237.67
+offset_left = 31.0
+offset_top = -125.67
+offset_right = 2351.0
+offset_bottom = 2557.33
 texture = ExtResource("6_ypig7")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -90,11 +117,11 @@ patch_margin_right = 136
 patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
-[node name="Number" type="RichTextLabel" parent="."]
-offset_left = 646.67
-offset_top = -2378.0
-offset_right = 1105.67
-offset_bottom = -2219.0
+[node name="Number" type="RichTextLabel" parent="OtherElements"]
+offset_left = 1829.67
+offset_top = -2058.34
+offset_right = 2288.67
+offset_bottom = -1899.34
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_33gue")
 theme_override_font_sizes/normal_font_size = 120
@@ -203,8 +230,3 @@ theme_override_constants/margin_bottom = 80
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
-
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
-offset_left = 3.0
-offset_right = 43.0
-offset_bottom = 40.0

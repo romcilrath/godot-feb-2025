@@ -7,10 +7,14 @@ public partial class CardInstance : Node2D
 {
 	[Export] public CardResource cardResource;
 	private Card _card;
+	private bool _isFlipped = false;
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
+	[Export] public NodePath CardBack { get; set; }
 	[Export] public NodePath BackdropPath { get; set; }
+	[Export] public NodePath OtherElementsPath { get; set; }
+	[Export] public NodePath BodyChoicesContainer { get; set; }
 	[Export] public NodePath ArtPath { get; set; }
 	[Export] public NodePath WindowPath { get; set; }
 	[Export] public NodePath TabPath { get; set; }
@@ -19,7 +23,10 @@ public partial class CardInstance : Node2D
 	[Export] public NodePath BodyPath { get; set; }
 	[Export] public NodePath ChoicesContainerPath { get; set; }
 
+	private NinePatchRect _cardBack;
 	private NinePatchRect _backdrop;
+	private Node2D _otherElements;
+	private BoxContainer _bodyChoicesContainer;
 	private TextureRect _art;
 	private NinePatchRect _window;
 	private NinePatchRect _tab;
@@ -32,7 +39,10 @@ public partial class CardInstance : Node2D
 
 	public override void _Ready()
 	{
+		_cardBack = NodeUtils.FindNodeWithError<NinePatchRect>(this, CardBack, "CardBack");
 		_backdrop = NodeUtils.FindNodeWithError<NinePatchRect>(this, BackdropPath, "Backdrop");
+		_otherElements = NodeUtils.FindNodeWithError<Node2D>(this, OtherElementsPath, "OtherElements");
+		_bodyChoicesContainer = NodeUtils.FindNodeWithError<BoxContainer>(this, BodyChoicesContainer, "BodyChoicesContainer");
 		_art = NodeUtils.FindNodeWithError<TextureRect>(this, ArtPath, "Art");
 		_window = NodeUtils.FindNodeWithError<NinePatchRect>(this, WindowPath, "Window");
 		_tab = NodeUtils.FindNodeWithError<NinePatchRect>(this, TabPath, "Tab");
@@ -50,6 +60,9 @@ public partial class CardInstance : Node2D
 		Card card = new Card(cardResource);
 		this._card = card;
 
+		_isFlipped = false;
+		_cardBack.Visible = false;
+		_backdrop.Visible = true;
 		_number.Text = "No. " + this._card.Number.ToString();
 		_nameLabel.Text = this._card.Name;
 		_art.Texture = this._card.Art;
@@ -88,6 +101,34 @@ public partial class CardInstance : Node2D
 		LoadCard();
 	}
 
+	public void FlipCard()
+	{
+		if (_isFlipped)
+		{
+			_isFlipped = false;
+
+			_cardBack.Visible = false;
+			_backdrop.Visible = true;
+
+			_otherElements.Visible = true;
+			_bodyChoicesContainer.Visible = true;
+			_tab.Visible = true;
+			_nameLabel.Visible = true;
+		}
+		else
+		{
+			_isFlipped = true;
+
+			_cardBack.Visible = true;
+			_backdrop.Visible = false;
+			
+			_otherElements.Visible = false;
+			_bodyChoicesContainer.Visible = false;
+			_tab.Visible = false;
+			_nameLabel.Visible = false;
+		}
+	}
+
 	private void OnShakeParentReceived(float degrees=0.4f, float duration=0.05f)
 	{		
 		_rotationTween = CreateTween();
@@ -122,5 +163,6 @@ public partial class CardInstance : Node2D
 	{
 		_rotationTween?.Kill();
 		// TODO 
+		FlipCard();
 	}	
 }

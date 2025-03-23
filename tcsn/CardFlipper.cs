@@ -23,12 +23,12 @@ public partial class CardFlipper : SubViewportContainer
 	{
 		Tween xRotationTween = CreateTween();
 		xRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_x", 15.0f, 0.5f)
+			.TweenProperty(this.Material, "shader_parameter/rotation_x", 15.0f, 0.65f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
 		xRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_x", -15.0f, 0.5f)
+			.TweenProperty(this.Material, "shader_parameter/rotation_x", -15.0f, 0.35f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.Out)
 			.AsRelative();

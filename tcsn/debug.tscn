@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=15 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -12,6 +12,17 @@
 [ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/icons/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
 [ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
+[ext_resource type="Shader" path="res://shaders/perspectiveoffsetshadow.gdshader" id="13_g3cam"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qep06"]
+shader = ExtResource("13_g3cam")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/rotation_y = 0.0
+shader_parameter/rotation_x = 0.0
+shader_parameter/inset = 0.0
+shader_parameter/offset = Vector2(-50, 50)
+shader_parameter/modulate = Color(0, 0, 0, 0.294118)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
@@ -111,16 +122,17 @@ color = Color(0.784314, 0.74902, 0.956863, 1)
 metadata/_edit_lock_ = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_qep06")
 offset_left = 1089.0
 offset_top = 114.0
-offset_right = 3690.0
-offset_bottom = 4923.0
+offset_right = 3739.0
+offset_bottom = 4943.0
 scale = Vector2(0.35, 0.35)
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2601, 4809)
+size = Vector2i(2650, 4850)
 render_target_update_mode = 4
 
 [node name="CardInstance" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_slpme")]

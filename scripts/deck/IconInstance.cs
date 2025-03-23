@@ -55,12 +55,12 @@ public partial class IconInstance : TextureRect
 				case "Vitality":
 					_art.Texture = GlobalReferences.Instance.VitalityIcon;
 					this.SelfModulate = GlobalReferences.Instance.VitalityColor;
-					SetArtContainerMargins(20);
+					SetArtContainerMargins(20, 20, 30, 30);
 					break;
 				case "Coin":
 					_art.Texture = GlobalReferences.Instance.CoinIcon;
 					this.SelfModulate = GlobalReferences.Instance.CoinColor;
-					SetArtContainerMargins(10, 10, 0, 30);
+					SetArtContainerMargins(10, 10, 20, 40);
 					break;
 				case "Rations":
 					_art.Texture = GlobalReferences.Instance.RationsIcon;

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://bu3df4rhtw7c6"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://bu3df4rhtw7c6"]
 
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_1y60g"]
 [ext_resource type="Script" path="res://scripts/deck/effects/OneTimeStatEffectResource.cs" id="2_tdloc"]
@@ -35,11 +35,17 @@ Text = "Kill the father"
 HoverText = ""
 Effects = Array[Object]([SubResource("Resource_5c4fj"), SubResource("Resource_48356")])
 
+[sub_resource type="Resource" id="Resource_iyrpu"]
+script = ExtResource("2_tdloc")
+Target = 3
+Value = -2.0
+ActionType = 1
+
 [sub_resource type="Resource" id="Resource_i0nb6"]
 script = ExtResource("3_eblnx")
 Text = "Mind your own business"
 HoverText = ""
-Effects = Array[Object]([])
+Effects = Array[Object]([SubResource("Resource_iyrpu")])
 
 [resource]
 script = ExtResource("4_73g6q")

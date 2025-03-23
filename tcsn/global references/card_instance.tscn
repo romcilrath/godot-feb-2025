@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn7ixi314jln5"]
+[gd_scene load_steps=11 format=3 uid="uid://cn7ixi314jln5"]
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
 [ext_resource type="Resource" uid="uid://bu3df4rhtw7c6" path="res://tres/cards/prodigal_son.tres" id="2_8bc6y"]
@@ -9,6 +9,8 @@
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="7_33gue"]
 [ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://sprites/card/Tab.PNG" id="8_8dcjg"]
 [ext_resource type="FontFile" uid="uid://1obcqasqw6i2" path="res://fonts/Walter Turncoat/WalterTurncoat-Regular.ttf" id="9_o38rn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opy7t"]
 
 [node name="CardInstance" type="Node2D"]
 script = ExtResource("1_0mhr0")
@@ -24,13 +26,15 @@ ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesCon
 
 [node name="Backdrop" type="NinePatchRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
+material = SubResource("ShaderMaterial_opy7t")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 2601.0
-offset_bottom = 4809.0
+offset_left = 50.0
+offset_right = 2650.0
+offset_bottom = 4800.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_pootg")
@@ -43,27 +47,27 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
-offset_left = 149.0
-offset_top = 142.0
-offset_right = 2461.0
-offset_bottom = 4743.0
+offset_left = 198.0
+offset_top = 110.0
+offset_right = 2510.0
+offset_bottom = 4711.0
 texture = ExtResource("4_ih85q")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = 114.0
-offset_top = 2105.34
-offset_right = 2490.0
-offset_bottom = 4224.34
+offset_left = 163.0
+offset_top = 2073.34
+offset_right = 2539.0
+offset_bottom = 4192.34
 
 [node name="Window" type="NinePatchRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = 94.0
-offset_top = 129.67
-offset_right = 2513.0
-offset_bottom = 2370.67
+offset_left = 143.0
+offset_top = 97.6699
+offset_right = 2562.0
+offset_bottom = 2338.67
 texture = ExtResource("5_1gkqf")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -73,10 +77,10 @@ axis_stretch_vertical = 1
 
 [node name="Textbox" type="NinePatchRect" parent="."]
 modulate = Color(0.552941, 0.796078, 0.666667, 1)
-offset_left = 145.0
-offset_top = 1979.67
-offset_right = 2465.0
-offset_bottom = 4662.67
+offset_left = 194.0
+offset_top = 1947.67
+offset_right = 2514.0
+offset_bottom = 4630.67
 texture = ExtResource("6_ypig7")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -85,10 +89,10 @@ patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
 [node name="Number" type="RichTextLabel" parent="."]
-offset_left = 1943.67
-offset_top = 47.0
-offset_right = 2402.67
-offset_bottom = 206.0
+offset_left = 1992.67
+offset_top = 15.0
+offset_right = 2451.67
+offset_bottom = 174.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_33gue")
 theme_override_font_sizes/normal_font_size = 120
@@ -97,10 +101,10 @@ text = "No. 12"
 text_direction = 2
 
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
-offset_left = 103.0
-offset_top = 93.6699
-offset_right = 1446.0
-offset_bottom = 511.67
+offset_left = 152.0
+offset_top = 61.6699
+offset_right = 1495.0
+offset_bottom = 479.67
 metadata/_edit_use_anchors_ = true
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
@@ -145,10 +149,10 @@ layout_mode = 2
 border_color = Color(1, 0, 0, 0)
 
 [node name="BodyChoicesContainer" type="VBoxContainer" parent="."]
-offset_left = 154.0
-offset_top = 1988.67
-offset_right = 2455.0
-offset_bottom = 4500.67
+offset_left = 203.0
+offset_top = 1956.67
+offset_right = 2504.0
+offset_bottom = 4468.67
 
 [node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
@@ -199,7 +203,7 @@ size_flags_vertical = 8
 alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-offset_left = 1300.0
-offset_top = 2425.0
-offset_right = 1340.0
-offset_bottom = 2465.0
+offset_left = 1349.0
+offset_top = 2393.0
+offset_right = 1389.0
+offset_bottom = 2433.0

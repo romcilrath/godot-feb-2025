@@ -124,7 +124,7 @@ public partial class ChoiceInstance : ColorRect
             material.Set("shader_parameter/rotation_y", rotY);
         }
 
-        if (_isHovered)
+        if (_isHovered && !_isDisabled)
         {
             float angleXMax = 2.0f, angleYMax = 2.0f;
             float time = (float)Time.GetTicksMsec() / 3000.0f; // Time in seconds

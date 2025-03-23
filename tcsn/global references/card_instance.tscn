@@ -13,6 +13,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opy7t"]
 
 [node name="CardInstance" type="Node2D"]
+position = Vector2(1350, 2400)
 script = ExtResource("1_0mhr0")
 cardResource = ExtResource("2_8bc6y")
 BackdropPath = NodePath("Backdrop")
@@ -32,9 +33,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 50.0
-offset_right = 2650.0
-offset_bottom = 4800.0
+offset_left = -1300.0
+offset_top = -2400.0
+offset_right = 1300.0
+offset_bottom = 2400.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_pootg")
@@ -47,27 +49,27 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
-offset_left = 198.0
-offset_top = 110.0
-offset_right = 2510.0
-offset_bottom = 4711.0
+offset_left = -1148.0
+offset_top = -2283.0
+offset_right = 1164.0
+offset_bottom = 2318.0
 texture = ExtResource("4_ih85q")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = 163.0
-offset_top = 2073.34
-offset_right = 2539.0
-offset_bottom = 4192.34
+offset_left = -1183.0
+offset_top = -319.663
+offset_right = 1193.0
+offset_bottom = 1799.34
 
 [node name="Window" type="NinePatchRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = 143.0
-offset_top = 97.6699
-offset_right = 2562.0
-offset_bottom = 2338.67
+offset_left = -1203.0
+offset_top = -2295.33
+offset_right = 1216.0
+offset_bottom = -54.333
 texture = ExtResource("5_1gkqf")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -77,10 +79,10 @@ axis_stretch_vertical = 1
 
 [node name="Textbox" type="NinePatchRect" parent="."]
 modulate = Color(0.552941, 0.796078, 0.666667, 1)
-offset_left = 194.0
-offset_top = 1947.67
-offset_right = 2514.0
-offset_bottom = 4630.67
+offset_left = -1152.0
+offset_top = -445.333
+offset_right = 1168.0
+offset_bottom = 2237.67
 texture = ExtResource("6_ypig7")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -89,10 +91,10 @@ patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
 [node name="Number" type="RichTextLabel" parent="."]
-offset_left = 1992.67
-offset_top = 15.0
-offset_right = 2451.67
-offset_bottom = 174.0
+offset_left = 646.67
+offset_top = -2378.0
+offset_right = 1105.67
+offset_bottom = -2219.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_33gue")
 theme_override_font_sizes/normal_font_size = 120
@@ -101,10 +103,10 @@ text = "No. 12"
 text_direction = 2
 
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
-offset_left = 152.0
-offset_top = 61.6699
-offset_right = 1495.0
-offset_bottom = 479.67
+offset_left = -1194.0
+offset_top = -2331.33
+offset_right = 149.0
+offset_bottom = -1913.33
 metadata/_edit_use_anchors_ = true
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
@@ -149,10 +151,10 @@ layout_mode = 2
 border_color = Color(1, 0, 0, 0)
 
 [node name="BodyChoicesContainer" type="VBoxContainer" parent="."]
-offset_left = 203.0
-offset_top = 1956.67
-offset_right = 2504.0
-offset_bottom = 4468.67
+offset_left = -1143.0
+offset_top = -436.333
+offset_right = 1158.0
+offset_bottom = 2075.67
 
 [node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
@@ -203,7 +205,6 @@ size_flags_vertical = 8
 alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-offset_left = 1349.0
-offset_top = 2393.0
-offset_right = 1389.0
-offset_bottom = 2433.0
+offset_left = 3.0
+offset_right = 43.0
+offset_bottom = 40.0

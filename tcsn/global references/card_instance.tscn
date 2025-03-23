@@ -29,10 +29,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1300.5
-offset_top = -2404.5
-offset_right = 1300.5
-offset_bottom = 2404.5
+offset_right = 2601.0
+offset_bottom = 4809.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_pootg")
@@ -45,27 +43,27 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Art" type="TextureRect" parent="."]
-offset_left = -1151.0
-offset_top = -2282.67
-offset_right = 1161.0
-offset_bottom = 2655.34
+offset_left = 149.0
+offset_top = 142.0
+offset_right = 2461.0
+offset_bottom = 4743.0
 texture = ExtResource("4_ih85q")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="Cover" type="ColorRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = -1186.0
-offset_top = -319.663
-offset_right = 1190.0
-offset_bottom = 1799.34
+offset_left = 114.0
+offset_top = 2105.34
+offset_right = 2490.0
+offset_bottom = 4224.34
 
 [node name="Window" type="NinePatchRect" parent="."]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_left = -1206.0
-offset_top = -2295.33
-offset_right = 1213.0
-offset_bottom = -54.333
+offset_left = 94.0
+offset_top = 129.67
+offset_right = 2513.0
+offset_bottom = 2370.67
 texture = ExtResource("5_1gkqf")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -75,10 +73,10 @@ axis_stretch_vertical = 1
 
 [node name="Textbox" type="NinePatchRect" parent="."]
 modulate = Color(0.552941, 0.796078, 0.666667, 1)
-offset_left = -1155.0
-offset_top = -445.333
-offset_right = 1165.0
-offset_bottom = 2237.67
+offset_left = 145.0
+offset_top = 1979.67
+offset_right = 2465.0
+offset_bottom = 4662.67
 texture = ExtResource("6_ypig7")
 patch_margin_left = 128
 patch_margin_top = 134
@@ -87,10 +85,10 @@ patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
 [node name="Number" type="RichTextLabel" parent="."]
-offset_left = 643.67
-offset_top = -2378.0
-offset_right = 1102.67
-offset_bottom = -2219.0
+offset_left = 1943.67
+offset_top = 47.0
+offset_right = 2402.67
+offset_bottom = 206.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_33gue")
 theme_override_font_sizes/normal_font_size = 120
@@ -99,10 +97,10 @@ text = "No. 12"
 text_direction = 2
 
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
-offset_left = -1197.0
-offset_top = -2331.33
-offset_right = 146.0
-offset_bottom = -1913.33
+offset_left = 103.0
+offset_top = 93.6699
+offset_right = 1446.0
+offset_bottom = 511.67
 metadata/_edit_use_anchors_ = true
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
@@ -147,10 +145,10 @@ layout_mode = 2
 border_color = Color(1, 0, 0, 0)
 
 [node name="BodyChoicesContainer" type="VBoxContainer" parent="."]
-offset_left = -1146.0
-offset_top = -436.333
-offset_right = 1155.0
-offset_bottom = 2075.67
+offset_left = 154.0
+offset_top = 1988.67
+offset_right = 2455.0
+offset_bottom = 4500.67
 
 [node name="BodyContainer" type="VBoxContainer" parent="BodyChoicesContainer"]
 layout_mode = 2
@@ -201,5 +199,7 @@ size_flags_vertical = 8
 alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1300.0
+offset_top = 2425.0
+offset_right = 1340.0
+offset_bottom = 2465.0

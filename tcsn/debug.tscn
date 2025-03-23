@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2t860"]
-viewport_path = NodePath("GlobalReferences/SubViewport")
+viewport_path = NodePath("TextureRect/SubViewport")
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
@@ -35,12 +35,6 @@ VitalityColor = Color(0.87451, 0.568627, 0.564706, 1)
 CoinColor = Color(0.537255, 0.819608, 0.301961, 1)
 RationsColor = Color(0.776471, 0.662745, 0.913725, 1)
 GritColor = Color(0.905882, 0.509804, 0.101961, 1)
-
-[node name="SubViewport" type="SubViewport" parent="GlobalReferences"]
-
-[node name="CardInstance" parent="GlobalReferences/SubViewport" instance=ExtResource("3_slpme")]
-position = Vector2(1501, 972)
-scale = Vector2(0.35, 0.35)
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("5_vgp1m")
@@ -120,9 +114,24 @@ color = Color(0.784314, 0.74902, 0.956863, 1)
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 521.0
-offset_top = -35.0
-offset_right = 2455.0
-offset_bottom = 2019.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1045.0
+offset_top = 107.0
+offset_right = 3646.0
+offset_bottom = 4916.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
 texture = SubResource("ViewportTexture_2t860")
 stretch_mode = 4
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(2601, 4809)
+
+[node name="CardInstance" parent="TextureRect/SubViewport" instance=ExtResource("3_slpme")]

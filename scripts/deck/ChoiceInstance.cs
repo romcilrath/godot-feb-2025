@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Linq;
 
 public partial class ChoiceInstance : ColorRect
@@ -225,16 +226,25 @@ public partial class ChoiceInstance : ColorRect
             .SetTrans(Tween.TransitionType.Elastic);
 	}
 
+    private async void DelayApplyCard(int delay = 500)
+    {
+        await Task.Delay(delay); // Delay for 1 second
+        _choice.Apply();
+        GameManager.Instance.IncrementTurn();
+        EmitSignal(SignalName.DismissCard);
+        EmitSignal(SignalName.ChoiceSelected);
+    }
+
+
     private void OnChoiceClicked(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
         {
             if (_isDisabled) return;
             _isDisabled = true;
-            EmitSignal(SignalName.ChoiceSelected);
 
             GD.Print($"Choice clicked: {_choice?.Text}");
-            EmitSignal(SignalName.ShakeParent, 1f, 0.05f);
+            EmitSignal(SignalName.ShakeParent, 2f, 0.05f);
 
             KillTweens();
 
@@ -264,9 +274,7 @@ public partial class ChoiceInstance : ColorRect
                 .SetEase(Tween.EaseType.In)
                 .SetTrans(Tween.TransitionType.Bounce);
 
-            EmitSignal(SignalName.DismissCard);
-            _choice.Apply();
-            GameManager.Instance.IncrementTurn();
+            DelayApplyCard();
         }
     }
 }

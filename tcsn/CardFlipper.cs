@@ -21,16 +21,28 @@ public partial class CardFlipper : SubViewportContainer
 
 	public void OnFlip()
 	{
-		Tween tween = CreateTween();
-		tween
+		Tween xRotationTween = CreateTween();
+		xRotationTween
+			.TweenProperty(this.Material, "shader_parameter/rotation_x", 15.0f, 0.5f)
+			.SetTrans(Tween.TransitionType.Sine)
+			.SetEase(Tween.EaseType.In)
+			.AsRelative();
+		xRotationTween
+			.TweenProperty(this.Material, "shader_parameter/rotation_x", -15.0f, 0.5f)
+			.SetTrans(Tween.TransitionType.Sine)
+			.SetEase(Tween.EaseType.Out)
+			.AsRelative();
+
+		Tween yRotationTween = CreateTween();
+		yRotationTween
 			.TweenProperty(this.Material, "shader_parameter/rotation_y", 90.0f, 0.5f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
-		tween
+		yRotationTween
 			.TweenProperty(this.Material, "shader_parameter/rotation_y", -90.0f, 0f)
 			.Finished += () => _cardInstance.FlipCard();
-		tween
+		yRotationTween
 			.TweenProperty(this.Material, "shader_parameter/rotation_y", 90.0f, 0.5f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.Out)

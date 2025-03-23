@@ -134,20 +134,30 @@ public partial class CardInstance : Node2D
 	private void OnShakeParentReceived(float degrees=0.4f, float duration=0.05f)
 	{		
 		_rotationTween = CreateTween();
-        _rotationTween
-            .TweenProperty(this, "rotation_degrees", degrees, duration)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-        _rotationTween
-            .Chain()
-            .TweenProperty(this, "rotation_degrees", -degrees, duration)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-        _rotationTween
-            .Chain()
-            .TweenProperty(this, "rotation_degrees", 0, duration)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
+		_rotationTween
+			.TweenProperty(this, "rotation_degrees", degrees, duration)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Elastic);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", -degrees, duration)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Elastic);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", degrees / 2, duration * 1.5f)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Back);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", -degrees / 2, duration * 1.5f)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Back);
+		_rotationTween
+			.Chain()
+			.TweenProperty(this, "rotation_degrees", 0, duration * 2)
+			.SetEase(Tween.EaseType.Out)
+			.SetTrans(Tween.TransitionType.Sine);
 	}
 	
 	private void OnChoiceSelected()

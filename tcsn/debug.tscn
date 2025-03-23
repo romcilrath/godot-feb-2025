@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=13 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -12,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/icons/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
 [ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_2t860"]
-viewport_path = NodePath("TextureRect/SubViewport")
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
@@ -113,25 +110,17 @@ mouse_filter = 2
 color = Color(0.784314, 0.74902, 0.956863, 1)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 1045.0
-offset_top = 107.0
-offset_right = 3646.0
-offset_bottom = 4916.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 1089.0
+offset_top = 114.0
+offset_right = 3690.0
+offset_bottom = 4923.0
 scale = Vector2(0.35, 0.35)
-texture = SubResource("ViewportTexture_2t860")
-stretch_mode = 4
 
-[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(2601, 4809)
+render_target_update_mode = 4
 
-[node name="CardInstance" parent="TextureRect/SubViewport" instance=ExtResource("3_slpme")]
+[node name="CardInstance" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_slpme")]

@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c8jolkcv36qfh" path="res://sprites/card/Tab.PNG" id="8_8dcjg"]
 [ext_resource type="FontFile" uid="uid://1obcqasqw6i2" path="res://fonts/Walter Turncoat/WalterTurncoat-Regular.ttf" id="9_o38rn"]
 
-[node name="Node2D" type="Node2D"]
+[node name="CardInstance" type="Node2D"]
 script = ExtResource("1_0mhr0")
 cardResource = ExtResource("2_8bc6y")
 BackdropPath = NodePath("Backdrop")

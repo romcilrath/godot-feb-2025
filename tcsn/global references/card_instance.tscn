@@ -199,3 +199,7 @@ theme_override_constants/margin_bottom = 80
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

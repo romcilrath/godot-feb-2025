@@ -15,6 +15,10 @@ run/main_scene="res://tcsn/debug.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Shaker="*res://addons/shaker/src/Shaker.gd"
+
 [display]
 
 window/size/viewport_width=3072
@@ -25,6 +29,10 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="February 2025"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
 
 [rendering]
 

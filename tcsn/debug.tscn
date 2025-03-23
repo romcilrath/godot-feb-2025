@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=14 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/icons/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
 [ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2t860"]
+viewport_path = NodePath("GlobalReferences/SubViewport")
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
@@ -33,12 +36,14 @@ CoinColor = Color(0.537255, 0.819608, 0.301961, 1)
 RationsColor = Color(0.776471, 0.662745, 0.913725, 1)
 GritColor = Color(0.905882, 0.509804, 0.101961, 1)
 
+[node name="SubViewport" type="SubViewport" parent="GlobalReferences"]
+
+[node name="CardInstance" parent="GlobalReferences/SubViewport" instance=ExtResource("3_slpme")]
+position = Vector2(1501, 972)
+scale = Vector2(0.35, 0.35)
+
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("5_vgp1m")
-
-[node name="CardInstance" parent="." instance=ExtResource("3_slpme")]
-position = Vector2(1506, 977)
-scale = Vector2(0.35, 0.35)
 
 [node name="CoinStat" type="Label" parent="."]
 offset_left = 2365.0
@@ -113,3 +118,11 @@ offset_bottom = 2004.0
 mouse_filter = 2
 color = Color(0.784314, 0.74902, 0.956863, 1)
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 521.0
+offset_top = -35.0
+offset_right = 2455.0
+offset_bottom = 2019.0
+texture = SubResource("ViewportTexture_2t860")
+stretch_mode = 4

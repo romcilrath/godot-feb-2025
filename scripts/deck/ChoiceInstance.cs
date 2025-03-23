@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class ChoiceInstance : ColorRect
 {
@@ -63,10 +64,15 @@ public partial class ChoiceInstance : ColorRect
 
         // Set the choice text
 		_text.Text = this._choice.Text;
-
+        
+        // No need to spawn icon instances if we hav eno effects
+        if (this._choice.Effects is null) return;
+        if (this._choice.Effects.Length == 0) return;
+        
         // Spawn icon instances
         foreach (Effect effect in this._choice.Effects)
         {
+
             IconInstance iconInstance = GlobalReferences.Instance.IconInstanceScene.Instantiate() as IconInstance;
             _effectRow.AddChild(iconInstance);
             iconInstance.SetEffect(effect);

@@ -30,6 +30,8 @@ public class Choice
         Effect[] effects = new Effect[effectResources.Length];
         for (int i = 0; i < effectResources.Length; i++)
         {
+            if (effectResources[i] is null) continue;
+            
             if (effectResources[i] is OneTimeStatEffectResource oneTimeResource)
             {
                 effects[i] = new OneStatTimeEffect(oneTimeResource);

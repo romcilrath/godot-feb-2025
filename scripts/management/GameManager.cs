@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 public partial class GameManager : Node
 {
@@ -9,6 +11,8 @@ public partial class GameManager : Node
     //      GameManager.Instance.AddScore(10);
     private static GameManager _instance;
     public static GameManager Instance => _instance;
+
+	[Export] public DeckResource[] StartingDecks { get; private set; }
 
     // Define an event that gets triggered when Turn increments
     public event Action OnTurnIncremented;
@@ -29,8 +33,33 @@ public partial class GameManager : Node
             return;
         }
 
+        // This sets upa  call to _LateReady right after _Ready for activities that require other _Ready's to have completed
+        // Instantiating the Deck for example requires PlayManager to reference the Stats
+        CallDeferred(nameof(_AfterReady));
+    
         _instance = this;
         GD.Print("GameManager Initialized.");
+    }
+
+    // Called directly after _Ready
+    private void _AfterReady()
+    {
+        // Add starting Decks after PlayerManager instanced
+        AddStartingDecks();
+
+        GD.Print(GetActiveCardCount());
+        DrawFromActiveDecks();
+        GD.Print(GetActiveCardCount());
+    }
+
+    public void AddStartingDecks()
+    {
+        GD.Print("Adding StartingDecks to ActiveDecks...");
+        foreach (DeckResource deckResource in StartingDecks)
+        {
+            Deck deck = new Deck(deckResource);
+            ActiveDecks.Add(deck);
+        }
     }
 
     public void IncrementTurn(int incrementBy = 1)
@@ -43,4 +72,49 @@ public partial class GameManager : Node
         // Notify the OnTurnIncremented listeners
         OnTurnIncremented?.Invoke();
     }
+
+    public int GetActiveCardCount()
+    {
+        // List the sum of the Cards in all ActiveDecks
+        int activeCardCount = 0;
+        for (int index = 0; index < ActiveDecks.Count; index++)
+        {
+            activeCardCount += ActiveDecks[index].Cards.Count;
+        }
+        return activeCardCount;
+    }
+
+    public Card[] DrawFromActiveDecks(int count = 1)
+    {
+        // Draw a random Card from ActiveDecks
+        Card[] cards = new Card[count];
+
+        for (int j = 0; j < count; j++)
+        {
+            int cardCount = GetActiveCardCount();
+
+            if (cardCount == 0) return cards;
+
+            int chosenCardIndex = (int)(GD.Randi() % cardCount);
+
+            int choosenDeckIndex = 0;
+            int deckCardIndex = 0;
+            for (int index = 0; index < chosenCardIndex; index++)
+            {
+                if (deckCardIndex > ActiveDecks[choosenDeckIndex].Cards.Count)
+                {
+                    choosenDeckIndex += 1;
+                    deckCardIndex = 0;
+                }
+                else
+                {
+                    deckCardIndex += 1;
+                }
+            }
+            cards.Append(ActiveDecks[choosenDeckIndex].DrawAt(deckCardIndex));
+        }
+        return cards;
+    }
 }
+
+

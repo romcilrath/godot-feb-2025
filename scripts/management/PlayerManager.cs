@@ -39,8 +39,6 @@ public partial class PlayerManager : Node
         Vitality = new Stat("Vitality", min:0, max:100, initial:StartingVitality);
         Grit = new Stat("Grit", min:0, initial:StartingGrit);
         Rations = new Stat("Rations", initial:StartingRations);
-
-        //Debug_Apply_Choice();
     }
 
     public List<Stat> GetStats()

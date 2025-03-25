@@ -58,6 +58,18 @@ public class Deck
         }
         
         int drawIndex = GD.RandRange(0, Cards.Count - 1);
+        return DrawAt(drawIndex);
+    }
+
+    public Card DrawAt(int drawIndex = 0)
+    {
+        if (Cards.Count == 0 || drawIndex > Cards.Count)
+        {
+            Refresh();
+            if (Cards.Count == 0)
+                return null;
+        }
+        
         Card card = Cards[drawIndex];
         Cards.RemoveAt(drawIndex);
         DiscardedCards.Add(card);

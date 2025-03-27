@@ -129,7 +129,6 @@ public partial class GameManager : Node
 		    CardInstance cardInstance = cardFlipper.GetCardInstance();
             cardFlipper.Position = new Vector2(210, -1500);
 
-            cardInstance.ClearChoices();
             cardInstance.SetCard(card);
             cardInstance.LoadCard();
         }

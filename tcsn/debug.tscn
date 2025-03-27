@@ -117,8 +117,8 @@ StatToTrack = 4
 
 [node name="Background" type="ColorRect" parent="."]
 show_behind_parent = true
-offset_right = 3110.0
-offset_bottom = 1959.0
+offset_right = 3072.0
+offset_bottom = 1920.0
 mouse_filter = 2
 color = Color(0.784314, 0.74902, 0.956863, 1)
 metadata/_edit_lock_ = true

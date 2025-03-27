@@ -48,7 +48,7 @@ public partial class GameManager : Node
         AddStartingDecks();
 
         GD.Print(GetActiveCardCount());
-        DrawFromActiveDecks();
+        OnDrawFromActiveDecks();
         GD.Print(GetActiveCardCount());
     }
 
@@ -111,9 +111,28 @@ public partial class GameManager : Node
                     deckCardIndex += 1;
                 }
             }
-            cards.Append(ActiveDecks[choosenDeckIndex].DrawAt(deckCardIndex));
+            Card newCard = ActiveDecks[choosenDeckIndex].DrawAt(deckCardIndex);
+            cards[j] = newCard;
         }
         return cards;
+    }
+
+    private void OnDrawFromActiveDecks(int count = 1)
+    {
+        Card[] cards = DrawFromActiveDecks(count);
+        GD.Print("Cards: " + cards.Length);
+        foreach (Card card in cards)
+        {
+            CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
+            GetTree().Root.AddChild(cardFlipper);
+
+		    CardInstance cardInstance = cardFlipper.GetCardInstance();
+            cardFlipper.Position = new Vector2(210, -1500);
+
+            cardInstance.ClearChoices();
+            cardInstance.SetCard(card);
+            cardInstance.LoadCard();
+        }
     }
 }
 

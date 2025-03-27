@@ -5,8 +5,8 @@ using System.Linq;
 
 public partial class CardInstance : Node2D
 {
-	[Export] public CardResource cardResource;
-	private Card _card;
+	[Export] public CardResource cardResource = null;
+	private Card _card = null;
 	private bool _isFlipped = false;
 	
     [Signal]
@@ -59,17 +59,30 @@ public partial class CardInstance : Node2D
 		_body = NodeUtils.FindNodeWithError<RichTextLabel>(this, BodyPath, "Body");
 		_choicesContainer = NodeUtils.FindNodeWithError<VBoxContainer>(this, ChoicesContainerPath, "ChoicesContainer");
 
-		LoadCard();
+		// If cardResource is defined via editor (like for debug) then SetCard and LoadCard
+		if (this.cardResource is not null) 
+		{
+			SetCard(this.cardResource);
+			LoadCard();
+		}
+	}
+
+	public void SetCard(CardResource cardResource)
+	{
+		// Instiate the card object from the cardResource
+		SetCard(new Card(cardResource));
+	}
+
+	public void SetCard(Card card)
+	{
+		// Directly assign the card
+		this._card = card;
 	}
 
 	// Load the card visuals including choices
 	public void LoadCard() 
 	{	
-		GD.Print("Loading card " + cardResource.Name + "...");
-
-		// Instiate the card object from the cardResource
-		Card card = new Card(cardResource);
-		this._card = card;
+		GD.Print("Loading card " + this._card.Name + "...");
 
 		// Set the card visuals by setting card flipped to true, (state when showing the back)
 		// and then calling FlipCard() to show the front and ensure its all visible
@@ -84,22 +97,23 @@ public partial class CardInstance : Node2D
 
 		// Load each choice to the card, includes instantiating 
 		// Hooks up choice sigals, adds as children, instantiates, and adds spaces between choices 
-		foreach (ChoiceResource choiceResource in this.cardResource.Choices)
+		foreach (Choice choice in this._card.Choices)
 		{
-			LoadChoice(choiceResource);
+			LoadChoice(choice);
 		}
 	}
 
 	// Load all choices to the card
 	// Hooks up choice sigals, adds as children, instantiates, and adds spaces between choices 
-	public void LoadChoice(ChoiceResource choiceResource)
+	public void LoadChoice(Choice choice)
 	{
-		GD.Print("Loading choice " + choiceResource.Text + "...");
+		GD.Print("Loading choice " + choice.Text + "...");
 
 		// Instantiate the choice instance object and set its choiceResource
 		ChoiceInstance choiceInstance = GlobalReferences.Instance.ChoiceInstanceScene.Instantiate() as ChoiceInstance;
 		_choicesContainer.AddChild(choiceInstance);
-		choiceInstance.SetChoiceResource(choiceResource);
+		choiceInstance.SetChoice(choice);
+		choiceInstance.LoadChoice();
 
 		// Connect the signals
 		choiceInstance.Connect(ChoiceInstance.SignalName.OnShake, Callable.From((float degrees, float duration) => EmitSignal(nameof(OnShake), degrees, duration)));
@@ -112,13 +126,13 @@ public partial class CardInstance : Node2D
 		_choicesContainer.AddChild(space);
 	}
 
-	// Set the card resource and load the card
-	// Consider we may not wanna load the card at the same time?
-	public void SetCardResource(CardResource newCardResource)
+	public void ClearChoices()
 	{
-		cardResource = newCardResource;
-		LoadCard();
-	}
+		foreach (Node child in this._choicesContainer.GetChildren())
+		{
+			child.QueueFree();
+		}
+	}	
 
 	// "Flips" the cards visuals in the sense that it...
 	// shows the card back if the card front is visible and vice versa

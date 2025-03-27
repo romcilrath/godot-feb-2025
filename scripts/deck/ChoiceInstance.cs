@@ -53,14 +53,29 @@ public partial class ChoiceInstance : ColorRect
 		{
 			_choiceRect.Material = shaderMaterial.Duplicate() as ShaderMaterial;
 		}
+
+		// If choiceResource is defined via editor (like for debug) then SetChoice and LoadChoice
+        if (this.choiceResource is not null)
+        {
+            SetChoice(new Choice(this.choiceResource));
+            LoadChoice();
+        }
 	}    
+
+    public void SetChoice(ChoiceResource newChoiceResource)
+    {
+		// Instiate the Choice object from the ChoiceResource
+        SetChoice(new Choice(newChoiceResource));
+    }
+
+	public void SetChoice(Choice newChoice)
+	{
+        // Set the new Choice directly
+		this._choice = newChoice;
+	}
 
 	public void LoadChoice()
 	{
-        // Convert the choiceResource to a Choice object
-		Choice choice = new Choice(choiceResource);
-		this._choice = choice;
-
         // Set the choice text
 		_text.Text = this._choice.Text;
         
@@ -71,7 +86,6 @@ public partial class ChoiceInstance : ColorRect
         // Spawn icon instances
         foreach (Effect effect in this._choice.Effects)
         {
-
             IconInstance iconInstance = GlobalReferences.Instance.IconInstanceScene.Instantiate() as IconInstance;
             _effectRow.AddChild(iconInstance);
             iconInstance.SetEffect(effect);
@@ -83,13 +97,6 @@ public partial class ChoiceInstance : ColorRect
         ReferenceRect finalSpace = new ReferenceRect();
         finalSpace.CustomMinimumSize = new Vector2(50, 0);
         _effectRow.AddChild(finalSpace);
-	}
-
-	public void SetChoiceResource(ChoiceResource newChoiceResource)
-	{
-        // Set the new choice resource and load the choice
-		choiceResource = newChoiceResource;
-		LoadChoice();
 	}
     
     public void SetDisabled(bool isDisabled=true)

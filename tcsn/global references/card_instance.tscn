@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn7ixi314jln5"]
+[gd_scene load_steps=10 format=3 uid="uid://cn7ixi314jln5"]
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
-[ext_resource type="Resource" uid="uid://bu3df4rhtw7c6" path="res://tres/cards/prodigal_son.tres" id="2_8bc6y"]
 [ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://sprites/card/Card.PNG" id="3_pootg"]
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="4_ih85q"]
 [ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://sprites/card/Window.PNG" id="5_1gkqf"]
@@ -13,9 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opy7t"]
 
 [node name="CardInstance" type="Node2D"]
-position = Vector2(1350, 2400)
 script = ExtResource("1_0mhr0")
-cardResource = ExtResource("2_8bc6y")
 CardBack = NodePath("CardBack")
 BackdropPath = NodePath("Backdrop")
 OtherElementsPath = NodePath("OtherElements")

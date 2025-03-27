@@ -16,6 +16,16 @@ public partial class CardFlipper : SubViewportContainer
 		_cardInstance.Connect("OnShake", Callable.From((float degrees, float duration) => OnShake(degrees, duration)));
 	}
 
+	public CardInstance GetCardInstance()
+	{
+		return this._cardInstance;
+	}
+
+	public void SetCardInstance(CardInstance cardInstance)
+	{
+		this._cardInstance = cardInstance;
+	}
+
 	public void DoShake(float degrees=0.4f, float duration=0.05f)
 	{
 		Tween _rotationTween = CreateTween();

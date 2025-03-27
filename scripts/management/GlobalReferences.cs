@@ -10,6 +10,7 @@ public partial class GlobalReferences : Node
     private static GlobalReferences _instance;
     public static GlobalReferences Instance => _instance;
 
+    [Export] public PackedScene CardFlipperScene;
     [Export] public PackedScene CardInstanceScene;
     [Export] public PackedScene ChoiceInstanceScene;
     [Export] public PackedScene IconInstanceScene;

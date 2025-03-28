@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
+using Vector2 = Godot.Vector2;
 
 public partial class CardInstance : Node2D
 {
@@ -13,6 +15,10 @@ public partial class CardInstance : Node2D
     public delegate void OnFlipRightEventHandler();
 	[Signal]
     public delegate void OnFlipLeftEventHandler();
+	[Signal]
+    public delegate void OnExitEventHandler();
+	[Signal]
+    public delegate void OnScaleCardEventHandler(float xScale = 1f, float yScale = 1f, float duration = 1f);
 	[Signal]
 	public delegate void OnShakeEventHandler(float degrees = 0.4f, float duration = 0.5f);
 
@@ -30,7 +36,7 @@ public partial class CardInstance : Node2D
 	[Export] public NodePath BodyPath { get; set; }
 	[Export] public NodePath ChoicesContainerPath { get; set; }
 
-	private NinePatchRect _cardBack;
+	private CardBack _cardBack;
 	private NinePatchRect _backdrop;
 	private Node2D _otherElements;
 	private BoxContainer _bodyChoicesContainer;
@@ -47,7 +53,7 @@ public partial class CardInstance : Node2D
 	// Get the nodes from the scene and load the card on Ready
 	public override void _Ready()
 	{
-		_cardBack = NodeUtils.FindNodeWithError<NinePatchRect>(this, CardBack, "CardBack");
+		_cardBack = NodeUtils.FindNodeWithError<CardBack>(this, CardBack, "CardBack");
 		_backdrop = NodeUtils.FindNodeWithError<NinePatchRect>(this, BackdropPath, "Backdrop");
 		_otherElements = NodeUtils.FindNodeWithError<Node2D>(this, OtherElementsPath, "OtherElements");
 		_bodyChoicesContainer = NodeUtils.FindNodeWithError<BoxContainer>(this, BodyChoicesContainer, "BodyChoicesContainer");
@@ -182,6 +188,12 @@ public partial class CardInstance : Node2D
 	{
 		_rotationTween?.Kill();
 
-		EmitSignal(SignalName.OnFlipRight);
+		EmitSignal(SignalName.OnExit, GameManager.Instance.CardExitPoint.Position.X, GameManager.Instance.CardExitPoint.Position.Y, 1f);
 	}	
+
+	private void OnCardBackSelected()
+	{
+		EmitSignal(SignalName.OnFlipRight);
+		EmitSignal(SignalName.OnScaleCard, 1f, 1f, 1f);
+	}
 }

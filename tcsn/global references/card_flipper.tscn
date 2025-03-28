@@ -14,29 +14,35 @@ shader_parameter/inset = 0.0
 shader_parameter/offset = Vector2(-50, 50)
 shader_parameter/modulate = Color(0, 0, 0, 0.294118)
 
-[node name="CardFlipper" type="SubViewportContainer"]
+[node name="CardFlipper" type="Node2D"]
+script = ExtResource("2_0hesl")
+SubViewportContainer = NodePath("SubViewportContainer")
+CardInstance = NodePath("SubViewportContainer/SubViewport/CardInstance")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_qep06")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1323.0
-offset_top = -2424.0
-offset_right = 1327.0
-offset_bottom = 2426.0
+offset_left = -1325.0
+offset_top = -2425.0
+offset_right = 1325.0
+offset_bottom = 2425.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.28, 0.28)
 pivot_offset = Vector2(1325, 2425)
-script = ExtResource("2_0hesl")
-CardInstance = NodePath("SubViewport/CardInstance")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(2650, 4850)
 render_target_update_mode = 4
 
-[node name="CardInstance" parent="SubViewport" instance=ExtResource("3_3nn6a")]
+[node name="CardInstance" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_3nn6a")]
 position = Vector2(1350, 2400)
+
+[connection signal="OnExit" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnExit"]
+[connection signal="OnScaleCard" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnScaleCard"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn7ixi314jln5"]
+[gd_scene load_steps=11 format=3 uid="uid://cn7ixi314jln5"]
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_0mhr0"]
 [ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://sprites/card/Card.PNG" id="3_pootg"]
+[ext_resource type="Script" path="res://tcsn/global references/CardBack.cs" id="3_tm8io"]
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="4_ih85q"]
 [ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://sprites/card/Window.PNG" id="5_1gkqf"]
 [ext_resource type="Texture2D" uid="uid://dl056v53yg8kh" path="res://sprites/card/Textbox.PNG" id="6_ypig7"]
@@ -39,6 +40,7 @@ offset_right = 1300.0
 offset_bottom = 2400.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 texture = ExtResource("3_pootg")
 region_rect = Rect2(0, 10, 2203, 3869)
 patch_margin_left = 149
@@ -47,6 +49,7 @@ patch_margin_right = 143
 patch_margin_bottom = 144
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+script = ExtResource("3_tm8io")
 
 [node name="Backdrop" type="NinePatchRect" parent="."]
 self_modulate = Color(0.443137, 0.690196, 0.560784, 1)
@@ -237,3 +240,7 @@ alignment = 1
 [connection signal="OnFlipLeft" from="." to="." method="OnFlipLeft"]
 [connection signal="OnFlipRight" from="." to="." method="OnFlipRight"]
 [connection signal="OnShake" from="." to="." method="OnShake"]
+[connection signal="OnCardBackSelected" from="CardBack" to="." method="OnCardBackSelected"]
+[connection signal="gui_input" from="CardBack" to="CardBack" method="OnGUIInput"]
+[connection signal="mouse_entered" from="CardBack" to="CardBack" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="CardBack" to="CardBack" method="OnMouseExit"]

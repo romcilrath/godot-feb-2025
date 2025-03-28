@@ -1,16 +1,20 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
-public partial class CardFlipper : SubViewportContainer
+public partial class CardFlipper : Node2D
 {
+	[Export] public NodePath SubViewportContainer { get; set; }
 	[Export] public NodePath CardInstance { get; set; }
 
+	private SubViewportContainer _subViewportContainer;
 	private CardInstance _cardInstance;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_cardInstance = NodeUtils.FindNodeWithError<CardInstance>(this, CardInstance, "CardInstance");
+		_subViewportContainer = NodeUtils.FindNodeWithError<SubViewportContainer>(this, SubViewportContainer, "SubViewportContainer");
 		_cardInstance.Connect("OnFlipRight", Callable.From(OnFlipRight));
 		_cardInstance.Connect("OnFlipLeft", Callable.From(OnFlipLeft));
 		_cardInstance.Connect("OnShake", Callable.From((float degrees, float duration) => OnShake(degrees, duration)));
@@ -30,27 +34,27 @@ public partial class CardFlipper : SubViewportContainer
 	{
 		Tween _rotationTween = CreateTween();
 		_rotationTween
-			.TweenProperty(this, "rotation_degrees", degrees, duration)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", degrees, duration)
 			.SetEase(Tween.EaseType.Out)
 			.SetTrans(Tween.TransitionType.Elastic);
 		_rotationTween
 			.Chain()
-			.TweenProperty(this, "rotation_degrees", -degrees, duration)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", -degrees, duration)
 			.SetEase(Tween.EaseType.Out)
 			.SetTrans(Tween.TransitionType.Elastic);
 		_rotationTween
 			.Chain()
-			.TweenProperty(this, "rotation_degrees", degrees / 2, duration * 1.5f)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", degrees / 2, duration * 1.5f)
 			.SetEase(Tween.EaseType.Out)
 			.SetTrans(Tween.TransitionType.Back);
 		_rotationTween
 			.Chain()
-			.TweenProperty(this, "rotation_degrees", -degrees / 2, duration * 1.5f)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", -degrees / 2, duration * 1.5f)
 			.SetEase(Tween.EaseType.Out)
 			.SetTrans(Tween.TransitionType.Back);
 		_rotationTween
 			.Chain()
-			.TweenProperty(this, "rotation_degrees", 0, duration * 2)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", 0, duration * 2)
 			.SetEase(Tween.EaseType.Out)
 			.SetTrans(Tween.TransitionType.Sine);
 	}
@@ -62,39 +66,39 @@ public partial class CardFlipper : SubViewportContainer
 
 		Tween xRotationTween = CreateTween();
 		xRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_x", 15.0f, 0.65f)
+			.TweenProperty(_subViewportContainer.Material, "shader_parameter/rotation_x", 15.0f, 0.65f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
 		xRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_x", -15.0f, 0.35f)
+			.TweenProperty(_subViewportContainer.Material, "shader_parameter/rotation_x", -15.0f, 0.35f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.Out)
 			.AsRelative();
 
 		Tween yRotationTween = CreateTween();
 		yRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_y", flipMultiplier * 90.0f, 0.5f)
+			.TweenProperty(_subViewportContainer.Material, "shader_parameter/rotation_y", flipMultiplier * 90.0f, 0.5f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
 		yRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_y", flipMultiplier * -90.0f, 0f)
+			.TweenProperty(_subViewportContainer.Material, "shader_parameter/rotation_y", flipMultiplier * -90.0f, 0f)
 			.Finished += () => _cardInstance.FlipCard();
 		yRotationTween
-			.TweenProperty(this.Material, "shader_parameter/rotation_y", flipMultiplier * 90.0f, 0.5f)
+			.TweenProperty(_subViewportContainer.Material, "shader_parameter/rotation_y", flipMultiplier * 90.0f, 0.5f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.Out)
 			.AsRelative();
 
 		Tween slightRotationTween = CreateTween();
 		slightRotationTween
-			.TweenProperty(this, "rotation_degrees", -25.0f, 0.6f)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", -25.0f, 0.6f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
 		slightRotationTween
-			.TweenProperty(this, "rotation_degrees", 25.0f, 0.4f)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", 25.0f, 0.4f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.Out)
 			.AsRelative();
@@ -113,5 +117,22 @@ public partial class CardFlipper : SubViewportContainer
 	public void OnShake(float degrees, float duration)
 	{
 		DoShake(degrees, duration);
+	}
+
+	public void OnScaleCard(float xScale, float yScale, float duration)
+	{
+		Tween tween = CreateTween();
+		tween.TweenProperty(this, "scale", new Vector2(xScale, yScale), duration)
+			.SetDelay(1.3f)
+			.SetTrans(Tween.TransitionType.Elastic)
+			.SetEase(Tween.EaseType.Out);
+	}
+
+	public void OnExit(float xPosition, float yPosition, float duration)
+	{
+		Tween tween = CreateTween();
+		tween.TweenProperty(this, "position", new Vector2(xPosition, yPosition), duration)
+			.SetEase(Tween.EaseType.InOut)
+			.SetTrans(Tween.TransitionType.Back);
 	}
 }

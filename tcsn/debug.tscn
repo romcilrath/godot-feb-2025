@@ -18,9 +18,12 @@
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CardSpawnPoint", "CardExitPoint", "CardDrawRegion")]
 script = ExtResource("1_33a1n")
 StartingDecks = Array[Object]([ExtResource("2_qgxyn")])
+CardSpawnPoint = NodePath("../CardSpawnPoint")
+CardExitPoint = NodePath("../CardExitPoint")
+CardDrawRegion = NodePath("../CardDrawRegion")
 
 [node name="GlobalReferences" type="Node" parent="."]
 script = ExtResource("2_77h7y")
@@ -114,6 +117,17 @@ text = "Test: 300"
 horizontal_alignment = 2
 script = ExtResource("10_vadct")
 StatToTrack = 4
+
+[node name="CardSpawnPoint" type="Node2D" parent="."]
+position = Vector2(1536, -1000)
+
+[node name="CardExitPoint" type="Node2D" parent="."]
+position = Vector2(1536, 2920)
+
+[node name="CardDrawRegion" type="ReferenceRect" parent="."]
+offset_top = 250.0
+offset_right = 3072.0
+offset_bottom = 1636.0
 
 [node name="Background" type="ColorRect" parent="."]
 show_behind_parent = true

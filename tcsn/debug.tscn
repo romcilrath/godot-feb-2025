@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
 [ext_resource type="Resource" uid="uid://ds427qa82mnnm" path="res://tres/decks/test_deck.tres" id="2_qgxyn"]
-[ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://sprites/global references/card_instance.tscn" id="3_slpme"]
-[ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://sprites/global references/choice_instance.tscn" id="4_e1s8x"]
-[ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/icon_instance.tscn" id="5_4pu66"]
+[ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://tcsn/global references/card_instance.tscn" id="3_slpme"]
+[ext_resource type="PackedScene" uid="uid://bk0aajrt6bywu" path="res://tcsn/global references/choice_instance.tscn" id="4_e1s8x"]
+[ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/global references/icon_instance.tscn" id="5_4pu66"]
 [ext_resource type="Script" path="res://scripts/management/PlayerManager.cs" id="5_vgp1m"]
 [ext_resource type="Texture2D" uid="uid://cymsq0rik0j7t" path="res://sprites/icons/Vitality.PNG" id="6_tksyb"]
 [ext_resource type="Texture2D" uid="uid://c1a6khdfwm0r5" path="res://sprites/icons/Coin.PNG" id="7_3vi07"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/icons/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
 [ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
-[ext_resource type="PackedScene" uid="uid://c4w53q2bs5k83" path="res://card_flipper.tscn" id="14_6tg8j"]
+[ext_resource type="PackedScene" uid="uid://c4w53q2bs5k83" path="res://tcsn/global references/card_flipper.tscn" id="14_6tg8j"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)

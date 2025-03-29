@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/deck/CardInstance.cs" id="1_utcpr"]
 [ext_resource type="Texture2D" uid="uid://daarpnb37mvg7" path="res://sprites/card/Card.PNG" id="2_d6w0w"]
-[ext_resource type="Script" path="res://scripts/CardBack.cs" id="3_eo8xd"]
+[ext_resource type="Script" path="res://scripts/deck/CardBack.cs" id="3_eo8xd"]
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="4_tpbsj"]
 [ext_resource type="Texture2D" uid="uid://dsi7p2klx8stg" path="res://sprites/card/Window.PNG" id="5_hk5w0"]
 [ext_resource type="Texture2D" uid="uid://dl056v53yg8kh" path="res://sprites/card/Textbox.PNG" id="6_fluqx"]
@@ -77,19 +77,19 @@ axis_stretch_vertical = 1
 [node name="OtherElements" type="Node2D" parent="."]
 position = Vector2(-1183, -319.663)
 
+[node name="Art" type="TextureRect" parent="OtherElements"]
+offset_left = 23.0
+offset_top = -1957.34
+offset_right = 2335.0
+offset_bottom = 2643.66
+texture = ExtResource("4_tpbsj")
+expand_mode = 5
+stretch_mode = 4
+
 [node name="Cover" type="ColorRect" parent="OtherElements"]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
 offset_right = 2376.0
 offset_bottom = 2119.0
-
-[node name="Art" type="TextureRect" parent="OtherElements"]
-offset_left = 35.0
-offset_top = -1956.34
-offset_right = 2347.0
-offset_bottom = 2644.66
-texture = ExtResource("4_tpbsj")
-expand_mode = 5
-stretch_mode = 4
 
 [node name="Window" type="NinePatchRect" parent="OtherElements"]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
@@ -98,6 +98,7 @@ offset_top = -1972.67
 offset_right = 2399.0
 offset_bottom = 268.33
 texture = ExtResource("5_hk5w0")
+region_rect = Rect2(0, 0, 2047, 2063)
 patch_margin_left = 128
 patch_margin_top = 134
 patch_margin_right = 136
@@ -132,19 +133,19 @@ hint_underlined = false
 text_direction = 2
 
 [node name="TabMarginContainer" type="MarginContainer" parent="."]
-offset_left = -1194.0
-offset_top = -2331.33
-offset_right = 149.0
-offset_bottom = -1913.33
+offset_left = -1209.0
+offset_top = -2331.0
+offset_right = 134.0
+offset_bottom = -1921.0
 metadata/_edit_use_anchors_ = true
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
 modulate = Color(0.443137, 0.690196, 0.560784, 1)
 layout_mode = 2
 texture = ExtResource("8_mx82h")
-region_rect = Rect2(9, 10, 609, 371)
+region_rect = Rect2(0, 0, 609, 371)
 patch_margin_left = 72
-patch_margin_top = 42
+patch_margin_top = 35
 patch_margin_right = 278
 patch_margin_bottom = 361
 axis_stretch_horizontal = 1

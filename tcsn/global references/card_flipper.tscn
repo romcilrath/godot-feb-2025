@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4w53q2bs5k83"]
 
 [ext_resource type="Shader" path="res://shaders/perspectiveoffsetshadow.gdshader" id="1_6pu5f"]
-[ext_resource type="Script" path="res://CardFlipper.cs" id="2_0hesl"]
-[ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://sprites/global references/card_instance.tscn" id="3_3nn6a"]
+[ext_resource type="Script" path="res://scripts/deck/CardFlipper.cs" id="1_ox0dv"]
+[ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://tcsn/global references/card_instance.tscn" id="3_3nn6a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qep06"]
 shader = ExtResource("1_6pu5f")
@@ -15,7 +15,7 @@ shader_parameter/offset = Vector2(-50, 50)
 shader_parameter/modulate = Color(0, 0, 0, 0.294118)
 
 [node name="CardFlipper" type="Node2D"]
-script = ExtResource("2_0hesl")
+script = ExtResource("1_ox0dv")
 SubViewportContainer = NodePath("SubViewportContainer")
 CardInstance = NodePath("SubViewportContainer/SubViewport/CardInstance")
 CardEffectsContainer = NodePath("CardEffectsContainer")
@@ -51,7 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 693.0
 offset_top = -1644.0
-offset_right = 1027.0
+offset_right = 1191.0
 offset_bottom = -519.0
 grow_horizontal = 2
 grow_vertical = 2

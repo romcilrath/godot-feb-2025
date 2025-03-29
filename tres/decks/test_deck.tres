@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="DeckResource" load_steps=5 format=3 uid="uid://ds427qa82mnnm"]
+[gd_resource type="Resource" script_class="DeckResource" load_steps=6 format=3 uid="uid://ds427qa82mnnm"]
 
 [ext_resource type="Resource" uid="uid://bu3df4rhtw7c6" path="res://tres/cards/prodigal_son.tres" id="1_5y3ur"]
 [ext_resource type="Script" path="res://scripts/deck/DeckResource.cs" id="1_d8cn6"]
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_v61qc"]
 [ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://tres/cards/test_card.tres" id="2_lvooy"]
+[ext_resource type="Resource" uid="uid://p5b5n0rdprue" path="res://tres/cards/preacher_man.tres" id="4_t455w"]
 
 [resource]
 script = ExtResource("1_d8cn6")
 Name = "Test Deck"
 Art = ExtResource("1_v61qc")
-Cards = Array[Object]([ExtResource("1_5y3ur"), ExtResource("2_lvooy")])
+Cards = Array[Object]([ExtResource("4_t455w"), ExtResource("1_5y3ur"), ExtResource("2_lvooy")])
 LockedCards = Array[Object]([])

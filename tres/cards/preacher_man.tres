@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://p5b5n0rdprue"]
+
+[ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_lmok4"]
+[ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_lupfb"]
+[ext_resource type="Script" path="res://scripts/deck/effects/OneTimeStatEffectResource.cs" id="2_iyh2a"]
+[ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="3_1ewql"]
+
+[sub_resource type="Resource" id="Resource_shkh1"]
+script = ExtResource("2_iyh2a")
+Target = 0
+Value = 25.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_1epck"]
+script = ExtResource("3_1ewql")
+Text = "Extort the preacher"
+HoverText = ""
+Effects = Array[Object]([SubResource("Resource_shkh1")])
+
+[sub_resource type="Resource" id="Resource_4uvbr"]
+script = ExtResource("2_iyh2a")
+Target = 3
+Value = 10.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_p4g68"]
+script = ExtResource("3_1ewql")
+Text = "Tell the town of his misdeeds"
+HoverText = ""
+Effects = Array[Object]([SubResource("Resource_4uvbr")])
+
+[sub_resource type="Resource" id="Resource_josr7"]
+script = ExtResource("2_iyh2a")
+Target = 1
+Value = 100.0
+ActionType = 0
+
+[sub_resource type="Resource" id="Resource_atslx"]
+script = ExtResource("3_1ewql")
+Text = "Spend the night with her yourself"
+HoverText = ""
+Effects = Array[Object]([SubResource("Resource_josr7")])
+
+[resource]
+script = ExtResource("1_lupfb")
+Number = 3
+Name = "Preacher Man"
+Body = "You discover the town preacher has a favorite girl down at the brothel. Quite the scandal for a supposed \"man of the cloth\"."
+Art = ExtResource("1_lmok4")
+CardEffects = Array[Object]([])
+Choices = Array[Object]([SubResource("Resource_1epck"), SubResource("Resource_p4g68"), SubResource("Resource_atslx")])

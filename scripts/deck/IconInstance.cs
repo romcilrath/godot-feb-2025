@@ -110,9 +110,9 @@ public partial class IconInstance : TextureRect
 		_effect = newEffect;
 		LoadEffect();
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	
+	public void Reveal()
 	{
+		this.Modulate = new Color(1);
 	}
 }

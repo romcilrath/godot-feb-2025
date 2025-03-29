@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4w53q2bs5k83"]
+[gd_scene load_steps=5 format=3 uid="uid://c4w53q2bs5k83"]
 
 [ext_resource type="Shader" path="res://shaders/perspectiveoffsetshadow.gdshader" id="1_6pu5f"]
 [ext_resource type="Script" path="res://CardFlipper.cs" id="2_0hesl"]
 [ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://sprites/global references/card_instance.tscn" id="3_3nn6a"]
-[ext_resource type="PackedScene" uid="uid://d4ffhg4gai21m" path="res://tcsn/icon_instance.tscn" id="4_fjuh2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qep06"]
 shader = ExtResource("1_6pu5f")
@@ -52,25 +51,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 693.0
 offset_top = -1644.0
-offset_right = 953.0
-offset_bottom = -574.0
+offset_right = 1027.0
+offset_bottom = -519.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-
-[node name="IconInstance" parent="CardEffectsContainer" instance=ExtResource("4_fjuh2")]
-visible = false
-layout_mode = 2
-
-[node name="Space" type="ReferenceRect" parent="CardEffectsContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-
-[node name="IconInstance2" parent="CardEffectsContainer" instance=ExtResource("4_fjuh2")]
-visible = false
-self_modulate = Color(0.937255, 0.654902, 0.682353, 1)
-layout_mode = 2
 
 [connection signal="OnAnimateCardEffects" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnAnimateCardEffects"]
 [connection signal="OnExit" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnExit"]

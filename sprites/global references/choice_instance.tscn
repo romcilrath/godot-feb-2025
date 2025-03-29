@@ -26,7 +26,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
@@ -74,7 +73,7 @@ asdf asdf asfd asdf"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ReferenceRect" type="ReferenceRect" parent="Choice/HBoxContainer"]
+[node name="SpaceRight" type="ReferenceRect" parent="Choice/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -96,7 +95,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Shadow" type="NinePatchRect" parent="."]
+[node name="Shadow" type="NinePatchRect" parent="Choice"]
 self_modulate = Color(0, 0, 0, 0.294118)
 show_behind_parent = true
 material = ExtResource("2_wyg3w")

@@ -54,8 +54,6 @@ public partial class ChoiceInstance : ColorRect
 			_choiceRect.Material = shaderMaterial.Duplicate() as ShaderMaterial;
 		}
 
-        // Set the pivot point of the choice rect to its center
-        _choiceRect.PivotOffset = _choiceRect.Size / 2;
 
 		// If choiceResource is defined via editor (like for debug) then SetChoice and LoadChoice
         if (this.choiceResource is not null)
@@ -100,6 +98,7 @@ public partial class ChoiceInstance : ColorRect
         ReferenceRect finalSpace = new ReferenceRect();
         finalSpace.CustomMinimumSize = new Vector2(50, 0);
         _effectRow.AddChild(finalSpace);
+        
 	}
     
     public void SetDisabled(bool isDisabled=true)
@@ -112,15 +111,11 @@ public partial class ChoiceInstance : ColorRect
         // Save the initial position of the choice rect
         this._initialPosition = _choiceRect.Position;
         this._isInitialPositionSet = true;
-
-        // Set the pivot offset to the center of the choice rect
-        _choiceRect.PivotOffset = _choiceRect.Size / 2;
+        _choiceRect.PivotOffset += _choiceRect.Size/2;
     }
 
     public override void _Process(double delta)
     {
-        // If the initial position hasn't been set, hold off
-        if (!_isInitialPositionSet) SetInitialPosition();
 
         void UpdateShaderRotation(ShaderMaterial material, Vector2 anchorCenter, float angleXMax, float angleYMax, float time)
         {
@@ -165,6 +160,8 @@ public partial class ChoiceInstance : ColorRect
 	private void OnMouseEnter() {
         if (_isDisabled) return;
 
+        if (!_isInitialPositionSet) SetInitialPosition();
+
         // Set the hover flag
         _isHovered = true;
 
@@ -181,12 +178,12 @@ public partial class ChoiceInstance : ColorRect
         // Tween the choice rect to rotate slightly
         _rotationTween = CreateTween();
         _rotationTween
-            .TweenProperty(_choiceRect, "rotation_degrees", 1, 0.05f)
+            .TweenProperty(_choiceRect, "rotation_degrees", 3, 0.0)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
         _rotationTween
             .Chain()
-            .TweenProperty(_choiceRect, "rotation_degrees", -1, 0.05f)
+            .TweenProperty(_choiceRect, "rotation_degrees", -3, 0.05f)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Elastic);
         _rotationTween
@@ -274,7 +271,7 @@ public partial class ChoiceInstance : ColorRect
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Elastic);
             _sizeTween.Chain()
-                .TweenProperty(_choiceRect, "scale", new Vector2(1.2f, 1.0f), 0.2f)
+                .TweenProperty(_choiceRect, "scale", new Vector2(1.08f, 1.0f), 0.2f)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Elastic);
             _sizeTween.Chain()

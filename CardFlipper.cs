@@ -123,12 +123,12 @@ public partial class CardFlipper : Node2D
 
 		Tween slightRotationTween = CreateTween();
 		slightRotationTween
-			.TweenProperty(_subViewportContainer, "rotation_degrees", -25.0f, 0.6f)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", flipMultiplier * 25.0f, 0.6f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.In)
 			.AsRelative();
 		slightRotationTween
-			.TweenProperty(_subViewportContainer, "rotation_degrees", 25.0f, 0.4f)
+			.TweenProperty(_subViewportContainer, "rotation_degrees", -flipMultiplier * 25.0f, 0.4f)
 			.SetTrans(Tween.TransitionType.Sine)
 			.SetEase(Tween.EaseType.Out)
 			.AsRelative();

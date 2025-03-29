@@ -21,6 +21,8 @@ public partial class CardInstance : Node2D
     public delegate void OnScaleCardEventHandler(float xScale = 1f, float yScale = 1f, float duration = 1f);
 	[Signal]
 	public delegate void OnShakeEventHandler(float degrees = 0.4f, float duration = 0.5f);
+	[Signal]
+	public delegate void OnAnimateCardEffectsEventHandler(float delay = 1f);
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
@@ -83,6 +85,11 @@ public partial class CardInstance : Node2D
 	{
 		// Directly assign the card
 		this._card = card;
+	}
+
+	public Card GetCard()
+	{
+		return this._card;
 	}
 
 	// Load the card visuals including choices
@@ -194,6 +201,7 @@ public partial class CardInstance : Node2D
 	private void OnCardBackSelected()
 	{
 		EmitSignal(SignalName.OnFlipRight);
-		EmitSignal(SignalName.OnScaleCard, 1f, 1f, 1f);
+		EmitSignal(SignalName.OnScaleCard, 0.45f, 0.45f, 1f);
+		EmitSignal(SignalName.OnAnimateCardEffects, 2f);
 	}
 }

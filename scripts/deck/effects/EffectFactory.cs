@@ -21,4 +21,12 @@ public static class EffectFactory
 
         throw new WarningException($"Unsupported EffectResource type: {effectResource?.GetType().Name}", nameof(effectResource));
     }
+
+    public static Effect[] CreateEffects(EffectResource[] effectResources)
+    {
+        Effect[] effects = new Effect[effectResources.Length];
+        for (int i = 0; i < effects.Length; i++)
+            effects[i] = CreateEffect(effectResources[i]);
+        return effects;
+    }
 }

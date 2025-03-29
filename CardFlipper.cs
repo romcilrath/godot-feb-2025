@@ -6,15 +6,19 @@ public partial class CardFlipper : Node2D
 {
 	[Export] public NodePath SubViewportContainer { get; set; }
 	[Export] public NodePath CardInstance { get; set; }
+	[Export] public NodePath CardEffectsContainer { get; set; }
 
 	private SubViewportContainer _subViewportContainer;
 	private CardInstance _cardInstance;
+	private VBoxContainer _cardEffectsContainer;
+	private IconInstance[] _iconInstances;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_cardInstance = NodeUtils.FindNodeWithError<CardInstance>(this, CardInstance, "CardInstance");
 		_subViewportContainer = NodeUtils.FindNodeWithError<SubViewportContainer>(this, SubViewportContainer, "SubViewportContainer");
+		_cardEffectsContainer = NodeUtils.FindNodeWithError<VBoxContainer>(this, CardEffectsContainer, "CardEffectsContainer");
 		_cardInstance.Connect("OnFlipRight", Callable.From(OnFlipRight));
 		_cardInstance.Connect("OnFlipLeft", Callable.From(OnFlipLeft));
 		_cardInstance.Connect("OnShake", Callable.From((float degrees, float duration) => OnShake(degrees, duration)));
@@ -28,6 +32,32 @@ public partial class CardFlipper : Node2D
 	public void SetCardInstance(CardInstance cardInstance)
 	{
 		this._cardInstance = cardInstance;
+	}
+
+	public void LoadCardEffects(Effect[] effects)
+	{
+		_iconInstances = new IconInstance[effects.Length];
+		for (int i = 0; i < effects.Length; i ++)
+		{
+			IconInstance iconInstance = GlobalReferences.Instance.IconInstanceScene.Instantiate() as IconInstance;
+			_iconInstances[i] = iconInstance;
+			_cardEffectsContainer.AddChild(iconInstance);
+			iconInstance.SetEffect(effects[i]);
+
+			ReferenceRect space = new ReferenceRect();
+			space.CustomMinimumSize = new Vector2(50, 0);
+			_cardEffectsContainer.AddChild(space);
+		}
+	}
+
+	public void ShowEffects()
+	{
+		_cardEffectsContainer.Visible = true;
+	}
+
+	public void HideEffects()
+	{
+		_cardEffectsContainer.Visible = false;
 	}
 
 	public void DoShake(float degrees=0.4f, float duration=0.05f)
@@ -117,6 +147,13 @@ public partial class CardFlipper : Node2D
 	public void OnShake(float degrees, float duration)
 	{
 		DoShake(degrees, duration);
+	}
+
+	public void OnAnimateCardEffects(float delay = 1f)
+	{
+		Tween tween = CreateTween();
+		tween.TweenCallback(Callable.From(ShowEffects))
+			.SetDelay(delay);
 	}
 
 	public void OnScaleCard(float xScale, float yScale, float duration)

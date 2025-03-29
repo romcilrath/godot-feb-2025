@@ -130,19 +130,23 @@ public partial class GameManager : Node
 			CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
 			GetTree().Root.AddChild(cardFlipper);
 			cardFlipper.Position = CardSpawnPoint.Position;
-			cardFlipper.Scale = new Vector2(0.5f, 0.5f);
+			cardFlipper.Scale = new Vector2(0.35f, 0.35f);
 
 			CardInstance cardInstance = cardFlipper.GetCardInstance();
 
 			cardInstance.SetCard(card);
 			cardInstance.LoadCard();
 			cardInstance.FlipCard();
+			
+			cardFlipper.HideEffects();
+
+			Effect[] effects = cardInstance.GetCard().CardEffects;
+			cardFlipper.LoadCardEffects(effects);
 
 			Tween tween = CreateTween();
 			tween.TweenProperty(cardFlipper, "position", CardDrawRegion.GetRect().GetCenter(), 0.8)
 				.SetEase(Tween.EaseType.Out)
 				.SetTrans(Tween.TransitionType.Elastic);
-
 			
 		}
 	}

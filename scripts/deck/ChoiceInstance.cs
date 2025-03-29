@@ -54,6 +54,9 @@ public partial class ChoiceInstance : ColorRect
 			_choiceRect.Material = shaderMaterial.Duplicate() as ShaderMaterial;
 		}
 
+        // Set the pivot point of the choice rect to its center
+        _choiceRect.PivotOffset = _choiceRect.Size / 2;
+
 		// If choiceResource is defined via editor (like for debug) then SetChoice and LoadChoice
         if (this.choiceResource is not null)
         {

@@ -6,11 +6,11 @@
 [ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="2_t5tw7"]
 [ext_resource type="Script" path="res://scripts/deck/effects/RepeatStatEffectResource.cs" id="4_qrrqg"]
 
-[sub_resource type="Resource" id="Resource_b50ad"]
+[sub_resource type="Resource" id="Resource_f7lm5"]
 script = ExtResource("2_epl1y")
-Target = 0
-Value = 0.0
-ActionType = 0
+Target = 3
+Value = 2.0
+ActionType = 1
 
 [sub_resource type="Resource" id="Resource_ahvi8"]
 script = ExtResource("2_epl1y")
@@ -73,5 +73,5 @@ Left is a stretch of burning hot coals.
 
 Thoughts? Perponderances?"
 Art = ExtResource("1_qanyq")
-CardEffect = SubResource("Resource_b50ad")
+CardEffects = Array[Object]([SubResource("Resource_f7lm5")])
 Choices = Array[Object]([SubResource("Resource_t61wy"), SubResource("Resource_apjao"), SubResource("Resource_b3lby")])

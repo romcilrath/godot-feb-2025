@@ -27,7 +27,7 @@ BodyPath = NodePath("BodyChoicesContainer/BodyContainer/Body")
 ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesContainer")
 
 [node name="CardBack" type="NinePatchRect" parent="."]
-self_modulate = Color(0.980392, 0.282353, 0.866667, 1)
+self_modulate = Color(0.443137, 0.690196, 0.560784, 1)
 material = SubResource("ShaderMaterial_opy7t")
 anchors_preset = 8
 anchor_left = 0.5
@@ -238,9 +238,6 @@ layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
 
-[connection signal="OnFlipLeft" from="." to="." method="OnFlipLeft"]
-[connection signal="OnFlipRight" from="." to="." method="OnFlipRight"]
-[connection signal="OnShake" from="." to="." method="OnShake"]
 [connection signal="OnCardBackSelected" from="CardBack" to="." method="OnCardBackSelected"]
 [connection signal="gui_input" from="CardBack" to="CardBack" method="OnGUIInput"]
 [connection signal="mouse_entered" from="CardBack" to="CardBack" method="OnMouseEnter"]

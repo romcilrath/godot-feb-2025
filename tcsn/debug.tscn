@@ -125,9 +125,9 @@ position = Vector2(1536, -1000)
 position = Vector2(1536, 2920)
 
 [node name="CardDrawRegion" type="ReferenceRect" parent="."]
-offset_top = 250.0
+offset_top = 242.0
 offset_right = 3072.0
-offset_bottom = 1636.0
+offset_bottom = 1723.0
 
 [node name="Background" type="ColorRect" parent="."]
 show_behind_parent = true

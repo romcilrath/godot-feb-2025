@@ -59,4 +59,7 @@ alignment = 1
 
 [connection signal="OnAnimateCardEffects" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnAnimateCardEffects"]
 [connection signal="OnExit" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnExit"]
+[connection signal="OnFlipLeft" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnFlipLeft"]
+[connection signal="OnFlipRight" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnFlipRight"]
 [connection signal="OnScaleCard" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnScaleCard"]
+[connection signal="OnShake" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnShake"]

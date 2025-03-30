@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using Vector2 = Godot.Vector2;
 
 public partial class CardFlipper : Node2D
 {
@@ -19,19 +20,25 @@ public partial class CardFlipper : Node2D
 		_cardInstance = NodeUtils.FindNodeWithError<CardInstance>(this, CardInstance, "CardInstance");
 		_subViewportContainer = NodeUtils.FindNodeWithError<SubViewportContainer>(this, SubViewportContainer, "SubViewportContainer");
 		_cardEffectsContainer = NodeUtils.FindNodeWithError<VBoxContainer>(this, CardEffectsContainer, "CardEffectsContainer");
-		_cardInstance.Connect("OnFlipRight", Callable.From(OnFlipRight));
-		_cardInstance.Connect("OnFlipLeft", Callable.From(OnFlipLeft));
-		_cardInstance.Connect("OnShake", Callable.From((float degrees, float duration) => OnShake(degrees, duration)));
-	}
 
+		// Duplicate the shader material so when we animate this materials shader we don't also animate other shared materials
+		// Without this when one CardFlipper "flips" all of them would
+		_subViewportContainer.Material = (Material)_subViewportContainer.Material.Duplicate();
+	}
+	
 	public CardInstance GetCardInstance()
 	{
 		return this._cardInstance;
 	}
 
-	public void SetCardInstance(CardInstance cardInstance)
+	public Vector2 GetSize()
 	{
-		this._cardInstance = cardInstance;
+		return _subViewportContainer.Size;
+	}
+
+	public Vector2 GetScale()
+	{
+		return _subViewportContainer.Scale;
 	}
 
 	public void LoadCardEffects(Effect[] effects)

@@ -2,7 +2,9 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
+using Vector2 = Godot.Vector2;
 
 public partial class GameManager : Node
 {
@@ -43,7 +45,7 @@ public partial class GameManager : Node
 		_instance = this;
 		GD.Print("GameManager Initialized.");
 	}
-
+	
 	// Called directly after _Ready
 	private void _AfterReady()
 	{
@@ -51,7 +53,7 @@ public partial class GameManager : Node
 		AddStartingDecks();
 
 		GD.Print(GetActiveCardCount());
-		OnDrawFromActiveDecks();
+		OnDrawFromActiveDecks(3);
 		GD.Print(GetActiveCardCount());
 	}
 
@@ -125,8 +127,9 @@ public partial class GameManager : Node
 		Card[] cards = DrawFromActiveDecks(count);
 		GD.Print("Cards: " + cards.Length);
 
-		foreach (Card card in cards)
+		for (int i = 0; i < cards.Length; i++)
 		{
+			Card card = cards[i];
 			CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
 			GetTree().Root.AddChild(cardFlipper);
 			cardFlipper.Position = CardSpawnPoint.Position;
@@ -142,9 +145,13 @@ public partial class GameManager : Node
 
 			Effect[] effects = cardInstance.GetCard().CardEffects;
 			cardFlipper.LoadCardEffects(effects);
+			
+			float xPosition = CardDrawRegion.Position.X + ((i + 0.5f) * (CardDrawRegion.Size.X / cards.Length));
+			float yPosition = CardDrawRegion.Position.Y + CardDrawRegion.Size.Y/2;
+			Vector2 toPosition = new Vector2(xPosition, yPosition);
 
 			Tween tween = CreateTween();
-			tween.TweenProperty(cardFlipper, "position", CardDrawRegion.GetRect().GetCenter(), 0.8)
+			tween.TweenProperty(cardFlipper, "position", toPosition, 0.8)
 				.SetEase(Tween.EaseType.Out)
 				.SetTrans(Tween.TransitionType.Elastic);
 			

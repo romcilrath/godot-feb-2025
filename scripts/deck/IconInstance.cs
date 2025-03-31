@@ -26,6 +26,8 @@ public partial class IconInstance : TextureRect
 		_countLabel = NodeUtils.FindNodeWithError<Label>(this, CountLabelPath, "CountLabel");
 		_artContainer = NodeUtils.FindNodeWithError<MarginContainer>(this, ArtContainerPath, "ArtContainer");
 		_art = NodeUtils.FindNodeWithError<TextureRect>(this, ArtPath, "Art");
+
+		this.PivotOffset = this.Size/2;
 	}
 
 	public void SetArtContainerMargins(int margin=40)

@@ -51,10 +51,10 @@ offset_bottom = 40.0
 
 [node name="CoinStat" type="Label" parent="StatRenderers"]
 layout_mode = 0
-offset_left = 2365.0
-offset_top = 122.0
-offset_right = 2790.0
-offset_bottom = 248.0
+offset_left = 1905.0
+offset_top = 59.0
+offset_right = 2330.0
+offset_bottom = 185.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_r38au")
 theme_override_font_sizes/font_size = 100
@@ -64,10 +64,10 @@ script = ExtResource("10_vadct")
 
 [node name="VitalityStat" type="Label" parent="StatRenderers"]
 layout_mode = 0
-offset_left = 2365.0
-offset_top = 268.0
-offset_right = 2790.0
-offset_bottom = 394.0
+offset_left = 2429.0
+offset_top = 59.0
+offset_right = 2854.0
+offset_bottom = 185.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_r38au")
 theme_override_font_sizes/font_size = 100
@@ -78,10 +78,10 @@ StatToTrack = 1
 
 [node name="GritStat" type="Label" parent="StatRenderers"]
 layout_mode = 0
-offset_left = 2365.0
-offset_top = 416.0
-offset_right = 2790.0
-offset_bottom = 542.0
+offset_left = 1921.0
+offset_top = 210.0
+offset_right = 2346.0
+offset_bottom = 336.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_r38au")
 theme_override_font_sizes/font_size = 100
@@ -92,10 +92,10 @@ StatToTrack = 2
 
 [node name="RationsStat" type="Label" parent="StatRenderers"]
 layout_mode = 0
-offset_left = 2362.0
-offset_top = 560.0
-offset_right = 2787.0
-offset_bottom = 686.0
+offset_left = 2429.0
+offset_top = 208.0
+offset_right = 2854.0
+offset_bottom = 334.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_r38au")
 theme_override_font_sizes/font_size = 100
@@ -125,9 +125,9 @@ position = Vector2(1536, -1000)
 position = Vector2(1536, 2920)
 
 [node name="CardDrawRegion" type="ReferenceRect" parent="."]
-offset_top = 242.0
+offset_top = 426.0
 offset_right = 3072.0
-offset_bottom = 1723.0
+offset_bottom = 1717.0
 
 [node name="Background" type="ColorRect" parent="."]
 show_behind_parent = true

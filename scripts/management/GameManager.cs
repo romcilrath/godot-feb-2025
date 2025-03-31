@@ -133,18 +133,17 @@ public partial class GameManager : Node
 			CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
 			GetTree().Root.AddChild(cardFlipper);
 			cardFlipper.Position = CardSpawnPoint.Position;
-			cardFlipper.Scale = new Vector2(0.35f, 0.35f);
+			cardFlipper.Scale = new Vector2(0.3f, 0.3f);
 
 			CardInstance cardInstance = cardFlipper.GetCardInstance();
 
 			cardInstance.SetCard(card);
 			cardInstance.LoadCard();
 			cardInstance.FlipCard();
-			
-			cardFlipper.HideEffects();
 
 			Effect[] effects = cardInstance.GetCard().CardEffects;
 			cardFlipper.LoadCardEffects(effects);
+			cardFlipper.HideEffects();
 			
 			float xPosition = CardDrawRegion.Position.X + ((i + 0.5f) * (CardDrawRegion.Size.X / cards.Length));
 			float yPosition = CardDrawRegion.Position.Y + CardDrawRegion.Size.Y/2;

@@ -1,10 +1,28 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://db8kmkf1e8ilh"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://db8kmkf1e8ilh"]
 
 [ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_qanyq"]
 [ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_wi1o2"]
 [ext_resource type="Script" path="res://scripts/deck/effects/OneTimeStatEffectResource.cs" id="2_epl1y"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="2_t5tw7"]
 [ext_resource type="Script" path="res://scripts/deck/effects/RepeatStatEffectResource.cs" id="4_qrrqg"]
+
+[sub_resource type="Resource" id="Resource_80wqm"]
+script = ExtResource("2_epl1y")
+Target = 0
+Value = 10.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_27vmj"]
+script = ExtResource("2_epl1y")
+Target = 1
+Value = -10.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_31cf6"]
+script = ExtResource("2_epl1y")
+Target = 2
+Value = 10.0
+ActionType = 1
 
 [sub_resource type="Resource" id="Resource_ahvi8"]
 script = ExtResource("2_epl1y")
@@ -46,8 +64,7 @@ Body = "A path divergres before you.
 Right awaits safety, and a $10 bill. 
 Left is a stretch of burning hot coals. 
 
-
 Thoughts? Perponderances?"
 Art = ExtResource("1_qanyq")
-CardEffects = Array[Object]([])
+CardEffects = Array[Object]([SubResource("Resource_80wqm"), SubResource("Resource_27vmj"), SubResource("Resource_31cf6")])
 Choices = Array[Object]([SubResource("Resource_t61wy"), SubResource("Resource_apjao"), SubResource("Resource_b3lby")])

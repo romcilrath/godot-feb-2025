@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4ffhg4gai21m"]
+[gd_scene load_steps=6 format=3 uid="uid://d4ffhg4gai21m"]
 
 [ext_resource type="Texture2D" uid="uid://bath3o0frge45" path="res://sprites/icons/Icon.PNG" id="1_ntmb1"]
 [ext_resource type="Texture2D" uid="uid://brbmhcyjityl" path="res://sprites/card/CountBox.PNG" id="2_bmahb"]
@@ -6,11 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cymsq0rik0j7t" path="res://sprites/icons/Vitality.PNG" id="3_ot7xb"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="3_pfyaa"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7uguc"]
-
 [node name="IconInstance" type="TextureRect"]
 self_modulate = Color(0.937255, 0.654902, 0.682353, 1)
-material = SubResource("ShaderMaterial_7uguc")
+scale = Vector2(2, 2)
 texture = ExtResource("1_ntmb1")
 stretch_mode = 3
 script = ExtResource("2_r7he4")
@@ -43,8 +41,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -44.0
-offset_bottom = 82.0
+offset_top = -52.0
+offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -73,6 +71,7 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CountBox/BoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 15
 
 [node name="Label" type="Label" parent="HBoxContainer/CountBox/BoxContainer/MarginContainer"]
@@ -85,10 +84,15 @@ text = " + 99 "
 [node name="Shadow" type="TextureRect" parent="."]
 self_modulate = Color(0, 0, 0, 0.294118)
 show_behind_parent = true
-layout_mode = 0
-offset_left = -25.0
-offset_top = 25.0
-offset_right = 235.0
-offset_bottom = 287.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = 18.0
+offset_right = -28.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_ntmb1")
 stretch_mode = 3

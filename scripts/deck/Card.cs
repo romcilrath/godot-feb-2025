@@ -68,9 +68,15 @@ public class Card
 
     public void ApplyEffects()
     {
-        foreach (Effect effect in CardEffects)
-            effect.Apply();
+        for (int i = 0; i < CardEffects.Length; i++)
+            ApplyEffect(i);
     }   
+
+    public void ApplyEffect(int index = 0)
+    {
+        GD.Print("Applying effect " + index + " of " + CardEffects.Length);
+        CardEffects[index].Apply();
+    }
 
     public void PrintCard()
     {

@@ -49,15 +49,15 @@ position = Vector2(1350, 2400)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 693.0
-offset_top = -1644.0
-offset_right = 1191.0
-offset_bottom = -519.0
+offset_left = 788.0
+offset_top = -1601.0
+offset_right = 1077.0
+offset_bottom = -409.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[connection signal="OnAnimateCardEffects" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnAnimateCardEffects"]
+[connection signal="OnAnimateApplyCardEffects" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnAnimateApplyCardEffects"]
 [connection signal="OnExit" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnExit"]
 [connection signal="OnFlipLeft" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnFlipLeft"]
 [connection signal="OnFlipRight" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnFlipRight"]

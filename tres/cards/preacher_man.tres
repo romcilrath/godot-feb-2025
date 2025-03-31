@@ -52,7 +52,8 @@ Effects = Array[Object]([SubResource("Resource_1rn7e"), SubResource("Resource_jo
 script = ExtResource("1_lupfb")
 Number = 3
 Name = "Preacher Man"
-Body = "You discover the town preacher has a favorite girl down at the brothel. Quite the scandal for a supposed \"man of the cloth\"."
+Body = "
+You discover the town preacher has a favorite girl down at the brothel. Quite the scandal for a supposed \"man of the cloth\"."
 Art = ExtResource("1_lmok4")
 CardEffects = Array[Object]([])
 Choices = Array[Object]([SubResource("Resource_1epck"), SubResource("Resource_p4g68"), SubResource("Resource_atslx")])

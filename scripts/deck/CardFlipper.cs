@@ -52,7 +52,7 @@ public partial class CardFlipper : Node2D
 			iconInstance.SetEffect(effects[i]);
 
 			ReferenceRect space = new ReferenceRect();
-			space.CustomMinimumSize = new Vector2(50, 0);
+			space.CustomMinimumSize = new Vector2(0, 125);
 			_cardEffectsContainer.AddChild(space);
 		}
 	}
@@ -156,11 +156,48 @@ public partial class CardFlipper : Node2D
 		DoShake(degrees, duration);
 	}
 
-	public void OnAnimateCardEffects(float delay = 1f)
+	public void OnAnimateApplyCardEffects(float delay = 1f)
 	{
-		Tween tween = CreateTween();
-		tween.TweenCallback(Callable.From(ShowEffects))
-			.SetDelay(delay);
+		ShowEffects();
+
+		for (int i = 0; i < _iconInstances.Length; i++)
+		{
+			// Set the alpha to 0 (transparent())
+			_iconInstances[i].Modulate = new Color(_iconInstances[i].Modulate, 0);
+
+			// Fade in from transparent
+			Tween iconOpacityTween = CreateTween();
+			iconOpacityTween.TweenProperty(_iconInstances[i], "modulate:a", 1, 0.1f)
+				.SetDelay(delay + 0.5f * i);
+
+			// After animation completes actually apply the effect
+			// Make a copy of the index for uniqueness in the .ApplyEffect call
+			int effectNumber = i; 
+			iconOpacityTween.Finished += () => _cardInstance.GetCard().ApplyEffect(effectNumber);
+
+			// Scale tween
+			Tween sizeTween = CreateTween();
+			sizeTween.TweenProperty(_iconInstances[i], "scale", new Vector2(1.4f, 1.4f), 0);
+			sizeTween
+				.Chain()
+				.TweenProperty(_iconInstances[i], "scale", new Vector2(1f, 1f), 0.15f)
+				.SetTrans(Tween.TransitionType.Elastic)
+				.SetEase(Tween.EaseType.In)
+				.SetDelay(delay + 0.5f * i);
+
+			// Rotation tween
+			Tween rotationTween = CreateTween();
+			rotationTween.TweenProperty(_iconInstances[i], "rotation_degrees", -90, 0);
+			rotationTween
+				.Chain()
+				.TweenProperty(_iconInstances[i], "rotation_degrees", 25, 0.15f)
+				.SetDelay(delay + 0.5f * i);
+			rotationTween
+				.Chain()
+				.TweenProperty(_iconInstances[i], "rotation_degrees", 0, 0.05f)
+				.SetTrans(Tween.TransitionType.Bounce);
+				
+		}
 	}
 
 	public void OnScaleCard(float xScale, float yScale, float duration)

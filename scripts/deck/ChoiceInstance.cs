@@ -28,9 +28,7 @@ public partial class ChoiceInstance : ColorRect
     [Signal]
     public delegate void OnShakeEventHandler(float degrees=0.4f, float duration=0.5f);
     [Signal]
-    public delegate void ChoiceSelectedEventHandler();
-    [Signal]
-    public delegate void DismissCardEventHandler();
+    public delegate void OnChoiceSelectedEventHandler();
 
     // Hover variables
     private bool _isHovered = false;
@@ -236,8 +234,7 @@ public partial class ChoiceInstance : ColorRect
         await Task.Delay(delay); // Delay for 1 second
         _choice.Apply();
         GameManager.Instance.IncrementTurn();
-        EmitSignal(SignalName.DismissCard);
-        EmitSignal(SignalName.ChoiceSelected);
+        EmitSignal(SignalName.OnChoiceSelected);
     }
 
 
@@ -246,7 +243,7 @@ public partial class ChoiceInstance : ColorRect
         if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
         {
             if (_isDisabled) return;
-            _isDisabled = true;
+            SetDisabled(true);
 
             GD.Print($"Choice clicked: {_choice?.Text}");
             EmitSignal(SignalName.OnShake, 2f, 0.05f);

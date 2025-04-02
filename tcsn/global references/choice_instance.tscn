@@ -120,8 +120,6 @@ patch_margin_bottom = 260
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[connection signal="ChoiceSelected" from="." to="." method="ChoiceSelected"]
-[connection signal="DismissCard" from="." to="." method="DismissCard"]
 [connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExit"]

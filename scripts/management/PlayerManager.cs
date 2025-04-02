@@ -53,25 +53,4 @@ public partial class PlayerManager : Node
         GD.Print($"Grit: {Grit.Current}");
         GD.Print($"Rations: {Rations.Current}");
     }
-
-    public void Debug_Apply_Choice()
-    {
-        Effect test1 = new OneStatTimeEffect(Coin, 10f, ActionType.Set);
-
-        Effect test2 = new RepeatStatEffect(Coin, 10f, ActionType.Multiply, 1, 5);
-
-        Effect[] effects = { test1, test2 };
-        Choice choice = new Choice(effects:effects);
-        choice.Apply();
-
-        GD.Print(GameManager.Instance.Turn);
-        PrintStats();
-
-        for (int i = 0; i < 7; i++)
-        {
-            GameManager.Instance.IncrementTurn();
-            GD.Print(GameManager.Instance.Turn);
-            PrintStats();
-        }
-    }
 }

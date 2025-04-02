@@ -10,23 +10,17 @@ public partial class CardInstance : Node2D
 	[Export] public CardResource cardResource = null;
 	private Card _card = null;
 	private bool _isFlipped = false;
-	
-    [Signal]
-    public delegate void OnFlipRightEventHandler();
+
 	[Signal]
-    public delegate void OnFlipLeftEventHandler();
+    public delegate void OnCardSelectedEventHandler(CardInstance selectedCardInstance);
 	[Signal]
-    public delegate void OnExitEventHandler();
-	[Signal]
-    public delegate void OnScaleCardEventHandler(float xScale = 1f, float yScale = 1f, float duration = 1f);
+    public delegate void OnCardDismissedEventHandler(CardInstance cardInstance);
 	[Signal]
 	public delegate void OnShakeEventHandler(float degrees = 0.4f, float duration = 0.5f);
-	[Signal]
-	public delegate void OnAnimateApplyCardEffectsEventHandler(float delay = 1f);
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
-	[Export] public NodePath CardBack { get; set; }
+	[Export] public NodePath CardBackl { get; set; }
 	[Export] public NodePath BackdropPath { get; set; }
 	[Export] public NodePath OtherElementsPath { get; set; }
 	[Export] public NodePath BodyChoicesContainer { get; set; }
@@ -49,13 +43,13 @@ public partial class CardInstance : Node2D
 	private RichTextLabel _number;
 	private RichTextLabel _body;
 	private VBoxContainer _choicesContainer;
-	
-    private Tween _rotationTween;
 
+	private bool _isEnabled = true;
+	
 	// Get the nodes from the scene and load the card on Ready
 	public override void _Ready()
 	{
-		_cardBack = NodeUtils.FindNodeWithError<CardBack>(this, CardBack, "CardBack");
+		_cardBack = NodeUtils.FindNodeWithError<CardBack>(this, CardBackl, "CardBack");
 		_backdrop = NodeUtils.FindNodeWithError<NinePatchRect>(this, BackdropPath, "Backdrop");
 		_otherElements = NodeUtils.FindNodeWithError<Node2D>(this, OtherElementsPath, "OtherElements");
 		_bodyChoicesContainer = NodeUtils.FindNodeWithError<BoxContainer>(this, BodyChoicesContainer, "BodyChoicesContainer");
@@ -87,6 +81,11 @@ public partial class CardInstance : Node2D
 		this._card = card;
 	}
 
+	public void SetEnabled(bool isEnabled = true)
+	{
+		this._isEnabled = isEnabled;
+	}
+
 	public Card GetCard()
 	{
 		return this._card;
@@ -110,15 +109,17 @@ public partial class CardInstance : Node2D
 
 		// Load each choice to the card, includes instantiating 
 		// Hooks up choice sigals, adds as children, instantiates, and adds spaces between choices 
-		foreach (Choice choice in this._card.Choices)
+		choiceInstances = new ChoiceInstance[_card.Choices.Length];
+		for (int i = 0; i < this._card.Choices.Length; i++) 
 		{
-			LoadChoice(choice);
+			Choice choice = this._card.Choices[i];
+			choiceInstances[i] = LoadChoice(choice);
 		}
 	}
 
 	// Load all choices to the card
 	// Hooks up choice sigals, adds as children, instantiates, and adds spaces between choices 
-	public void LoadChoice(Choice choice)
+	public ChoiceInstance LoadChoice(Choice choice)
 	{
 		GD.Print("Loading choice " + choice.Text + "...");
 
@@ -130,13 +131,14 @@ public partial class CardInstance : Node2D
 
 		// Connect the signals
 		choiceInstance.Connect(ChoiceInstance.SignalName.OnShake, Callable.From((float degrees, float duration) => EmitSignal(nameof(OnShake), degrees, duration)));
-		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnChoiceSelected));
-		choiceInstance.Connect(ChoiceInstance.SignalName.ChoiceSelected, Callable.From(OnDismissCard));
+		choiceInstance.Connect(ChoiceInstance.SignalName.OnChoiceSelected, Callable.From(() => OnChoiceSelected()));
 
-		// Add space between choices
+		// Add space between choicesf
 		ReferenceRect space = new ReferenceRect();
 		space.CustomMinimumSize = new Vector2(0, 50);
 		_choicesContainer.AddChild(space);
+
+		return choiceInstance;
 	}
 
 	public void ClearChoices()
@@ -152,6 +154,8 @@ public partial class CardInstance : Node2D
 	// Does not run the flip animation
 	public void FlipCard()
 	{
+		if (!_isEnabled) return;
+
 		if (_isFlipped)
 		{
 			_isFlipped = false;
@@ -177,31 +181,19 @@ public partial class CardInstance : Node2D
 			_nameLabel.Visible = false;
 		}
 	}
-	
-	// Disables all choices when a choice is selected
-	private void OnChoiceSelected()
+
+	public void OnCardBackSelected()
 	{
-		foreach (Node child in _choicesContainer.GetChildren())
-		{
-			if (child is ChoiceInstance choiceInstance)
-			{
-				choiceInstance.SetDisabled();
-			}
-		}
+		EmitSignal(SignalName.OnCardSelected, this);
 	}
-	
-	// Dismisses the card when a choice is selected by emitting a signal
-	private void OnDismissCard()
-	{
-		_rotationTween?.Kill();
 
-		EmitSignal(SignalName.OnExit, GameManager.Instance.CardExitPoint.Position.X, GameManager.Instance.CardExitPoint.Position.Y, 1f);
-	}	
-
-	private void OnCardBackSelected()
+	public void OnChoiceSelected()
 	{
-		EmitSignal(SignalName.OnFlipRight);
-		EmitSignal(SignalName.OnScaleCard, 0.4f, 0.4f, 1f);
-		EmitSignal(SignalName.OnAnimateApplyCardEffects, 2.5f);
+		foreach (ChoiceInstance choiceInstance in choiceInstances)
+		{
+			choiceInstance.SetDisabled(true);
+		}
+		
+		EmitSignal(SignalName.OnCardDismissed, this);
 	}
 }

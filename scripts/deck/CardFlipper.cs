@@ -204,7 +204,6 @@ public partial class CardFlipper : Node2D
 	{
 		Tween tween = CreateTween();
 		tween.TweenProperty(this, "scale", new Vector2(xScale, yScale), duration)
-			.SetDelay(1.3f)
 			.SetTrans(Tween.TransitionType.Elastic)
 			.SetEase(Tween.EaseType.Out);
 	}
@@ -212,7 +211,7 @@ public partial class CardFlipper : Node2D
 	public void OnExit(float xPosition, float yPosition, float duration)
 	{
 		Tween tween = CreateTween();
-		tween.TweenProperty(this, "position", new Vector2(xPosition, yPosition), duration)
+		tween.TweenProperty(this, "position", new Vector2(this.Position.X, yPosition), duration)
 			.SetEase(Tween.EaseType.InOut)
 			.SetTrans(Tween.TransitionType.Back);
 	}

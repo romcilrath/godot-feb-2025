@@ -27,6 +27,7 @@ public partial class GameManager : Node
 
 	// Define ActiveDecks
 	public List<Deck> ActiveDecks { get; private set; } = new List<Deck>();
+	public CardFlipper[] BlindDraw { get; private set; }
 
 	public override void _Ready() 
 	{
@@ -52,9 +53,7 @@ public partial class GameManager : Node
 		// Add starting Decks after PlayerManager instanced
 		AddStartingDecks();
 
-		GD.Print(GetActiveCardCount());
-		OnDrawFromActiveDecks(3);
-		GD.Print(GetActiveCardCount());
+		DoBlindDraw(3);
 	}
 
 	public void AddStartingDecks()
@@ -97,7 +96,7 @@ public partial class GameManager : Node
 		for (int j = 0; j < count; j++)
 		{
 			int cardCount = GetActiveCardCount();
-
+			
 			if (cardCount == 0) return cards;
 
 			int chosenCardIndex = (int)(GD.Randi() % cardCount);
@@ -122,9 +121,10 @@ public partial class GameManager : Node
 		return cards;
 	}
 
-	private void OnDrawFromActiveDecks(int count = 1)
+	private void DoBlindDraw(int count = 1)
 	{
 		Card[] cards = DrawFromActiveDecks(count);
+		BlindDraw = new CardFlipper[cards.Length];
 		GD.Print("Cards: " + cards.Length);
 
 		for (int i = 0; i < cards.Length; i++)
@@ -132,11 +132,18 @@ public partial class GameManager : Node
 			Card card = cards[i];
 			CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
 			GetTree().Root.AddChild(cardFlipper);
+			BlindDraw[i] = cardFlipper;
 			cardFlipper.Position = CardSpawnPoint.Position;
 			cardFlipper.Scale = new Vector2(0.3f, 0.3f);
 
 			CardInstance cardInstance = cardFlipper.GetCardInstance();
+			
+			// Hook up signals for when card back is selected, for emiting a card selected signal
+			// And when a card choice is selected, for emitting a card dismissed signal
+			cardInstance.Connect(CardInstance.SignalName.OnCardSelected, Callable.From((CardInstance selectedCardInstance) => OnCardSelected(selectedCardInstance)));
+			cardInstance.Connect(CardInstance.SignalName.OnCardDismissed, Callable.From((CardInstance cardInstance) => OnCardDismissed(cardInstance)));
 
+			// Assign and then flipe the card
 			cardInstance.SetCard(card);
 			cardInstance.LoadCard();
 			cardInstance.FlipCard();
@@ -153,7 +160,56 @@ public partial class GameManager : Node
 			tween.TweenProperty(cardFlipper, "position", toPosition, 0.8)
 				.SetEase(Tween.EaseType.Out)
 				.SetTrans(Tween.TransitionType.Elastic);
-			
+		}
+	}
+
+	private void OnCardSelected(CardInstance selectedCardInstance)
+	{
+		foreach (CardFlipper cardFlipper in BlindDraw)
+		{
+			CardInstance cardInstance = cardFlipper.GetCardInstance();
+
+			// Dismiss unselected cards
+			if (cardInstance != selectedCardInstance)
+			{
+				cardInstance.SetEnabled(false);
+
+				Vector2 toPosition = new Vector2(cardFlipper.Position.X, CardExitPoint.Position.Y);
+				Tween positionTween = CreateTween();
+				positionTween.TweenProperty(cardFlipper, "position", toPosition, 0.4f)
+					.SetDelay(0.5)
+					.SetEase(Tween.EaseType.In);
+			}
+			// Flip, scale, and move to center selected card 
+			else
+			{				
+				cardFlipper.OnScaleCard(0.4f, 0.4f, 1f);
+
+				Vector2 toPosition = CardDrawRegion.Position + CardDrawRegion.Size/2;
+				Tween positionTween = CreateTween();
+				positionTween.TweenProperty(cardFlipper, "position", toPosition, 0.4f)
+					.SetDelay(0.5)
+					.SetEase(Tween.EaseType.In);
+
+				positionTween.Finished += () => cardFlipper.OnFlipRight();
+				positionTween.Finished += () => cardFlipper.OnAnimateApplyCardEffects(1f);
+			}
+		}
+	}
+
+	private void OnCardDismissed(CardInstance cardInstance)
+	{
+		// Vertically transition card to CardExitPoints Y position
+		foreach (CardFlipper cardFlipper in BlindDraw)
+		{
+			// Skip if its not the card to be dismissed
+			if (cardFlipper.GetCardInstance() != cardInstance) continue;
+
+			Vector2 toPosition = new Vector2(cardFlipper.Position.X, CardExitPoint.Position.Y);
+			Tween positionTween = CreateTween();
+			positionTween.TweenProperty(cardFlipper, "position", toPosition, 0.4f)
+				.SetDelay(0.5)
+				.SetEase(Tween.EaseType.In);
 		}
 	}
 }

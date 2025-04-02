@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -90,12 +91,15 @@ public partial class GameManager : Node
 
 	public Card[] DrawFromActiveDecks(int count = 1)
 	{
-		// Draw a random Card from ActiveDecks
-		Card[] cards = new Card[count];
+		int cardCount = GetActiveCardCount();
 
-		for (int j = 0; j < count; j++)
+		// Draw a random Card from ActiveDecks
+		int _count = count > cardCount ? cardCount : count;
+		Card[] cards = new Card[_count];
+
+		for (int j = 0; j < _count; j++)
 		{
-			int cardCount = GetActiveCardCount();
+			cardCount = GetActiveCardCount();
 			
 			if (cardCount == 0) return cards;
 
@@ -115,7 +119,7 @@ public partial class GameManager : Node
 					deckCardIndex += 1;
 				}
 			}
-			Card newCard = ActiveDecks[choosenDeckIndex].DrawAt(deckCardIndex);
+			Card newCard = ActiveDecks[choosenDeckIndex].BlindDrawAt(deckCardIndex);
 			cards[j] = newCard;
 		}
 		return cards;
@@ -199,6 +203,12 @@ public partial class GameManager : Node
 
 	private void OnCardDismissed(CardInstance cardInstance)
 	{
+		Card[] toDiscard = new Card[1];
+		toDiscard[0] = cardInstance.GetCard();
+		foreach (Deck deck in ActiveDecks)
+		{
+			deck.ReturnBlindDrawnCards(toDiscard);
+		}
 		// Vertically transition card to CardExitPoints Y position
 		foreach (CardFlipper cardFlipper in BlindDraw)
 		{
@@ -210,6 +220,7 @@ public partial class GameManager : Node
 			positionTween.TweenProperty(cardFlipper, "position", toPosition, 0.4f)
 				.SetDelay(0.5)
 				.SetEase(Tween.EaseType.In);
+			positionTween.Finished += () => DoBlindDraw(3);
 		}
 	}
 }

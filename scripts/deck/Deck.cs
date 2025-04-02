@@ -7,14 +7,16 @@ public class Deck
     public string Name { get; private set; } = "Deck Name";
     public Texture2D Art { get; private set; }
     public List<Card> Cards { get; private set; }
+    public List<Card> BlindDrawnCards { get; private set; }
     public List<Card> LockedCards { get; private set; }
     public List<Card> DiscardedCards { get; private set; }
 
-    public Deck(string name = null, Texture2D art = null, List<Card> cards = null, List<Card> lockedCards = null)
+    public Deck(string name = null, Texture2D art = null, List<Card> cards = null, List<Card> blindDrawnCards = null, List<Card> lockedCards = null)
     {
         Name = name ?? "Deck Name";
-        Art = art;                                          // TODO: Handle null art
+        Art = art;  // TODO: Handle null art
         Cards = cards ?? new List<Card>();
+        BlindDrawnCards = blindDrawnCards ?? new List<Card>();
         LockedCards = lockedCards ?? new List<Card>();
         DiscardedCards = new List<Card>();
     }
@@ -44,7 +46,8 @@ public class Deck
         Name = name;
         Art = art;
         Cards = new List<Card>(cardsArray);
-        DiscardedCards = new List<Card>(lockedCardsArray);
+        BlindDrawnCards = new List<Card>();
+        LockedCards = new List<Card>(lockedCardsArray);
         DiscardedCards = new List<Card>();
     }
 
@@ -74,6 +77,34 @@ public class Deck
         Cards.RemoveAt(drawIndex);
         DiscardedCards.Add(card);
         return card;
+    }
+
+    public Card BlindDrawAt(int drawIndex = 0)
+    {
+        if (Cards.Count == 0 || drawIndex > Cards.Count)
+        {
+            Refresh();
+            if (Cards.Count == 0)
+                return null;
+        }
+        
+        Card card = Cards[drawIndex];
+        Cards.RemoveAt(drawIndex);
+        BlindDrawnCards.Add(card);
+        return card;
+    }
+
+    public void ReturnBlindDrawnCards(Card[] toDiscard)
+    {
+        for (int i = 0; i < BlindDrawnCards.Count; i++)
+        {
+            Card returnCard = BlindDrawnCards[i];
+            bool isToDiscard = false;
+            foreach (Card discardCard in toDiscard) if (discardCard == returnCard) isToDiscard = true; 
+            if (isToDiscard) DiscardedCards.Add(returnCard);
+            else Cards.Add(returnCard);
+        }
+        BlindDrawnCards.Clear();
     }
 
     public void Shuffle()

@@ -129,6 +129,12 @@ public class Deck
         Shuffle();
     }
 
+    public bool IsExhausted()
+    {
+        if (Cards.Count == 0 && DiscardedCards.Count > 0) return true;
+        return false;
+    }
+
     public void PrintDeck()
     {
         GD.Print($"Deck Name: {Name}");

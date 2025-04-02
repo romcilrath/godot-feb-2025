@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using Vector2 = Godot.Vector2;
 
@@ -19,6 +20,7 @@ public partial class GameManager : Node
 	[Export] public Node2D CardSpawnPoint { get; private set; }
 	[Export] public Node2D CardExitPoint { get; private set; }
 	[Export] public ReferenceRect CardDrawRegion { get; private set; }
+	[Export] public Node2D ShufflingIndicator { get; private set; }
 
 	// Define an event that gets triggered when Turn increments
 	public event Action OnTurnIncremented;
@@ -220,7 +222,37 @@ public partial class GameManager : Node
 			positionTween.TweenProperty(cardFlipper, "position", toPosition, 0.4f)
 				.SetDelay(0.5)
 				.SetEase(Tween.EaseType.In);
-			positionTween.Finished += () => DoBlindDraw(3);
+			positionTween.Finished += () => HandleTurn();
+		}
+	}
+
+	private void HandleTurn()
+	{
+		List<Deck> toRefreshDecks = new List<Deck>();
+		foreach (Deck deck in ActiveDecks)
+		{
+			if (deck.IsExhausted()) toRefreshDecks.Add(deck);
+		}
+
+		foreach (Deck deck in toRefreshDecks)
+		{
+			deck.Refresh();
+		}
+
+		if (toRefreshDecks.Count > 0)
+		{
+			ShufflingIndicator.Visible = true;
+			ShufflingIndicator.Modulate = new Color(ShufflingIndicator.Modulate, 0);
+
+			Tween showShuffleIndicator = CreateTween();
+			showShuffleIndicator.TweenProperty(ShufflingIndicator, "modulate:a", 1, 0.1f);
+			showShuffleIndicator.TweenInterval(3);
+			showShuffleIndicator.TweenProperty(ShufflingIndicator, "modulate:a", 0, 0.1f);
+
+			showShuffleIndicator.Finished += () => ShufflingIndicator.Visible = false;
+			showShuffleIndicator.Finished += () => DoBlindDraw(3);
+		} else {
+			DoBlindDraw(3);
 		}
 	}
 }

@@ -18,12 +18,13 @@
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CardSpawnPoint", "CardExitPoint", "CardDrawRegion")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CardSpawnPoint", "CardExitPoint", "CardDrawRegion", "ShufflingIndicator")]
 script = ExtResource("1_33a1n")
 StartingDecks = Array[Object]([ExtResource("2_qgxyn")])
 CardSpawnPoint = NodePath("../CardSpawnPoint")
 CardExitPoint = NodePath("../CardExitPoint")
 CardDrawRegion = NodePath("../CardDrawRegion")
+ShufflingIndicator = NodePath("../ShufflingIndicator")
 
 [node name="GlobalReferences" type="Node" parent="."]
 script = ExtResource("2_77h7y")
@@ -136,3 +137,30 @@ offset_bottom = 1920.0
 mouse_filter = 2
 color = Color(0.784314, 0.74902, 0.956863, 1)
 metadata/_edit_lock_ = true
+
+[node name="ShufflingIndicator" type="Node2D" parent="."]
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="ShufflingIndicator"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -11.0
+offset_right = 3081.0
+offset_bottom = 1909.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShufflingIndicator/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_r38au")
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[wave amp=100 freq=4]Shuffling...[/wave]"
+fit_content = true
+autowrap_mode = 0

@@ -12,6 +12,7 @@ public class Deck
     public List<Card> DiscardedCards { get; private set; }
     public Color PrimaryColor { get; private set; }
     public Color SecondaryColor { get; private set; }
+    public Color ChoicesColor { get; private set;}
 
     public Deck(string name = null, Texture2D art = null, List<Card> cards = null, List<Card> blindDrawnCards = null, List<Card> lockedCards = null, Color primaryColor = new Color(), Color secondaryColor = new Color())
     {
@@ -23,6 +24,7 @@ public class Deck
         DiscardedCards = new List<Card>();
         PrimaryColor = new Color();
         SecondaryColor = new Color();
+        ChoicesColor = new Color();
     }
 
     public Deck(DeckResource deckResource)
@@ -54,6 +56,7 @@ public class Deck
         DiscardedCards = new List<Card>();
         PrimaryColor = deckResource.PrimaryColor;
         SecondaryColor = deckResource.SecondaryColor;
+        ChoicesColor = deckResource.ChoicesColor;
     }
 
     public Card Draw()

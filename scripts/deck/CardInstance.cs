@@ -130,6 +130,11 @@ public partial class CardInstance : Node2D
 		this._tab.SelfModulate = this._card.Deck.SecondaryColor;
 		this._window.SelfModulate = this._card.Deck.SecondaryColor;
 		this._divBar.SelfModulate = this._card.Deck.SecondaryColor;
+
+		foreach (ChoiceInstance choiceInstance in choiceInstances)
+		{
+			choiceInstance.SetColor(this._card.Deck.ChoicesColor);
+		}
 	}
 
 	// Load all choices to the card

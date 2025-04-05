@@ -11,6 +11,7 @@ public partial class DeckResource : Resource
     [Export] public CardResource[] LockedCards;
     [Export] public Color PrimaryColor;
     [Export] public Color SecondaryColor;
+    [Export] public Color ChoicesColor;
 
     #endregion
 }

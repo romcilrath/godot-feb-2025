@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DeckResource" load_steps=5 format=3 uid="uid://ds427qa82mnnm"]
+
+[ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_mksbf"]
+[ext_resource type="Resource" uid="uid://p5b5n0rdprue" path="res://tres/cards/preacher_man.tres" id="2_h6qr0"]
+[ext_resource type="Resource" uid="uid://bu3df4rhtw7c6" path="res://tres/cards/prodigal_son.tres" id="3_2rwbe"]
+[ext_resource type="Script" path="res://scripts/deck/DeckResource.cs" id="4_1ygh8"]
+
+[resource]
+script = ExtResource("4_1ygh8")
+Name = "Test Deck"
+Art = ExtResource("1_mksbf")
+Cards = Array[Object]([ExtResource("2_h6qr0"), ExtResource("3_2rwbe")])
+LockedCards = Array[Object]([])
+PrimaryColor = Color(0.701961, 0.607843, 0.690196, 1)
+SecondaryColor = Color(0.588235, 0.466667, 0.690196, 1)
+ChoicesColor = Color(0.933333, 1, 0.0156863, 1)

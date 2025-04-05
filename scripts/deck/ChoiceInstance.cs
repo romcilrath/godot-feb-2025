@@ -95,8 +95,7 @@ public partial class ChoiceInstance : ColorRect
         }
         ReferenceRect finalSpace = new ReferenceRect();
         finalSpace.CustomMinimumSize = new Vector2(50, 0);
-        _effectRow.AddChild(finalSpace);
-        
+        _effectRow.AddChild(finalSpace);        
 	}
     
     public void SetDisabled(bool isDisabled=true)
@@ -145,6 +144,11 @@ public partial class ChoiceInstance : ColorRect
             if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
                 ResetShaderRotation(choiceShaderMaterial);
         }
+    }
+
+    public void SetColor(Color color)
+    {
+        _choiceRect.SelfModulate = color;
     }
 
     private void KillTweens() 

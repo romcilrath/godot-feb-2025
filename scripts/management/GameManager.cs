@@ -94,38 +94,36 @@ public partial class GameManager : Node
 	public Card[] DrawFromActiveDecks(int count = 1)
 	{
 		int cardCount = GetActiveCardCount();
+		int _toDrawCount = count > cardCount ? cardCount : count;
+		Card[] cards = new Card[_toDrawCount];
 
-		// Draw a random Card from ActiveDecks
-		int _count = count > cardCount ? cardCount : count;
-		Card[] cards = new Card[_count];
-
-		for (int j = 0; j < _count; j++)
+		for (int i = 0; i < _toDrawCount; i++)
 		{
-			cardCount = GetActiveCardCount();
-			
 			if (cardCount == 0) return cards;
 
 			int chosenCardIndex = (int)(GD.Randi() % cardCount);
+			int toDrawDeckIndex = 0;
+			int toDrawCardIndex = chosenCardIndex;
 
-			int choosenDeckIndex = 0;
-			int deckCardIndex = 0;
-			for (int index = 0; index < chosenCardIndex; index++)
+			while (true)
 			{
-				if (deckCardIndex > ActiveDecks[choosenDeckIndex].Cards.Count)
-				{
-					choosenDeckIndex += 1;
-					deckCardIndex = 0;
-				}
-				else
-				{
-					deckCardIndex += 1;
-				}
+				int deckSize = ActiveDecks[toDrawDeckIndex].Cards.Count;
+				if (toDrawCardIndex < deckSize)
+					break;
+
+				toDrawCardIndex -= deckSize;
+				toDrawDeckIndex += 1;
 			}
-			Card newCard = ActiveDecks[choosenDeckIndex].BlindDrawAt(deckCardIndex);
-			cards[j] = newCard;
+
+			Card newCard = ActiveDecks[toDrawDeckIndex].BlindDrawAt(toDrawCardIndex);
+			cards[i] = newCard;
+
+			cardCount -= 1;
 		}
+
 		return cards;
 	}
+
 
 	private void DoBlindDraw(int count = 1)
 	{
@@ -236,6 +234,7 @@ public partial class GameManager : Node
 
 		foreach (Deck deck in toRefreshDecks)
 		{
+			GD.Print($"Refreshing deck {deck.Name}...");
 			deck.Refresh();
 		}
 
@@ -245,9 +244,11 @@ public partial class GameManager : Node
 			ShufflingIndicator.Modulate = new Color(ShufflingIndicator.Modulate, 0);
 
 			Tween showShuffleIndicator = CreateTween();
-			showShuffleIndicator.TweenProperty(ShufflingIndicator, "modulate:a", 1, 0.1f);
+			showShuffleIndicator.TweenProperty(ShufflingIndicator, "modulate:a", 1, 0.1f)
+				.SetEase(Tween.EaseType.In);
 			showShuffleIndicator.TweenInterval(3);
-			showShuffleIndicator.TweenProperty(ShufflingIndicator, "modulate:a", 0, 0.1f);
+			showShuffleIndicator.TweenProperty(ShufflingIndicator, "modulate:a", 0, 0.1f)
+				.SetEase(Tween.EaseType.Out);
 
 			showShuffleIndicator.Finished += () => ShufflingIndicator.Visible = false;
 			showShuffleIndicator.Finished += () => DoBlindDraw(3);

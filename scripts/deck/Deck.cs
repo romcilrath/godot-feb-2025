@@ -10,8 +10,10 @@ public class Deck
     public List<Card> BlindDrawnCards { get; private set; }
     public List<Card> LockedCards { get; private set; }
     public List<Card> DiscardedCards { get; private set; }
+    public Color PrimaryColor { get; private set; }
+    public Color SecondaryColor { get; private set; }
 
-    public Deck(string name = null, Texture2D art = null, List<Card> cards = null, List<Card> blindDrawnCards = null, List<Card> lockedCards = null)
+    public Deck(string name = null, Texture2D art = null, List<Card> cards = null, List<Card> blindDrawnCards = null, List<Card> lockedCards = null, Color primaryColor = new Color(), Color secondaryColor = new Color())
     {
         Name = name ?? "Deck Name";
         Art = art;  // TODO: Handle null art
@@ -19,6 +21,8 @@ public class Deck
         BlindDrawnCards = blindDrawnCards ?? new List<Card>();
         LockedCards = lockedCards ?? new List<Card>();
         DiscardedCards = new List<Card>();
+        PrimaryColor = new Color();
+        SecondaryColor = new Color();
     }
 
     public Deck(DeckResource deckResource)
@@ -27,7 +31,6 @@ public class Deck
         Texture2D art = deckResource.Art;
         CardResource[] cardResources = deckResource.Cards;
         CardResource[] lockedCardResources = deckResource.LockedCards;
-        
 
         // Convert  array of cardResources to array of cards
         Card[] cardsArray = new Card[cardResources.Length];
@@ -49,6 +52,8 @@ public class Deck
         BlindDrawnCards = new List<Card>();
         LockedCards = new List<Card>(lockedCardsArray);
         DiscardedCards = new List<Card>();
+        PrimaryColor = deckResource.PrimaryColor;
+        SecondaryColor = deckResource.SecondaryColor;
     }
 
     public Card Draw()
@@ -76,6 +81,7 @@ public class Deck
         Card card = Cards[drawIndex];
         Cards.RemoveAt(drawIndex);
         DiscardedCards.Add(card);
+        card.Deck = this;
         return card;
     }
 
@@ -88,9 +94,11 @@ public class Deck
                 return null;
         }
         
+        GD.Print($"Blind drawing card at index {drawIndex} from deck {Name} which has {Cards.Count} cards.");
         Card card = Cards[drawIndex];
         Cards.RemoveAt(drawIndex);
         BlindDrawnCards.Add(card);
+        card.Deck = this;
         return card;
     }
 

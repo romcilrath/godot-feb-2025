@@ -31,6 +31,8 @@ public partial class CardInstance : Node2D
 	[Export] public NodePath NumberPath { get; set; }
 	[Export] public NodePath BodyPath { get; set; }
 	[Export] public NodePath ChoicesContainerPath { get; set; }
+	[Export] public NodePath TextboxPath { get; set; }
+	[Export] public NodePath DivBarPath { get; set; }
 
 	private CardBack _cardBack;
 	private NinePatchRect _backdrop;
@@ -43,6 +45,8 @@ public partial class CardInstance : Node2D
 	private RichTextLabel _number;
 	private RichTextLabel _body;
 	private VBoxContainer _choicesContainer;
+	private NinePatchRect _textbox;
+	private ReferenceRect _divBar;
 
 	private bool _isEnabled = true;
 	
@@ -60,6 +64,8 @@ public partial class CardInstance : Node2D
 		_number = NodeUtils.FindNodeWithError<RichTextLabel>(this, NumberPath, "Number");
 		_body = NodeUtils.FindNodeWithError<RichTextLabel>(this, BodyPath, "Body");
 		_choicesContainer = NodeUtils.FindNodeWithError<VBoxContainer>(this, ChoicesContainerPath, "ChoicesContainer");
+		_textbox = NodeUtils.FindNodeWithError<NinePatchRect>(this, TextboxPath, "Textbox");
+		_divBar = NodeUtils.FindNodeWithError<ReferenceRect>(this, DivBarPath, "DivBar");
 
 		// If cardResource is defined via editor (like for debug) then SetCard and LoadCard
 		if (this.cardResource is not null) 
@@ -115,6 +121,15 @@ public partial class CardInstance : Node2D
 			Choice choice = this._card.Choices[i];
 			choiceInstances[i] = LoadChoice(choice);
 		}
+
+		if (this._card.Deck is null) return;
+
+		this._textbox.SelfModulate = this._card.Deck.PrimaryColor;
+		this._cardBack.SelfModulate = this._card.Deck.SecondaryColor;
+		this._backdrop.SelfModulate = this._card.Deck.SecondaryColor;
+		this._tab.SelfModulate = this._card.Deck.SecondaryColor;
+		this._window.SelfModulate = this._card.Deck.SecondaryColor;
+		this._divBar.SelfModulate = this._card.Deck.SecondaryColor;
 	}
 
 	// Load all choices to the card

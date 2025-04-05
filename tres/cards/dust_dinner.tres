@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://cxb8jsv81fl61"]
+
+[ext_resource type="Script" path="res://scripts/deck/CardResource.cs" id="1_3t8aq"]
+[ext_resource type="Texture2D" uid="uid://b42d3lqmg3eig" path="res://sprites/dev/card/ImageNotFound.png" id="1_vi0rv"]
+[ext_resource type="Script" path="res://scripts/deck/effects/OneTimeStatEffectResource.cs" id="2_s6rei"]
+[ext_resource type="Script" path="res://scripts/deck/ChoiceResource.cs" id="3_35thv"]
+
+[sub_resource type="Resource" id="Resource_j81gw"]
+script = ExtResource("2_s6rei")
+Target = 3
+Value = -25.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_54ual"]
+script = ExtResource("3_35thv")
+Text = "Give them what you can spare"
+HoverText = ""
+Effects = Array[Object]([SubResource("Resource_j81gw")])
+
+[sub_resource type="Resource" id="Resource_s5u3r"]
+script = ExtResource("2_s6rei")
+Target = 3
+Value = 5.0
+ActionType = 1
+
+[sub_resource type="Resource" id="Resource_6crlw"]
+script = ExtResource("3_35thv")
+Text = "Take what little they have"
+HoverText = ""
+Effects = Array[Object]([SubResource("Resource_s5u3r")])
+
+[sub_resource type="Resource" id="Resource_g6wi4"]
+script = ExtResource("3_35thv")
+Text = "Ride on"
+HoverText = ""
+Effects = Array[Object]([])
+
+[resource]
+script = ExtResource("1_3t8aq")
+Number = 4
+Name = "Dust Dinner"
+Body = "The local area is devastated, instead of crops the fields still only dust.
+
+Some children go without, meekly sharing their limited food."
+Art = ExtResource("1_vi0rv")
+CardEffects = Array[Object]([])
+Choices = Array[Object]([SubResource("Resource_54ual"), SubResource("Resource_6crlw"), SubResource("Resource_g6wi4")])

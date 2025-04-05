@@ -10,6 +10,7 @@ public class Card
     public Texture2D Art { get; private set; }
     public Effect[] CardEffects { get; private set; }
     public Choice[] Choices { get; private set; }
+    public Deck Deck { get; set; }
     
     public Card(int number = 0, string name = null, string body = null, Texture2D art = null, Choice[] choices = null, Effect[] cardEffects = null)
     {

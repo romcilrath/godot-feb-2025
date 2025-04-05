@@ -9,6 +9,8 @@ public partial class DeckResource : Resource
     [Export] public Texture2D Art;
     [Export] public CardResource[] Cards;
     [Export] public CardResource[] LockedCards;
+    [Export] public Color PrimaryColor;
+    [Export] public Color SecondaryColor;
 
     #endregion
 }

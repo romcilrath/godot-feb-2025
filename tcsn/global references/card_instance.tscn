@@ -25,6 +25,8 @@ NameLabelPath = NodePath("TabMarginContainer/CardNameCenterContainer/CardNameHBo
 NumberPath = NodePath("OtherElements/Number")
 BodyPath = NodePath("BodyChoicesContainer/BodyContainer/Body")
 ChoicesContainerPath = NodePath("BodyChoicesContainer/MarginContainer/ChoicesContainer")
+TextboxPath = NodePath("OtherElements/Textbox")
+DivBarPath = NodePath("BodyChoicesContainer/DivBar")
 
 [node name="CardBack" type="NinePatchRect" parent="."]
 self_modulate = Color(0.443137, 0.690196, 0.560784, 1)
@@ -86,13 +88,8 @@ texture = ExtResource("4_tpbsj")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Cover" type="ColorRect" parent="OtherElements"]
-modulate = Color(0.443137, 0.690196, 0.560784, 1)
-offset_right = 2376.0
-offset_bottom = 2119.0
-
 [node name="Window" type="NinePatchRect" parent="OtherElements"]
-modulate = Color(0.443137, 0.690196, 0.560784, 1)
+self_modulate = Color(0.443137, 0.690196, 0.560784, 1)
 offset_left = -20.0
 offset_top = -1972.67
 offset_right = 2399.0
@@ -106,10 +103,10 @@ patch_margin_bottom = 573
 axis_stretch_vertical = 1
 
 [node name="Textbox" type="NinePatchRect" parent="OtherElements"]
-modulate = Color(0.552941, 0.796078, 0.666667, 1)
-offset_left = 31.0
+self_modulate = Color(0.552941, 0.796078, 0.666667, 1)
+offset_left = 19.0
 offset_top = -125.67
-offset_right = 2351.0
+offset_right = 2339.0
 offset_bottom = 2557.33
 texture = ExtResource("6_fluqx")
 patch_margin_left = 128
@@ -140,7 +137,7 @@ offset_bottom = -1921.0
 metadata/_edit_use_anchors_ = true
 
 [node name="TabNPR" type="NinePatchRect" parent="TabMarginContainer"]
-modulate = Color(0.443137, 0.690196, 0.560784, 1)
+self_modulate = Color(0.443137, 0.690196, 0.560784, 1)
 layout_mode = 2
 texture = ExtResource("8_mx82h")
 region_rect = Rect2(0, 0, 609, 371)
@@ -224,6 +221,11 @@ size_flags_vertical = 4
 border_color = Color(0.443137, 0.690196, 0.560784, 1)
 border_width = 10.0
 editor_only = false
+
+[node name="Space" type="ReferenceRect" parent="BodyChoicesContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+border_color = Color(1, 0, 0, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="BodyChoicesContainer"]
 layout_mode = 2

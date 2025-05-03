@@ -183,6 +183,7 @@ public partial class GameManager : Node
 				positionTween.TweenProperty(cardFlipper, "position", toPosition, 0.4f)
 					.SetDelay(0.5)
 					.SetEase(Tween.EaseType.In);
+				positionTween.Finished += () => cardFlipper.QueueFree();
 			}
 			// Flip, scale, and move to center selected card 
 			else
@@ -221,6 +222,7 @@ public partial class GameManager : Node
 				.SetDelay(0.5)
 				.SetEase(Tween.EaseType.In);
 			positionTween.Finished += () => HandleTurn();
+			positionTween.Finished += () => cardFlipper.QueueFree();
 		}
 	}
 

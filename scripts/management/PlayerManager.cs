@@ -20,6 +20,7 @@ public partial class PlayerManager : Node
     public Stat Vitality { get; private set; } 
     public Stat Grit { get; private set; }
     public Stat Rations { get; private set; }
+    private const int MAX_STAT_VALUE = 9999;   // Constants should use 'const' and be in uppercase
 
     public override void _Ready() 
     {
@@ -35,10 +36,10 @@ public partial class PlayerManager : Node
         GD.Print("PlayerManager Initialized.");
 
         // Initialize Vitality with StartingVitality
-        Coin = new Stat("Coin", min:0, initial:StartingCoin);
+        Coin = new Stat("Coin", min:0, max:MAX_STAT_VALUE, initial:StartingCoin);
         Vitality = new Stat("Vitality", min:0, max:100, initial:StartingVitality);
-        Grit = new Stat("Grit", min:0, initial:StartingGrit);
-        Rations = new Stat("Rations", initial:StartingRations);
+        Grit = new Stat("Grit", min:0, max:MAX_STAT_VALUE, initial:StartingGrit);
+        Rations = new Stat("Rations", min:0, max:MAX_STAT_VALUE, initial:StartingRations);
     }
 
     public List<Stat> GetStats()

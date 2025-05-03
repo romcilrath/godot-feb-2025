@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bp3ghpuvojhjv" path="res://sprites/icons/Rations.PNG" id="8_67s3o"]
 [ext_resource type="Texture2D" uid="uid://c62mt40flsped" path="res://sprites/icons/Grit.PNG" id="9_3djmi"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
-[ext_resource type="Script" path="res://scripts/PlayerStatRenderer.cs" id="10_vadct"]
+[ext_resource type="PackedScene" uid="uid://t6hgr1rmx02f" path="res://tres/ui/stat_renderer.tscn" id="14_0oked"]
 [ext_resource type="PackedScene" uid="uid://c4w53q2bs5k83" path="res://tcsn/global references/card_flipper.tscn" id="14_6tg8j"]
 
 [node name="Node2D" type="Node2D"]
@@ -50,75 +50,35 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="CoinStat" type="Label" parent="StatRenderers"]
-layout_mode = 0
-offset_left = 1905.0
-offset_top = 59.0
-offset_right = 2330.0
-offset_bottom = 185.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_r38au")
-theme_override_font_sizes/font_size = 100
-text = "Test: 300"
-horizontal_alignment = 2
-script = ExtResource("10_vadct")
+[node name="CoinRenderer" parent="StatRenderers" instance=ExtResource("14_0oked")]
+position = Vector2(1454, -24)
+scale = Vector2(0.75, 0.75)
 
-[node name="VitalityStat" type="Label" parent="StatRenderers"]
-layout_mode = 0
-offset_left = 2429.0
-offset_top = 59.0
-offset_right = 2854.0
-offset_bottom = 185.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_r38au")
-theme_override_font_sizes/font_size = 100
-text = "Test: 300"
-horizontal_alignment = 2
-script = ExtResource("10_vadct")
+[node name="VitalityRenderer" parent="StatRenderers" instance=ExtResource("14_0oked")]
+position = Vector2(1852, -24)
+scale = Vector2(0.75, 0.75)
 StatToTrack = 1
+Art = ExtResource("6_tksyb")
 
-[node name="GritStat" type="Label" parent="StatRenderers"]
-layout_mode = 0
-offset_left = 1921.0
-offset_top = 210.0
-offset_right = 2346.0
-offset_bottom = 336.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_r38au")
-theme_override_font_sizes/font_size = 100
-text = "Test: 300"
-horizontal_alignment = 2
-script = ExtResource("10_vadct")
+[node name="GritRenderer" parent="StatRenderers" instance=ExtResource("14_0oked")]
+position = Vector2(2247, -24)
+scale = Vector2(0.75, 0.75)
 StatToTrack = 2
+Art = ExtResource("9_3djmi")
 
-[node name="RationsStat" type="Label" parent="StatRenderers"]
-layout_mode = 0
-offset_left = 2429.0
-offset_top = 208.0
-offset_right = 2854.0
-offset_bottom = 334.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_r38au")
-theme_override_font_sizes/font_size = 100
-text = "Test: 300"
-horizontal_alignment = 2
-script = ExtResource("10_vadct")
+[node name="RationsRenderer" parent="StatRenderers" instance=ExtResource("14_0oked")]
+position = Vector2(2644, -24)
+scale = Vector2(0.75, 0.75)
 StatToTrack = 3
+Art = ExtResource("8_67s3o")
 
-[node name="TurnTracker" type="Label" parent="StatRenderers"]
-layout_mode = 0
-offset_left = 133.0
-offset_top = 154.0
-offset_right = 558.0
-offset_bottom = 280.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_r38au")
-theme_override_font_sizes/font_size = 100
-text = "Test: 300"
-horizontal_alignment = 2
-script = ExtResource("10_vadct")
+[node name="TurnRenderer" parent="StatRenderers" instance=ExtResource("14_0oked")]
+position = Vector2(-26, -24)
+scale = Vector2(0.75, 0.75)
 StatToTrack = 4
+Art = null
 
 [node name="CardSpawnPoint" type="Node2D" parent="."]
 position = Vector2(1536, -1000)

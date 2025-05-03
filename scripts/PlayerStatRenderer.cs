@@ -11,41 +11,82 @@ public enum StatType
 	Turn
 }
 
-public partial class PlayerStatRenderer : Label
+public partial class PlayerStatRenderer : Node2D
 {
+	[Export] public Label StatName;
+	[Export] public Label StatValue;
+    [Export] public TextureRect ArtRect;
+	[Export] public ReferenceRect SpaceRect;
+	[Export] public StatType StatToTrack;
+	[Export] public Texture2D Art;
 
-    [Export] public StatType StatToTrack;
-    [Export] public Texture2D Art;
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-        // Update the label text based on the selected stat
-        switch (StatToTrack)
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+        // Set the texture of the ArtRect to the specified Art
+        if (Art != null)
         {
-            case StatType.Coin:
-                this.Text = "Coin: " + PlayerManager.Instance.Coin.Current;
-                break;
-            case StatType.Vitality:
-                this.Text = "Vitality: " + PlayerManager.Instance.Vitality.Current;
-                break;
-            case StatType.Grit:
-                this.Text = "Grit: " + PlayerManager.Instance.Grit.Current;
-                break;
-            case StatType.Rations:
-                this.Text = "Rations: " + PlayerManager.Instance.Rations.Current;
-                break;
+            ArtRect.Texture = Art;
+        }
+        else
+        {
+            GD.PrintErr("Art texture is not set.");
+			ArtRect.Visible = false;
+			SpaceRect.Visible = false;
+        }
+
+        if (StatName == null || StatValue == null)
+        {
+            GD.PrintErr("StatName or StatValue is not set.");
+            return;
+        }
+        
+        if (PlayerManager.Instance == null)
+        {
+            GD.PrintErr("PlayerManager instance is not available.");
+            return;
+        }
+        
+        if (GameManager.Instance == null)
+        {
+            GD.PrintErr("GameManager instance is not available.");
+            return;
+        }
+        
+        GD.Print("PlayerStatRenderer Initialized.");
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+		// Update the label text based on the selected stat
+		switch (StatToTrack)
+		{
+			case StatType.Coin:
+				StatName.Text = "Coin";
+				StatValue.Text = PlayerManager.Instance.Coin.Current.ToString();
+				break;
+			case StatType.Vitality:
+				StatName.Text = "Vitality";
+				StatValue.Text = PlayerManager.Instance.Vitality.Current.ToString();
+				break;
+			case StatType.Grit:
+				StatName.Text = "Grit";
+				StatValue.Text = PlayerManager.Instance.Grit.Current.ToString();
+				break;
+			case StatType.Rations:
+				StatName.Text = "Rations";
+				StatValue.Text = PlayerManager.Instance.Rations.Current.ToString();
+				break;
 			case StatType.Turn:
-				this.Text = "Turn: " + GameManager.Instance.Turn;
+				StatName.Text = "Turn";
+				StatValue.Text = GameManager.Instance.Turn.ToString();
 				break;
 			default:
-				this.Text = "???";
+				StatName.Text = "???";
+				StatValue.Text = "???";
 				break;
-        }
-    }
+		}
+	}
 }
+

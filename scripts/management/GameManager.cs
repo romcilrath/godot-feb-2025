@@ -188,6 +188,8 @@ public partial class GameManager : Node
 			// Flip, scale, and move to center selected card 
 			else
 			{				
+				cardFlipper.ZIndex += 1;
+				
 				cardFlipper.OnScaleCard(0.4f, 0.4f, 1f);
 
 				Vector2 toPosition = CardDrawRegion.Position + CardDrawRegion.Size/2;

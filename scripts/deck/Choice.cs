@@ -54,35 +54,6 @@ public class Choice
         foreach (Effect effect in Effects)
         {
             effect.Apply();
-
-            if (effect is OneTimeStatEffect oneTimeStatEffect)
-            {
-                Color color = Colors.Black;
-                if (oneTimeStatEffect.Value < 0)
-                    color = Colors.Red;
-                else if (oneTimeStatEffect.Value > 0)
-                    color = Colors.Green;
-
-                GD.Print("OneTimeStatEffect found: " + effect.GetType().Name);
-                switch (oneTimeStatEffect.Target.Name)
-                {
-                    case "Coin":
-                        GameManager.Instance.CoinRenderer.Shake(color);
-                        break;
-                    case "Vitality":
-                        GameManager.Instance.VitalityRenderer.Shake(color);
-                        break;
-                    case "Grit":
-                        GameManager.Instance.GritRenderer.Shake(color);
-                        break;
-                    case "Rations":
-                        GameManager.Instance.RationsRenderer.Shake(color);
-                        break;
-                    default:
-                        GD.Print($"Cannot parse target: {oneTimeStatEffect.Target}");
-                        break;
-                }
-            }
         }
     }
 

@@ -17,6 +17,10 @@ public partial class GameManager : Node
 	public static GameManager Instance => _instance;
 
 	[Export] public DeckResource[] StartingDecks { get; private set; }
+	[Export] public PlayerStatRenderer CoinRenderer { get; private set; }
+	[Export] public PlayerStatRenderer VitalityRenderer { get; private set; }
+	[Export] public PlayerStatRenderer GritRenderer { get; private set; }
+	[Export] public PlayerStatRenderer RationsRenderer { get; private set; }
 	[Export] public Node2D CardSpawnPoint { get; private set; }
 	[Export] public Node2D CardExitPoint { get; private set; }
 	[Export] public ReferenceRect CardDrawRegion { get; private set; }

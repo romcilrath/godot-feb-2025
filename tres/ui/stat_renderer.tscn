@@ -23,7 +23,7 @@ offset_bottom = 257.0
 self_modulate = Color(0.592157, 0.592157, 0.592157, 1)
 layout_mode = 2
 texture = ExtResource("3_jvv7y")
-region_rect = Rect2(0, 1, 1965, 352)
+region_rect = Rect2(0, 50, 1965, 302)
 patch_margin_left = 150
 patch_margin_top = 150
 patch_margin_right = 150
@@ -76,6 +76,7 @@ border_color = Color(1, 0, 0, 0)
 
 [node name="StatValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_sl66v")
 theme_override_font_sizes/font_size = 100

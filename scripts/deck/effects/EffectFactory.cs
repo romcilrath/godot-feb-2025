@@ -8,7 +8,7 @@ public static class EffectFactory
     {
         if (effectResource is OneTimeStatEffectResource oneTimeResource)
         {
-            return new OneStatTimeEffect(oneTimeResource);
+            return new OneTimeStatEffect(oneTimeResource);
         }
         else if (effectResource is RepeatStatEffectResource repeatResource)
         {

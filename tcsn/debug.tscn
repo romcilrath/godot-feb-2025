@@ -19,9 +19,13 @@
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CardSpawnPoint", "CardExitPoint", "CardDrawRegion", "ShufflingIndicator")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CoinRenderer", "VitalityRenderer", "GritRenderer", "RationsRenderer", "CardSpawnPoint", "CardExitPoint", "CardDrawRegion", "ShufflingIndicator")]
 script = ExtResource("1_33a1n")
 StartingDecks = Array[Object]([ExtResource("2_qgxyn"), ExtResource("3_iu32v")])
+CoinRenderer = NodePath("../StatRenderers/CoinRenderer")
+VitalityRenderer = NodePath("../StatRenderers/VitalityRenderer")
+GritRenderer = NodePath("../StatRenderers/GritRenderer")
+RationsRenderer = NodePath("../StatRenderers/RationsRenderer")
 CardSpawnPoint = NodePath("../CardSpawnPoint")
 CardExitPoint = NodePath("../CardExitPoint")
 CardDrawRegion = NodePath("../CardDrawRegion")

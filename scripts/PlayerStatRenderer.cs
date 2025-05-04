@@ -87,6 +87,64 @@ public partial class PlayerStatRenderer : Node2D
 				StatValue.Text = "???";
 				break;
 		}
+		// Adjust pivot offset to center the shake effect
+		StatValue.PivotOffset = new Vector2(StatValue.Size.X / 2, StatValue.Size.Y / 2);
+	}
+
+	public void Shake(Color? color = null)
+	{		
+		GD.Print("Shaking " + StatName.Text);
+		Tween colorTween = GetTree().CreateTween();
+		Tween scaleTween = GetTree().CreateTween();
+		Tween rotationTween = GetTree().CreateTween();
+		Color originalColor = StatValue.GetThemeColor("font_color");
+		Vector2 originalScale = StatValue.Scale;
+		float originalRotation = StatValue.Rotation;
+
+		// Use the provided color or fallback to the original color
+		Color targetColor = color ?? originalColor;
+
+		colorTween.TweenProperty(StatValue, "theme_override_colors/font_color", targetColor, 0.1f)
+			.SetTrans(Tween.TransitionType.Back)
+			.SetEase(Tween.EaseType.Out);
+		colorTween.TweenCallback(Callable.From(() => {}))
+			.SetDelay(0.9f);
+		colorTween.TweenProperty(StatValue, "theme_override_colors/font_color", originalColor, 0.3f)
+			.SetTrans(Tween.TransitionType.Sine)
+			.SetEase(Tween.EaseType.InOut);
+
+		// Shake rotation with pivot offset considered
+		rotationTween.TweenProperty(StatValue, "rotation", originalRotation + Mathf.DegToRad(30), 0.1f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.Out);
+		rotationTween.TweenProperty(StatValue, "rotation", originalRotation - Mathf.DegToRad(20), 0.2f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.InOut);
+		rotationTween.TweenProperty(StatValue, "rotation", originalRotation + Mathf.DegToRad(20), 0.2f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.InOut);
+		rotationTween.TweenProperty(StatValue, "rotation", originalRotation - Mathf.DegToRad(20), 0.2f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.InOut);
+		rotationTween.TweenProperty(StatValue, "rotation", originalRotation + Mathf.DegToRad(10), 0.15f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.InOut);
+		rotationTween.TweenProperty(StatValue, "rotation", originalRotation, 0.2f)
+			.SetTrans(Tween.TransitionType.Quad)
+			.SetEase(Tween.EaseType.In);
+
+		// Scale up and back with pivot offset considered
+		scaleTween.TweenProperty(StatValue, "scale", originalScale * 1.6f, 0.3f)
+			.SetTrans(Tween.TransitionType.Back)
+			.SetEase(Tween.EaseType.Out);
+		scaleTween.TweenProperty(StatValue, "scale", originalScale * 1.3f, 0.1f)
+			.SetTrans(Tween.TransitionType.Back)
+			.SetEase(Tween.EaseType.Out);
+		scaleTween.TweenProperty(StatValue, "scale", originalScale * 1.5f, 0.1f)
+			.SetTrans(Tween.TransitionType.Back)
+			.SetEase(Tween.EaseType.Out);
+		scaleTween.TweenProperty(StatValue, "scale", originalScale, 0.5f)
+			.SetTrans(Tween.TransitionType.Elastic)
+			.SetEase(Tween.EaseType.In);
 	}
 }
-

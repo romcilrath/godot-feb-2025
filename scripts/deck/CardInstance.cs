@@ -90,6 +90,7 @@ public partial class CardInstance : Node2D
 	public void SetEnabled(bool isEnabled = true)
 	{
 		this._isEnabled = isEnabled;
+		this._cardBack.SetEnabled(isEnabled);
 	}
 
 	public Card GetCard()

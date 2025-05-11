@@ -14,6 +14,11 @@ public partial class CardBack : NinePatchRect
 	{
 	}
 
+	public void SetEnabled(bool isEnabled = true)
+	{
+		_isEnabled = isEnabled;
+	}
+
 	
     private void OnGUIInput(InputEvent @event)
 	{

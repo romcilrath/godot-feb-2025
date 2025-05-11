@@ -212,6 +212,7 @@ public partial class CardInstance : Node2D
 		foreach (ChoiceInstance choiceInstance in choiceInstances)
 		{
 			choiceInstance.SetDisabled(true);
+			GD.Print("ChoiceInstance disabled");
 		}
 		
 		EmitSignal(SignalName.OnCardDismissed, this);

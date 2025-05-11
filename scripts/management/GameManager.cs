@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Vector2 = Godot.Vector2;
 
 public partial class GameManager : Node
@@ -71,6 +72,12 @@ public partial class GameManager : Node
 			Deck deck = new Deck(deckResource);
 			ActiveDecks.Add(deck);
 		}
+	}
+
+	public async void DelayIncrementTurn(int incrementBy = 1, int delay = 1000)
+	{
+        await Task.Delay(delay); 
+		IncrementTurn(incrementBy);
 	}
 
 	public void IncrementTurn(int incrementBy = 1)

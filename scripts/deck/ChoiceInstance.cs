@@ -236,12 +236,10 @@ public partial class ChoiceInstance : ColorRect
             .SetTrans(Tween.TransitionType.Elastic);
 	}
 
-    private async void DelayApplyCard(int delay = 500)
+    private async void DelayApplyCard(int delay = 1000)
     {
-        await Task.Delay(delay); // Delay for 1 second
+        await Task.Delay(delay); 
         _choice.Apply();
-        GameManager.Instance.IncrementTurn();
-        EmitSignal(SignalName.OnChoiceSelected);
     }
 
 
@@ -283,7 +281,12 @@ public partial class ChoiceInstance : ColorRect
                 .SetEase(Tween.EaseType.In)
                 .SetTrans(Tween.TransitionType.Bounce);
 
-            DelayApplyCard();
+            GameManager.Instance.DelayIncrementTurn(1, 500);
+            DelayApplyCard(500);
+            EmitSignal(SignalName.OnChoiceSelected);
+
+            // Disable the tooltip by setting it to an empty string
+            TooltipText = "";
         }
     }
 

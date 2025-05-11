@@ -4,6 +4,7 @@ using System;
 public partial class CardBack : NinePatchRect
 {
 	private bool _isHovered = false;
+	private bool _isEnabled = true;
 
     [Signal]
     public delegate void OnCardBackSelectedEventHandler();
@@ -17,10 +18,12 @@ public partial class CardBack : NinePatchRect
     private void OnGUIInput(InputEvent @event)
 	{
 		if (!_isHovered) return;
+		if (!_isEnabled) return;
 
         if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
 		{
 			EmitSignal(SignalName.OnCardBackSelected);
+			this._isEnabled = false;
 		}
 	}
 

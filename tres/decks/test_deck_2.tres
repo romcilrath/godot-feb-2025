@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="DeckResource" load_steps=3 format=3 uid="uid://c1h3cfaf42f6y"]
+[gd_resource type="Resource" script_class="DeckResource" load_steps=4 format=3 uid="uid://c1h3cfaf42f6y"]
 
 [ext_resource type="Resource" uid="uid://cxb8jsv81fl61" path="res://tres/cards/dust_dinner.tres" id="1_2te80"]
 [ext_resource type="Script" path="res://scripts/deck/DeckResource.cs" id="1_cbbkv"]
+[ext_resource type="Resource" uid="uid://db8kmkf1e8ilh" path="res://tres/cards/test_card.tres" id="2_vwvoo"]
 
 [resource]
 script = ExtResource("1_cbbkv")
 Name = "Deck uh Two"
-Cards = Array[Object]([ExtResource("1_2te80")])
+Cards = Array[Object]([ExtResource("1_2te80"), ExtResource("2_vwvoo")])
 LockedCards = Array[Object]([])
 PrimaryColor = Color(0.494118, 0.666667, 0.541176, 1)
 SecondaryColor = Color(0.227451, 0.380392, 0.223529, 1)

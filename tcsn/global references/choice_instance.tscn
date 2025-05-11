@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk0aajrt6bywu"]
+[gd_scene load_steps=8 format=3 uid="uid://bk0aajrt6bywu"]
 
+[ext_resource type="Theme" uid="uid://ccoo33qh5h6wt" path="res://tres/themes/main_theme.tres" id="1_lsf5w"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceInstance.cs" id="1_uwgwp"]
+[ext_resource type="PackedScene" uid="uid://3n314uxugxxq" path="res://tcsn/tooltips/tooltip_panel.tscn" id="2_hhsr6"]
 [ext_resource type="Material" uid="uid://cndrd8ug3j4u3" path="res://shaders/perspective.tres" id="2_wyg3w"]
 [ext_resource type="Texture2D" uid="uid://bt5s37fc604r4" path="res://sprites/card/Choice.PNG" id="3_jpfut"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="4_efxj2"]
+[ext_resource type="Script" path="res://scripts/management/ShakeController.cs" id="5_jn02c"]
 
 [node name="ChoiceInstance" type="ColorRect"]
 custom_minimum_size = Vector2(300, 450)
@@ -13,11 +16,13 @@ anchor_bottom = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_lsf5w")
 color = Color(1, 1, 1, 0)
 script = ExtResource("1_uwgwp")
 ChoiceRectPath = NodePath("Choice")
 TextPath = NodePath("Choice/HBoxContainer/MarginContainer/Text")
 EffectRowPath = NodePath("Choice/HBoxContainer/VBoxContainer/EffectRow")
+_tooltipScene = ExtResource("2_hhsr6")
 
 [node name="Choice" type="NinePatchRect" parent="."]
 self_modulate = Color(0.933333, 1, 0.0156863, 1)
@@ -119,6 +124,12 @@ patch_margin_right = 115
 patch_margin_bottom = 260
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="ShakeController" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_jn02c")
 
 [connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]

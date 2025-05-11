@@ -14,7 +14,7 @@ ActionType = 1
 [sub_resource type="Resource" id="Resource_54ual"]
 script = ExtResource("3_35thv")
 Text = "Give them what you can spare"
-HoverText = ""
+HoverText = "We all need the help we can get"
 Effects = Array[Object]([SubResource("Resource_j81gw")])
 
 [sub_resource type="Resource" id="Resource_s5u3r"]
@@ -26,13 +26,13 @@ ActionType = 1
 [sub_resource type="Resource" id="Resource_6crlw"]
 script = ExtResource("3_35thv")
 Text = "Take what little they have"
-HoverText = ""
+HoverText = "You need it more than they do"
 Effects = Array[Object]([SubResource("Resource_s5u3r")])
 
 [sub_resource type="Resource" id="Resource_g6wi4"]
 script = ExtResource("3_35thv")
 Text = "Ride on"
-HoverText = ""
+HoverText = "This isn't your concern"
 Effects = Array[Object]([])
 
 [resource]

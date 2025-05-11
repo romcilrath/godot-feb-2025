@@ -16,6 +16,8 @@ public partial class ChoiceInstance : ColorRect
 	[Export] public NodePath TextPath { get; set; }
 	[Export] public NodePath EffectRowPath { get; set; }
 
+    [Export] public PackedScene _tooltipScene;
+
     // These are the child nodes of the ChoiceInstance
 	private NinePatchRect _choiceRect;
 	private RichTextLabel _text;
@@ -75,8 +77,9 @@ public partial class ChoiceInstance : ColorRect
 
 	public void LoadChoice()
 	{
-        // Set the choice text
+        // Set the choice text and hover text
 		_text.Text = this._choice.Text;
+        TooltipText = this._choice.HoverText;
         
         // No need to spawn icon instances if we hav eno effects
         if (this._choice.Effects is null) return;
@@ -282,5 +285,12 @@ public partial class ChoiceInstance : ColorRect
 
             DelayApplyCard();
         }
+    }
+
+    public override Control _MakeCustomTooltip(string forText)
+    {
+        TooltipPanel tooltip = (TooltipPanel)_tooltipScene.Instantiate();
+        tooltip.SetTooltipText(forText);
+        return tooltip;
     }
 }

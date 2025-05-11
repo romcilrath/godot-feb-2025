@@ -20,7 +20,7 @@ public partial class CardInstance : Node2D
 
 	public ChoiceInstance[] choiceInstances { get; private set; }
 
-	[Export] public NodePath CardBackl { get; set; }
+	[Export] public NodePath CardBack_ { get; set; }
 	[Export] public NodePath BackdropPath { get; set; }
 	[Export] public NodePath OtherElementsPath { get; set; }
 	[Export] public NodePath BodyChoicesContainer { get; set; }
@@ -53,7 +53,7 @@ public partial class CardInstance : Node2D
 	// Get the nodes from the scene and load the card on Ready
 	public override void _Ready()
 	{
-		_cardBack = NodeUtils.FindNodeWithError<CardBack>(this, CardBackl, "CardBack");
+		_cardBack = NodeUtils.FindNodeWithError<CardBack>(this, CardBack_, "CardBack");
 		_backdrop = NodeUtils.FindNodeWithError<NinePatchRect>(this, BackdropPath, "Backdrop");
 		_otherElements = NodeUtils.FindNodeWithError<Node2D>(this, OtherElementsPath, "OtherElements");
 		_bodyChoicesContainer = NodeUtils.FindNodeWithError<BoxContainer>(this, BodyChoicesContainer, "BodyChoicesContainer");

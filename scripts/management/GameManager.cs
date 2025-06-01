@@ -146,7 +146,7 @@ public partial class GameManager : Node
 		{
 			Card card = cards[i];
 			CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
-			CardDrawRegion.AddChild(cardFlipper);
+			GetTree().Root.AddChild(cardFlipper);
 			BlindDraw[i] = cardFlipper;
 			cardFlipper.Position = CardSpawnPoint.Position;
 			cardFlipper.Scale = new Vector2(0.3f, 0.3f);

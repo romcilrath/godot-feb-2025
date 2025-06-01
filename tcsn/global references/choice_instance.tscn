@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk0aajrt6bywu"]
+[gd_scene load_steps=9 format=3 uid="uid://bk0aajrt6bywu"]
 
 [ext_resource type="Theme" uid="uid://ccoo33qh5h6wt" path="res://tres/themes/main_theme.tres" id="1_lsf5w"]
 [ext_resource type="Script" path="res://scripts/deck/ChoiceInstance.cs" id="1_uwgwp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bt5s37fc604r4" path="res://sprites/card/Choice.PNG" id="3_jpfut"]
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="4_efxj2"]
 [ext_resource type="Script" path="res://scripts/management/ShakeController.cs" id="5_jn02c"]
+[ext_resource type="Script" path="res://scripts/management/HoverController.cs" id="8_xic26"]
 
 [node name="ChoiceInstance" type="ColorRect"]
 custom_minimum_size = Vector2(300, 450)
@@ -22,6 +23,7 @@ script = ExtResource("1_uwgwp")
 ChoiceRectPath = NodePath("Choice")
 TextPath = NodePath("Choice/HBoxContainer/MarginContainer/Text")
 EffectRowPath = NodePath("Choice/HBoxContainer/VBoxContainer/EffectRow")
+HoverControllerPath = NodePath("HoverController")
 _tooltipScene = ExtResource("2_hhsr6")
 
 [node name="Choice" type="NinePatchRect" parent="."]
@@ -130,6 +132,13 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_jn02c")
+
+[node name="HoverController" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_xic26")
+TargetPath = NodePath("../Choice")
 
 [connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]

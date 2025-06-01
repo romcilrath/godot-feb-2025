@@ -20,7 +20,7 @@
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CoinRenderer", "VitalityRenderer", "GritRenderer", "RationsRenderer", "CardSpawnPoint", "CardExitPoint", "CardDrawRegion", "ShufflingIndicator")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CoinRenderer", "VitalityRenderer", "GritRenderer", "RationsRenderer", "CardSpawnPoint", "CardExitPoint", "CardDrawRegion", "ShufflingIndicator", "CardParent")]
 script = ExtResource("1_33a1n")
 StartingDecks = Array[Object]([ExtResource("2_qgxyn"), ExtResource("3_iu32v")])
 CoinRenderer = NodePath("../StatRenderers/CoinRenderer")
@@ -31,6 +31,7 @@ CardSpawnPoint = NodePath("../CardSpawnPoint")
 CardExitPoint = NodePath("../CardExitPoint")
 CardDrawRegion = NodePath("../CardDrawRegion")
 ShufflingIndicator = NodePath("../ShufflingIndicator")
+CardParent = NodePath("")
 
 [node name="GlobalReferences" type="Node" parent="."]
 script = ExtResource("2_77h7y")
@@ -51,6 +52,7 @@ GritColor = Color(0.905882, 0.509804, 0.101961, 1)
 script = ExtResource("5_vgp1m")
 
 [node name="StatRenderers" type="Control" parent="."]
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -90,8 +92,6 @@ position = Vector2(1494, -686)
 
 [node name="CardExitPoint" type="Node2D" parent="."]
 position = Vector2(1536, 2920)
-
-[node name="CardParent" type="Node" parent="."]
 
 [node name="CardDrawRegion" type="ReferenceRect" parent="."]
 offset_top = 426.0

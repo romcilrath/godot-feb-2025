@@ -14,7 +14,8 @@ public partial class ChoiceInstance : ColorRect
     // Allows us tomake ChoiceInstance a resource and set the paths in the editor
 	[Export] public NodePath ChoiceRectPath { get; set; }
 	[Export] public NodePath TextPath { get; set; }
-	[Export] public NodePath EffectRowPath { get; set; }
+    [Export] public NodePath EffectRowPath { get; set; }
+    [Export] public NodePath HoverControllerPath { get; set; }
 
     [Export] public PackedScene _tooltipScene;
 
@@ -22,6 +23,7 @@ public partial class ChoiceInstance : ColorRect
 	private NinePatchRect _choiceRect;
 	private RichTextLabel _text;
 	private HBoxContainer _effectRow;
+    private HoverController _hoverController;
 
     // Detect if this choice/ a sibling choice has been selected already
     private bool _isDisabled = false; 
@@ -31,15 +33,6 @@ public partial class ChoiceInstance : ColorRect
     public delegate void OnShakeEventHandler(float degrees=0.4f, float duration=0.5f);
     [Signal]
     public delegate void OnChoiceSelectedEventHandler();
-
-    // Hover variables
-    private bool _isHovered = false;
-    private bool _isInitialPositionSet = false;
-	private Vector2 _initialPosition;
-	private Vector2 _hoverOffset = new Vector2(0, -45); 
-    private Tween _hoverPositionTween;
-    private Tween _rotationTween;
-	private Tween _sizeTween; 
 
 	public override void _Ready()
 	{
@@ -61,7 +54,17 @@ public partial class ChoiceInstance : ColorRect
             SetChoice(new Choice(this.choiceResource));
             LoadChoice();
         }
-	}    
+
+        // Initialize HoverController
+        _hoverController = NodeUtils.FindNodeWithError<HoverController>(this, HoverControllerPath, "HoverController");
+        _hoverController.SetEnabled(!_isDisabled);
+	}   
+
+    public void SetColor(Color color)
+    {
+        // Set the color of the ChoiceRect
+        _choiceRect.SelfModulate = color;
+    }
 
     public void SetChoice(ChoiceResource newChoiceResource)
     {
@@ -104,136 +107,8 @@ public partial class ChoiceInstance : ColorRect
     public void SetDisabled(bool isDisabled=true)
     {
         _isDisabled = isDisabled;
+        _hoverController.SetEnabled(!_isDisabled);
     }
-
-    public void SetInitialPosition ()
-    {
-        // Save the initial position of the choice rect
-        this._initialPosition = _choiceRect.Position;
-        this._isInitialPositionSet = true;
-        _choiceRect.PivotOffset += _choiceRect.Size/2;
-    }
-
-    public void SetColor(Color color)
-    {
-        _choiceRect.SelfModulate = color;
-    }
-
-    public override void _Process(double delta)
-    {
-        void UpdateShaderRotation(ShaderMaterial material, Vector2 anchorCenter, float angleXMax, float angleYMax, float time)
-        {
-            // Calculate circular motion
-            float angle = Mathf.Pi * 2 * time; // Full circle over time
-            float rotX = Mathf.Sin(angle) * angleXMax;
-            float rotY = Mathf.Cos(angle) * angleYMax;
-
-            material.Set("shader_parameter/rotation_x", rotX);
-            material.Set("shader_parameter/rotation_y", rotY);
-        }
-
-        if (_isHovered && !_isDisabled)
-        {
-            float angleXMax = 2.0f, angleYMax = 2.0f;
-            float time = (float)Time.GetTicksMsec() / 3000.0f; // Time in seconds
-
-            if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
-                UpdateShaderRotation(choiceShaderMaterial, _choiceRect.Position + (_choiceRect.Size / 2), angleXMax, angleYMax, time);
-        }
-        else
-        {
-            void ResetShaderRotation(ShaderMaterial material)
-            {
-                material.Set("shader_parameter/rotation_x", 0.0f);
-                material.Set("shader_parameter/rotation_y", 0.0f);
-            }
-
-            if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
-                ResetShaderRotation(choiceShaderMaterial);
-        }
-    }
-
-    private void KillTweens() 
-    {
-        // Kill our tweens
-        _hoverPositionTween?.Kill();
-        _sizeTween?.Kill();
-        _rotationTween?.Kill();
-    }
-
-	private void OnMouseEnter() {
-        if (_isDisabled) return;
-
-        if (!_isInitialPositionSet) SetInitialPosition();
-
-        // Set the hover flag
-        _isHovered = true;
-
-        // Ensure shader perspective parameters are reset on hover
-        if (_choiceRect.Material is ShaderMaterial shaderMaterial)
-        {
-            shaderMaterial.Set("shader_parameter/x_rotation", 0.0f); 
-            shaderMaterial.Set("shader_parameter/y_rotation", 0.0f); 
-        }
-            
-        // Kill any existing tween before starting a new one
-        KillTweens();
-        
-        // Tween the choice rect to rotate slightly
-        _rotationTween = CreateTween();
-        _rotationTween
-            .TweenProperty(_choiceRect, "rotation_degrees", 3, 0.0)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-        _rotationTween
-            .Chain()
-            .TweenProperty(_choiceRect, "rotation_degrees", -3, 0.05f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-        _rotationTween
-            .Chain()
-            .TweenProperty(_choiceRect, "rotation_degrees", 0, 0.05f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the choice rect to the hover offset position
-        _hoverPositionTween = CreateTween();
-        _hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition + _hoverOffset, 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the choice rect to scale up slightly
-        _sizeTween = CreateTween();
-        _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.05f, 1.05f), 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-	}
-
-	private void OnMouseExit() {
-        // Reset the hover flag
-		_isHovered = false;
-        
-        // Kill any existing tween before starting a new one
-        KillTweens();
-
-        // Tween the choice rect to rotate back to 0
-        _rotationTween = CreateTween();
-        _rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the choice rect back to the initial position
-        _hoverPositionTween = CreateTween();
-        _hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.1f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-
-        // Tween the choice rect back to its original size
-        _sizeTween = CreateTween();
-        _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.4f)
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Elastic);
-	}
 
     private async void DelayApplyCard(int delay = 1000)
     {
@@ -251,34 +126,8 @@ public partial class ChoiceInstance : ColorRect
 
             GD.Print($"Choice clicked: {_choice?.Text}");
             EmitSignal(SignalName.OnShake, 2f, 0.05f);
-
-            KillTweens();
-
-            // Tween the choice rect to rotate back to 0
-            _rotationTween = CreateTween();
-            _rotationTween.TweenProperty(_choiceRect, "rotation_degrees", 0, 0.4f)
-                .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Elastic);
-
-            // Tween the choice rect back to the initial position
-            _hoverPositionTween = CreateTween();
-            _hoverPositionTween.TweenProperty(_choiceRect, "position", _initialPosition, 0.05f)
-                .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Bounce);
-
-            // Expand then tween the choice rect back to its original size
-            _sizeTween = CreateTween();
-            _sizeTween.TweenProperty(_choiceRect, "scale", new Vector2(0.8f, 1.2f), 0.2f)
-                .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Elastic);
-            _sizeTween.Chain()
-                .TweenProperty(_choiceRect, "scale", new Vector2(1.08f, 1.0f), 0.2f)
-                .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Elastic);
-            _sizeTween.Chain()
-                .TweenProperty(_choiceRect, "scale", new Vector2(1.0f, 1.0f), 0.2f)
-                .SetEase(Tween.EaseType.In)
-                .SetTrans(Tween.TransitionType.Bounce);
+            
+            _hoverController.SetEnabled(false);
 
             GameManager.Instance.DelayIncrementTurn(1, 500);
             DelayApplyCard(500);

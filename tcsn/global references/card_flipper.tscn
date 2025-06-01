@@ -1,17 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4w53q2bs5k83"]
+[gd_scene load_steps=6 format=3 uid="uid://c4w53q2bs5k83"]
 
 [ext_resource type="Shader" path="res://shaders/perspectiveoffsetshadow.gdshader" id="1_6pu5f"]
 [ext_resource type="Script" path="res://scripts/deck/CardFlipper.cs" id="1_ox0dv"]
 [ext_resource type="PackedScene" uid="uid://cn7ixi314jln5" path="res://tcsn/global references/card_instance.tscn" id="3_3nn6a"]
+[ext_resource type="Script" path="res://scripts/management/HoverController.cs" id="4_g22gu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qep06"]
 shader = ExtResource("1_6pu5f")
-shader_parameter/fov = 90.0
+shader_parameter/fov = 45.0
 shader_parameter/cull_back = true
 shader_parameter/rotation_y = 8.55e-06
 shader_parameter/rotation_x = 8.55e-06
 shader_parameter/inset = 0.0
-shader_parameter/offset = Vector2(-50, 50)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/modulate = Color(0, 0, 0, 0.294118)
 
 [node name="CardFlipper" type="Node2D"]
@@ -19,6 +20,7 @@ script = ExtResource("1_ox0dv")
 SubViewportContainer = NodePath("SubViewportContainer")
 CardInstance = NodePath("SubViewportContainer/SubViewport/CardInstance")
 CardEffectsContainer = NodePath("CardEffectsContainer")
+HoverController = NodePath("HoverController")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_qep06")
@@ -57,4 +59,17 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="HoverController" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_g22gu")
+TargetPath = NodePath("../SubViewportContainer")
+hoverPositionOffset = Vector2(0, -100)
+hoverScale = Vector2(1.125, 1.125)
+hoverShadowOffset = Vector2(-50, 50)
+
+[connection signal="mouse_entered" from="SubViewportContainer" to="HoverController" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="SubViewportContainer" to="HoverController" method="OnMouseExit"]
 [connection signal="OnShake" from="SubViewportContainer/SubViewport/CardInstance" to="." method="OnShake"]

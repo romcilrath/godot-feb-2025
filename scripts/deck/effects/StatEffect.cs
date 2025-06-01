@@ -50,6 +50,30 @@ public abstract class StatEffect: Effect
         ActionType = actionType;
     }
 
+    public PlayerStatRenderer GetTargetRenderer()
+    {
+        PlayerStatRenderer targetRenderer = null;
+        switch(Target.Name)
+        {
+            case "Coin":
+                targetRenderer = GameManager.Instance.CoinRenderer;
+                break;
+            case "Vitality":
+                targetRenderer = GameManager.Instance.VitalityRenderer;
+                break;
+            case "Grit":
+                targetRenderer = GameManager.Instance.GritRenderer;
+                break;
+            case "Rations":
+                targetRenderer = GameManager.Instance.RationsRenderer;
+                break;
+            default:
+                GD.Print($"Cannot target StatRender with Target named: {Target.Name}");
+                break;
+        }
+        return targetRenderer;
+    }
+
     public override abstract void Apply();
 
     public override void PrintEffect()

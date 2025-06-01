@@ -26,6 +26,7 @@ public partial class GameManager : Node
 	[Export] public Node2D CardExitPoint { get; private set; }
 	[Export] public ReferenceRect CardDrawRegion { get; private set; }
 	[Export] public Node2D ShufflingIndicator { get; private set; }
+	[Export] public Node CardParent { get; private set; }
 
 	// Define an event that gets triggered when Turn increments
 	public event Action OnTurnIncremented;
@@ -135,7 +136,6 @@ public partial class GameManager : Node
 		return cards;
 	}
 
-
 	private void DoBlindDraw(int count = 1)
 	{
 		Card[] cards = DrawFromActiveDecks(count);
@@ -146,10 +146,11 @@ public partial class GameManager : Node
 		{
 			Card card = cards[i];
 			CardFlipper cardFlipper = GlobalReferences.Instance.CardFlipperScene.Instantiate() as CardFlipper;
-			GetTree().Root.AddChild(cardFlipper);
+			CardDrawRegion.AddChild(cardFlipper);
 			BlindDraw[i] = cardFlipper;
 			cardFlipper.Position = CardSpawnPoint.Position;
 			cardFlipper.Scale = new Vector2(0.3f, 0.3f);
+			cardFlipper.SetHoverEnabled(false);
 
 			CardInstance cardInstance = cardFlipper.GetCardInstance();
 			
@@ -175,6 +176,9 @@ public partial class GameManager : Node
 			tween.TweenProperty(cardFlipper, "position", toPosition, 0.8)
 				.SetEase(Tween.EaseType.Out)
 				.SetTrans(Tween.TransitionType.Elastic);
+			tween.Finished += () => cardFlipper.InitializeHoverController();
+			tween.Finished += () => cardFlipper.SetHoverEnabled(true);
+			
 		}
 	}
 
@@ -182,6 +186,8 @@ public partial class GameManager : Node
 	{
 		foreach (CardFlipper cardFlipper in BlindDraw)
 		{
+			cardFlipper.SetHoverEnabled(false);
+
 			CardInstance cardInstance = cardFlipper.GetCardInstance();
 
 			// Dismiss unselected cards

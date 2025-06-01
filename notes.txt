@@ -1,0 +1,138 @@
+Character Creation
+	Class
+		Cowpolk (Grit+++)				Unlocked at start
+		Law-Man (Rations+ Money++)		Unlocked at start
+		Psycho (Righteousness---)		Locked at start (to unlock Win a game)
+
+Stats
+	Money (money sack)					It makes the world go round (helps buy food, health, and keep you outta trouble)
+	Rations (beans)						Keep yourself fed (you consume 1 ration per turn; if rations <= 0 lose 5 health per turn)
+	Grit (fist)							To survive you need to know how to carry yourself (the toughest situations demand grit for a positive outcome)
+	Health (heart)						Keep yourself alive (>0)
+	Righteousness (hidden) 				Get yourself right with the lord (>50) or align yourself with evil (<-50)
+	
+Decks
+	Class (3)							Full sized Decks (~30) that let you experience your Class
+		Cowpolk								Rustle cattle and find some way, any way, to survive out west
+			Victories		
+				White Hat						You have proven yourself a hero of the common 
+				Black Hat						You took what you needed at the expense of the foolish
+				A Land of My Own				You have a homestead of your own
+						
+		Law-Man								Tame the west and fight crooks to build a land of law and order
+			Victories		
+				Anti Federal					Reject the federal government and defend those you know
+				Federal							Embrace the structure and wealth of the federal powers
+				Corrupt							The only thing that really matters is cold hard cash anyway
+
+		Psycho								Relish in wreaking havok on a west that scorned you
+			Victories		
+				Arsonist						Burn it down, burn it all down
+				Bloodlust						Drenched in blood your enemies regret crossing your path, and some innocent strangers too
+				Reformed						Turn back from your wicked path and find the light
+						
+	Experience (5)							Tend to be mid-sized Decks (~15) that let you experience a specific story beat
+		Treasure								Can you find a rumoured treasure? Or will you lose your head trying?
+		Mysterious Stranger						A strange man has crossed your path, it seems your paths are destined to be intertwined
+		Town Clean-up							A tradgedy has struck town, help rebuild and be hailed a hero
+		Railroad								A train will roll through these parts full of valuables
+		Oil										Theres oil under this here land
+			
+	Conditional	(12)					Tends to have a few Cards (~5) meant to help either rescue you from your low Stat, or help cement your loss
+		Money (2)	
+			Hobo						A target for charity and violence
+			Barron						A target for investment and theft
+		Rations (2)	
+			Starvation					A stranger might take pity... or advantage of your weakened state
+			Overstocked					You have plenty to give, or plenty to be taken
+		Grit (2)	
+			Yellow Belly				You are a coward, people know how to take advantage of a weakling so you better learn how to outwit them
+			Bold						You are brave, but this bravery is just as likely to land you into some trouble as it is pay off big
+		Righteousness (2)	
+			Sinner						Be tempted by the light, or continue to embrace your wicked fate
+			Saint						Be temped by the dark, or continue to be a force for good 
+		Seasonal (4)	
+			Spring						Food begins to become plentiful
+			Summer						Found is easy to find
+			Fall						Food begins to become scarce
+			Winter						Food is hard to find
+
+Deck Total: 3 + 5 + 12 = 20
+Card Total: 3*30 + 5*15 + 12*5 = 225
+
+Card
+	Number 				Coorelates to Card Name
+	Name				
+	Description
+	Art
+	Effects				Applied when Card selected
+	Choices				Max of 3, user chooses 1
+	Lock				If Card is Locked/ Unlocked and can be drawn from the Deck
+	Lock-on-Discard		If true then when Card is used it becomes locked and does not shuffle back in
+	
+
+Turn Order
+	1. Do conditional checks and increment Turn Number
+		Are you dead? Should a Conditional Deck be added/ removed?
+	2. Draw 3 Cards face down
+		Backs of the Cards reveal what deck they are from
+		Cards will be drawn from Decks with still remaining Cards
+		One Card will be drawn from every Deck
+		No Deck will be drawn from twice per turn unless all other Decks exhausted
+		If no Cards remain exhausted Decks are shuffled
+		If no Cards remain (still) as many cards as possible are Drawn
+	3. Choose 1 of the 3 Cards
+		Apply card Effect(s)
+		Consider: Player might have a chance to use an Ability
+			- Reveal Card(s)
+			- Redraw Card(s)
+			- Etc.
+	4. Make Card Choice selection
+		Apply the Choice effect(s)
+		Card may:
+			- Discard other Cards
+			- Apply effects (Generally these will be Deck Modifications)
+	5. Discard the Card
+	6. Shuffle all Exhausted Decks
+		If Deck is Exhausted shuffle it
+		A Deck is Exhausted if all Unlocked and Drawable cards have been Discarded
+
+Effects
+	Stat Modification
+		One Time, Repeating 
+		Add, Multiply, Set
+		Visible, Hidden
+	Deck Modification
+		Add/ Remove Deck(s)
+		Add/ Remove Card(s) from a Deck
+		Lock/ Unlock Card(s) in a Deck
+	Game State
+		Kill
+		Win
+		New Character
+
+Features
+	View Decks
+		Needs to show all Active Decks
+		Each Deck should show
+			- Name
+			- Hover Text
+			- Number of Unlocked Cards (not Discarded out of total)
+			- Shuffle indicator
+
+Notes
+	- Starting a turn with Health <= 0 is Game Over
+	- To Win find a Golden Win Card
+		Generally difficult to do, these Cards are often Locked in their Deck at the start
+		Making correct choices on other Cards will Unlock Cards that eventually Unlock these Golden Win Cards
+		These cards tend to have conditions on a choice required for winning
+		If that choice is selected you win, hooray
+		Need to draw a bunch of the right cards
+		Card Choice will apply a Win state 
+		After "winning" you get celebrated/ noticed for you achievement
+		Game continues after "winning" and you can even go on to "win" again
+	- Some cards provide the option to continue playing as a new character
+		Things like having a child mature to a certain age let you continue as them
+		
+Thinking
+	

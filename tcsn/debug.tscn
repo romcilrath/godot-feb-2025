@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cpvwqtr55sa5y"]
+[gd_scene load_steps=17 format=3 uid="uid://cpvwqtr55sa5y"]
 
 [ext_resource type="Script" path="res://scripts/management/GameManager.cs" id="1_33a1n"]
 [ext_resource type="Script" path="res://scripts/management/GlobalReferences.cs" id="2_77h7y"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://mueukd37qxcs" path="res://fonts/Pangolin/Pangolin-Regular.ttf" id="9_r38au"]
 [ext_resource type="PackedScene" uid="uid://t6hgr1rmx02f" path="res://tres/ui/stat_renderer.tscn" id="14_0oked"]
 [ext_resource type="PackedScene" uid="uid://c4w53q2bs5k83" path="res://tcsn/global references/card_flipper.tscn" id="14_6tg8j"]
+[ext_resource type="PackedScene" uid="uid://b6dk7taoboac1" path="res://tcsn/dev/fps_counter.tscn" id="16_2710p"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-5, -5)
@@ -85,10 +86,12 @@ StatToTrack = 4
 Art = null
 
 [node name="CardSpawnPoint" type="Node2D" parent="."]
-position = Vector2(1536, -1000)
+position = Vector2(1494, -686)
 
 [node name="CardExitPoint" type="Node2D" parent="."]
 position = Vector2(1536, 2920)
+
+[node name="CardParent" type="Node" parent="."]
 
 [node name="CardDrawRegion" type="ReferenceRect" parent="."]
 offset_top = 426.0
@@ -129,3 +132,11 @@ bbcode_enabled = true
 text = "[wave amp=100 freq=4]Shuffling...[/wave]"
 fit_content = true
 autowrap_mode = 0
+
+[node name="DevItems" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPSCounter" parent="DevItems" instance=ExtResource("16_2710p")]

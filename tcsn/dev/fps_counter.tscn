@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6dk7taoboac1"]
+
+[ext_resource type="Script" path="res://scripts/dev/FPSCounter.cs" id="1_g5vf5"]
+
+[node name="FPSCounter" type="Label"]
+offset_left = 24.0
+offset_top = 1719.0
+offset_right = 774.0
+offset_bottom = 1856.0
+theme_override_font_sizes/font_size = 50
+text = "SUSAN IS POOR"
+vertical_alignment = 1
+script = ExtResource("1_g5vf5")

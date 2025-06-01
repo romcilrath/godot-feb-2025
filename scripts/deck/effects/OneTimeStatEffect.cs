@@ -17,25 +17,7 @@ public class OneTimeStatEffect: StatEffect
 
     public override void Apply()
     {
-        PlayerStatRenderer targetRenderer = null;
-        switch(Target.Name)
-        {
-            case "Coin":
-                targetRenderer = GameManager.Instance.CoinRenderer;
-                break;
-            case "Vitality":
-                targetRenderer = GameManager.Instance.VitalityRenderer;
-                break;
-            case "Grit":
-                targetRenderer = GameManager.Instance.GritRenderer;
-                break;
-            case "Rations":
-                targetRenderer = GameManager.Instance.RationsRenderer;
-                break;
-            default:
-                GD.Print($"Cannot tarrget StatRender with Target named: {Target.Name}");
-                break;
-        }
+        PlayerStatRenderer targetRenderer = GetTargetRenderer();
 
         Color targetRenderColor = Colors.Black;
         if (ActionType == ActionType.Set)

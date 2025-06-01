@@ -114,9 +114,13 @@ public partial class ChoiceInstance : ColorRect
         _choiceRect.PivotOffset += _choiceRect.Size/2;
     }
 
+    public void SetColor(Color color)
+    {
+        _choiceRect.SelfModulate = color;
+    }
+
     public override void _Process(double delta)
     {
-
         void UpdateShaderRotation(ShaderMaterial material, Vector2 anchorCenter, float angleXMax, float angleYMax, float time)
         {
             // Calculate circular motion
@@ -147,11 +151,6 @@ public partial class ChoiceInstance : ColorRect
             if (_choiceRect.Material is ShaderMaterial choiceShaderMaterial)
                 ResetShaderRotation(choiceShaderMaterial);
         }
-    }
-
-    public void SetColor(Color color)
-    {
-        _choiceRect.SelfModulate = color;
     }
 
     private void KillTweens() 

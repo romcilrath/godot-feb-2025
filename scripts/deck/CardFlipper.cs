@@ -8,10 +8,13 @@ public partial class CardFlipper : Node2D
 	[Export] public NodePath SubViewportContainer { get; set; }
 	[Export] public NodePath CardInstance { get; set; }
 	[Export] public NodePath CardEffectsContainer { get; set; }
+	[Export] public NodePath HoverController {get; set; }
 
 	private SubViewportContainer _subViewportContainer;
 	private CardInstance _cardInstance;
 	private VBoxContainer _cardEffectsContainer;
+	private HoverController _hoverController;
+
 	private IconInstance[] _iconInstances;
 
 	// Called when the node enters the scene tree for the first time.
@@ -20,6 +23,7 @@ public partial class CardFlipper : Node2D
 		_cardInstance = NodeUtils.FindNodeWithError<CardInstance>(this, CardInstance, "CardInstance");
 		_subViewportContainer = NodeUtils.FindNodeWithError<SubViewportContainer>(this, SubViewportContainer, "SubViewportContainer");
 		_cardEffectsContainer = NodeUtils.FindNodeWithError<VBoxContainer>(this, CardEffectsContainer, "CardEffectsContainer");
+		_hoverController = NodeUtils.FindNodeWithError<HoverController>(this, HoverController, "HoverController");
 
 		// Duplicate the shader material so when we animate this materials shader we don't also animate other shared materials
 		// Without this when one CardFlipper "flips" all of them would
@@ -214,5 +218,16 @@ public partial class CardFlipper : Node2D
 		tween.TweenProperty(this, "position", new Vector2(this.Position.X, yPosition), duration)
 			.SetEase(Tween.EaseType.InOut)
 			.SetTrans(Tween.TransitionType.Back);
+	}
+
+	public void InitializeHoverController()
+	{
+		_hoverController.SetInitialScale();
+		_hoverController.SetInitialPosition();
+	}
+
+	public void SetHoverEnabled(bool isEnabled)
+	{
+		_hoverController.SetEnabled(isEnabled);
 	}
 }

@@ -40,14 +40,8 @@ public partial class ChoiceInstance : ColorRect
 		_choiceRect = NodeUtils.FindNodeWithError<NinePatchRect>(this, ChoiceRectPath, "ChoiceRect");
 		_text = NodeUtils.FindNodeWithError<RichTextLabel>(this, TextPath, "Text");
 		_effectRow = NodeUtils.FindNodeWithError<HBoxContainer>(this, EffectRowPath, "EffectRow");
-
-		// Ensure the material is unique, otherwise the shader will be shared between all instances
-		if (_choiceRect.Material is ShaderMaterial shaderMaterial)
-		{
-			_choiceRect.Material = shaderMaterial.Duplicate() as ShaderMaterial;
-		}
-
-
+        _hoverController = NodeUtils.FindNodeWithError<HoverController>(this, HoverControllerPath, "HoverController");
+        
 		// If choiceResource is defined via editor (like for debug) then SetChoice and LoadChoice
         if (this.choiceResource is not null)
         {
@@ -56,7 +50,6 @@ public partial class ChoiceInstance : ColorRect
         }
 
         // Initialize HoverController
-        _hoverController = NodeUtils.FindNodeWithError<HoverController>(this, HoverControllerPath, "HoverController");
         _hoverController.SetEnabled(!_isDisabled);
 	}   
 

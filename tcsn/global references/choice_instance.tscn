@@ -139,7 +139,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_xic26")
 TargetPath = NodePath("../Choice")
+hoverPositionOffset = Vector2(-30, -45)
 
 [connection signal="gui_input" from="." to="." method="OnChoiceClicked"]
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
+[connection signal="mouse_entered" from="." to="HoverController" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExit"]
+[connection signal="mouse_exited" from="." to="HoverController" method="OnMouseExit"]
